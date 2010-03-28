@@ -1,1 +1,0 @@
-/home/k/Temp/src/vim/colors/github_vim_theme/github.vim
