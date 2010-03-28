@@ -18,11 +18,12 @@ if ARGV.include? '--clone'
       puts "[WARNING] The path #{submodule_dir} already exists, skipping cloning of #{script_name}"
     end
   end
-elsif ARGV.include?('--update') or ARGV.include?('-u')
+else
   Dir[File.join(SUBMODULES_DIR, "*")].each do |submodule|
     if File.exists? File.join(submodule, '.git')
       puts "Updating #{File.basename(submodule)}"
-      #system "git", "-q", "pull"
+      system "git", "checkout", "--quiet", "master"
+      system "git", "pull", "--quiet"
     end
   end
 end
