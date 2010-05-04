@@ -26,10 +26,6 @@ if has('multi_byte')
   let legacy_encoding=&encoding
 endif
 
-if has('win32')
-	behave mswin
-endif
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Scripting
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -91,18 +87,16 @@ if has('gui_running')
 
 	" Number of lines and columns (window height and width)
 	if &diff
-		set lines=30
-		set columns=150
+		set columns=150 lines=30
 	else
-		set lines=25
-		set columns=100
+		set columns=100 lines=25
 	endif
 
-	" Always show file types in menu
-	let do_syntax_sel_menu=1
+	" Don't show file types in menu
+	let do_syntax_sel_menu=0
 
 	" Color scheme
-	colorscheme wombat
+	colorscheme desert
 else
 	colorscheme desert
 endif
