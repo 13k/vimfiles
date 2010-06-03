@@ -26,9 +26,12 @@ if has('multi_byte')
   let legacy_encoding=&encoding
 endif
 
-if has('win32')
-	behave mswin
-endif
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Scripts/Plugins setup
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" pathogen. adds ~/.vim/bundle to rtp
+call pathogen#runtime_append_all_bundles()
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Scripting
@@ -75,37 +78,13 @@ set ruler
 " show (partial) command in status line.
 set showcmd
 " background
-set bg=dark
+"set bg=dark
 " enable mouse
 set mouse=a
 " no fucking bells!
 set vb t_vb=
-" GUI
-if has('gui_running')
-	" Font
-	if has('win32')
-		set guifont=Consolas:h10,Inconsolata:h11,DejaVu\ Sans\ Mono:h10
-	else
-		set guifont=Inconsolata\ 11,DejaVu\ Sans\ Mono\ 10
-	endif
-
-	" Number of lines and columns (window height and width)
-	if &diff
-		set lines=30
-		set columns=150
-	else
-		set lines=25
-		set columns=100
-	endif
-
-	" Always show file types in menu
-	let do_syntax_sel_menu=1
-
-	" Color scheme
-	colorscheme wombat
-else
-	colorscheme desert
-endif
+" colors!
+colorscheme elflord
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Editing
@@ -152,13 +131,6 @@ map <silent><C-Left> <C-T>
 map <silent><C-Right> <C-]>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Scripts/Plugins initializations
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" pathogen. adds ~/.vim/bundle to rtp
-call pathogen#runtime_append_all_bundles()
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " FileType customizations
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -178,6 +150,8 @@ function SniffAndSetDjangoPythonFT()
 	endif
 endf
 
+" C++
+au FileType cpp set et si sta ts=4 sts=4 sw=4
 " Python
 au FileType python set et si sta ts=4 sts=4 sw=4
 au FileType python call SniffAndSetDjangoPythonFT()
