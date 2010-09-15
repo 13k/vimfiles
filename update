@@ -1,4 +1,4 @@
-#!/usr/bin/ruby
+#!/usr/bin/env ruby
 
 require 'pathname'
 
@@ -8,6 +8,7 @@ SUBMODULES_DIR = 'bundle'
 if ARGV.include? '--clone'
   require 'yaml'
   repos = YAML::load_file(File.join(ROOT, '.vimscripts.yml'))
+  Dir.chdir(ROOT)
   repos.each do |repo|
     script_name = File.basename(repo).gsub(/\.git$/, '')
     submodule_dir = File.join(SUBMODULES_DIR, script_name)
@@ -22,8 +23,10 @@ else
   Dir[File.join(SUBMODULES_DIR, "*")].each do |submodule|
     if File.exists? File.join(submodule, '.git')
       puts "Updating #{File.basename(submodule)}"
-      system "git", "checkout", "--quiet", "master"
-      system "git", "pull", "--quiet"
+      Dir.chdir(submodule) do
+        system "git", "checkout", "--quiet", "master"
+        system "git", "pull", "--quiet"
+      end
     end
   end
 end

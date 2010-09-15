@@ -1,4 +1,4 @@
-" vim:noexpandtab shiftwidth=4 tabstop=4
+" vim: et si sta ts=2 sts=2 sw=2
 
 " k's vimrc for Vim 7
 " Last Change: Sun Jun 21 10:53:41 BRT 2009
@@ -7,17 +7,12 @@
 " Setup
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 if v:version < 700
-	echoerr 'This vimrc requires Vim 7 or later.'
-	quit
+  echoerr 'This vimrc requires Vim 7 or later.'
+  quit
 endif
 
-if has('autocmd')
-	" Remove ALL autocommands for the current group
-	au!
-	" Enable filetype detection, plugins and indent files
-	filetype plugin indent on
-	" reads rc in current directory
-	set exrc
+if v:version > 701
+  set term=builtin_xterm
 endif
 
 if has('multi_byte')
@@ -32,6 +27,10 @@ endif
 
 " pathogen. adds ~/.vim/bundle to rtp
 call pathogen#runtime_append_all_bundles()
+
+" fucking SQL ft plugin
+let g:ftplugin_sql_omni_key_right = '<PageDown>'
+let g:ftplugin_sql_omni_key_left = '<PageUp>'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Scripting
@@ -61,6 +60,8 @@ set ffs=unix,dos,mac
 set viminfo+=!
 " Suffixes that get lower priority when doing tab completion for filenames.
 set suffixes=.bak,~,.swp,.o,.info,.aux,.dvi,.bbl,.blg,.brf,.cb,.ind,.idx,.ilg,.inx,.out,.toc,.pyc
+" reads rc in current directory
+set exrc
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " UI
@@ -83,12 +84,18 @@ set showcmd
 set mouse=a
 " no fucking bells!
 set vb t_vb=
+" status line always shown
+set laststatus=2
+" status line
+set statusline=[%n]\ %<%.99f\ %h%w%m%r%y%{exists('g:loaded_fugitive')?fugitive#statusline():''}%{exists('g:loaded_rvm')?rvm#statusline():''}%=%-16(\ %l,%c-%v\ %)%P
 " colors!
 colorscheme elflord
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Editing
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Enable filetype detection, plugins and indent files
+filetype plugin indent on
 
 " auto indentation on
 set autoindent
@@ -136,18 +143,18 @@ map <silent><C-Right> <C-]>
 
 " Django template ft detection
 function SniffAndSetDjangoTemplateFT()
-	if search('{{.*}}') || search('{%.*%}')
-		set ft=html.django_template
-		set syntax=htmldjango
-	endif
+  if search('{{.*}}') || search('{%.*%}')
+    set ft=html.django_template
+    set syntax=htmldjango
+  endif
 endf
 
 " Django python source ft detection
 function SniffAndSetDjangoPythonFT()
-	if search('^\s*from\s\+django.*import') || search('^\s*import.*django')
-		set ft=python.django
-		set syntax=python
-	endif
+  if search('^\s*from\s\+django.*import') || search('^\s*import.*django')
+    set ft=python.django
+    set syntax=python
+  endif
 endf
 
 " C++
@@ -163,9 +170,11 @@ au FileType eruby set et si sta ts=2 sts=2 sw=2
 " Markdown
 au FileType mkd set ai formatoptions=tcroqn2 comments=n:>
 " HTML
-au FileType html set si sta ts=2 sts=2 sw=2
+au FileType html set et si sta ts=2 sts=2 sw=2
 au FileType html call SniffAndSetDjangoTemplateFT()
-au FileType html.django_template set si sta ts=2 sts=2 sw=2
+au FileType html.django_template set et si sta ts=2 sts=2 sw=2
+" JavaScript
+au FileType javascript set et si sta ts=2 sts=2 sw=2
 " PHP
 au FileType php set et si sta ts=4 sts=4 sw=4
 au FileType phtml set filetype=php
@@ -174,22 +183,22 @@ au FileType phtml set filetype=php
 " Helper Functions
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 fun HamlHashToDottedClass()
-	:s@{\s*:class\s*=>\s*["']\(.\{-}\)['"]\s*}@<HAML_CLASSES>\1</HAML_CLASSES>@
-	:s@<HAML_CLASSES>\(.\{-}\)</HAML_CLASSES>@\="." . substitute(submatch(1), "\\s\\+", ".", "g")
+  :s@{\s*:class\s*=>\s*["']\(.\{-}\)['"]\s*}@<HAML_CLASSES>\1</HAML_CLASSES>@
+  :s@<HAML_CLASSES>\(.\{-}\)</HAML_CLASSES>@\="." . substitute(submatch(1), "\\s\\+", ".", "g")
 endfun
 
 fun CssComment()
-	:s@^\(\s*\)\(.*\)$@\1/*\2*/@
+  :s@^\(\s*\)\(.*\)$@\1/*\2*/@
 endfun
 
 fun CssUncomment()
-	:s@^\(\s*\)/\*\(.*\)\*/$@\1\2@
+  :s@^\(\s*\)/\*\(.*\)\*/$@\1\2@
 endfun
 
 fun ToggleCssComment()
-	if (match(getline("."), "\s*/\\*.*\\*/") > -1)
-		call CssUncomment()
-	else
-		call CssComment()
-	end
+  if (match(getline("."), "\s*/\\*.*\\*/") > -1)
+    call CssUncomment()
+  else
+    call CssComment()
+  end
 endfun
