@@ -167,8 +167,6 @@ au FileType python.django set et si sta ts=4 sts=4 sw=4
 au FileType ruby set et si sta ts=2 sts=2 sw=2
 " Erb
 au FileType eruby set et si sta ts=2 sts=2 sw=2
-" Markdown
-au FileType mkd set ai formatoptions=tcroqn2 comments=n:>
 " HTML
 au FileType html set et si sta ts=2 sts=2 sw=2
 au FileType html call SniffAndSetDjangoTemplateFT()
@@ -178,6 +176,8 @@ au FileType javascript set et si sta ts=2 sts=2 sw=2
 " PHP
 au FileType php set et si sta ts=4 sts=4 sw=4
 au FileType phtml set filetype=php
+" YAML
+au FileType yaml set et si sta ts=2 sts=2 sw=2
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Helper Functions
