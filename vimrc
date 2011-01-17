@@ -22,6 +22,8 @@ endif
 " Scripts/Plugins setup
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" force ftdetect
+filetype off
 " pathogen. adds ~/.vim/bundle to rtp
 call pathogen#runtime_append_all_bundles()
 
