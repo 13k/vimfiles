@@ -1,8 +1,8 @@
 " Font
 if has('win32')
-	set guifont=Consolas:h10,Inconsolata:h11,DejaVu\ Sans\ Mono:h10
+	set guifont=Consolas:h10,DejaVu\ Sans\ Mono:h10
 else
-	set guifont=Inconsolata\ 11,DejaVu\ Sans\ Mono\ 10
+	set guifont=Droid\ Sans\ Mono\ 10,DejaVu\ Sans\ Mono\ 10
 endif
 
 " Number of lines and columns (window height and width)
@@ -15,5 +15,8 @@ endif
 " Don't show file types in menu
 let do_syntax_sel_menu=0
 
+" no fucking bells
+set vb t_vb=
+
 " Color scheme
-colorscheme darkZ
+colorscheme wombat

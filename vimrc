@@ -1,8 +1,5 @@
 " vim: et si sta ts=2 sts=2 sw=2
 
-" k's vimrc for Vim 7
-" Last Change: Sun Jun 21 10:53:41 BRT 2009
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Setup
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -89,7 +86,7 @@ set laststatus=2
 " status line
 set statusline=[%n]\ %<%.99f\ %h%w%m%r%y%{exists('g:loaded_fugitive')?fugitive#statusline():''}%{exists('g:loaded_rvm')?rvm#statusline():''}%=%-16(\ %l,%c-%v\ %)%P
 " colors!
-colorscheme elflord
+colorscheme darkZ
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Editing
@@ -159,6 +156,8 @@ endf
 
 " C++
 au FileType cpp set et si sta ts=4 sts=4 sw=4
+" CSS
+au FileType css set et si sta ts=2 sts=2 sw=2
 " Python
 au FileType python set et si sta ts=4 sts=4 sw=4
 au FileType python call SniffAndSetDjangoPythonFT()
@@ -167,8 +166,9 @@ au FileType python.django set et si sta ts=4 sts=4 sw=4
 au FileType ruby set et si sta ts=2 sts=2 sw=2
 " Erb
 au FileType eruby set et si sta ts=2 sts=2 sw=2
-" HTML
+" (X)HTML
 au FileType html set et si sta ts=2 sts=2 sw=2
+au FileType xhtml set et si sta ts=2 sts=2 sw=2
 au FileType html call SniffAndSetDjangoTemplateFT()
 au FileType html.django_template set et si sta ts=2 sts=2 sw=2
 " JavaScript
