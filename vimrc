@@ -176,7 +176,7 @@ au FileType html.django_template set et si sta ts=2 sts=2 sw=2
 " JavaScript
 au FileType javascript set et si sta ts=2 sts=2 sw=2
 " PHP
-au FileType php set et si sta ts=4 sts=4 sw=4
+au FileType php set noet si sta ts=4 sts=4 sw=4
 au FileType phtml set filetype=php
 " YAML
 au FileType yaml set et si sta ts=2 sts=2 sw=2
@@ -187,20 +187,4 @@ au FileType yaml set et si sta ts=2 sts=2 sw=2
 fun HamlHashToDottedClass()
   :s@{\s*:class\s*=>\s*["']\(.\{-}\)['"]\s*}@<HAML_CLASSES>\1</HAML_CLASSES>@
   :s@<HAML_CLASSES>\(.\{-}\)</HAML_CLASSES>@\="." . substitute(submatch(1), "\\s\\+", ".", "g")
-endfun
-
-fun CssComment()
-  :s@^\(\s*\)\(.*\)$@\1/*\2*/@
-endfun
-
-fun CssUncomment()
-  :s@^\(\s*\)/\*\(.*\)\*/$@\1\2@
-endfun
-
-fun ToggleCssComment()
-  if (match(getline("."), "\s*/\\*.*\\*/") > -1)
-    call CssUncomment()
-  else
-    call CssComment()
-  end
 endfun
