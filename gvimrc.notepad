@@ -1,0 +1,9 @@
+set guioptions-=m
+set guioptions-=r
+set guioptions-=l
+set guioptions-=L
+set guioptions-=t
+set guioptions-=T
+set guioptions-=b
+set columns=35 lines=20
+colorscheme wombat
