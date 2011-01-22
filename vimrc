@@ -8,7 +8,7 @@ if v:version < 700
   quit
 endif
 
-if v:version > 701
+if v:version > 701 && &term != "cygwin"
   set term=builtin_xterm
 endif
 
@@ -59,16 +59,15 @@ set ffs=unix,dos,mac
 set viminfo+=!
 " Suffixes that get lower priority when doing tab completion for filenames.
 set suffixes=.bak,~,.swp,.o,.info,.aux,.dvi,.bbl,.blg,.brf,.cb,.ind,.idx,.ilg,.inx,.out,.toc,.pyc
-" reads rc in current directory
-set exrc
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " UI
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " enable syntax highlight
-syntax on
-
+if &t_Co > 2 || has('gui_running')
+  syntax on
+endif
 " show line numbers
 set number
 " don't highlight searchs
@@ -80,7 +79,9 @@ set showcmd
 " background
 "set bg=dark
 " enable mouse
-set mouse=a
+if has('mouse')
+  set mouse=a
+endif
 " no fucking bells!
 set vb t_vb=
 " status line always shown
@@ -93,8 +94,6 @@ colorscheme darkZ
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Editing
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Enable filetype detection, plugins and indent files
-filetype plugin indent on
 
 " auto indentation on
 set autoindent
@@ -140,46 +139,51 @@ map <silent><C-Right> <C-]>
 " FileType customizations
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Django template ft detection
-function SniffAndSetDjangoTemplateFT()
-  if search('{{.*}}') || search('{%.*%}')
-    set ft=html.django_template
-    set syntax=htmldjango
-  endif
-endf
+if has('autocmd')
+  " Enable filetype detection, plugins and indent files
+  filetype plugin indent on
 
-" Django python source ft detection
-function SniffAndSetDjangoPythonFT()
-  if search('^\s*from\s\+django.*import') || search('^\s*import.*django')
-    set ft=python.django
-    set syntax=python
-  endif
-endf
+  " Django template ft detection
+  function SniffAndSetDjangoTemplateFT()
+    if search('{{.*}}') || search('{%.*%}')
+      set ft=html.django_template
+      set syntax=htmldjango
+    endif
+  endf
 
-" C++
-au FileType cpp set et si sta ts=4 sts=4 sw=4
-" CSS
-au FileType css set et si sta ts=2 sts=2 sw=2
-" Python
-au FileType python set et si sta ts=4 sts=4 sw=4
-au FileType python call SniffAndSetDjangoPythonFT()
-au FileType python.django set et si sta ts=4 sts=4 sw=4
-" Ruby
-au FileType ruby set et si sta ts=2 sts=2 sw=2
-" Erb
-au FileType eruby set et si sta ts=2 sts=2 sw=2
-" (X)HTML
-au FileType html set et si sta ts=2 sts=2 sw=2
-au FileType xhtml set et si sta ts=2 sts=2 sw=2
-au FileType html call SniffAndSetDjangoTemplateFT()
-au FileType html.django_template set et si sta ts=2 sts=2 sw=2
-" JavaScript
-au FileType javascript set et si sta ts=2 sts=2 sw=2
-" PHP
-au FileType php set noet si sta ts=4 sts=4 sw=4
-au FileType phtml set filetype=php
-" YAML
-au FileType yaml set et si sta ts=2 sts=2 sw=2
+  " Django python source ft detection
+  function SniffAndSetDjangoPythonFT()
+    if search('^\s*from\s\+django.*import') || search('^\s*import.*django')
+      set ft=python.django
+      set syntax=python
+    endif
+  endf
+
+  " C++
+  au FileType cpp set et si sta ts=4 sts=4 sw=4
+  " CSS
+  au FileType css set et si sta ts=2 sts=2 sw=2
+  " Python
+  au FileType python set et si sta ts=4 sts=4 sw=4
+  au FileType python call SniffAndSetDjangoPythonFT()
+  au FileType python.django set et si sta ts=4 sts=4 sw=4
+  " Ruby
+  au FileType ruby set et si sta ts=2 sts=2 sw=2
+  " Erb
+  au FileType eruby set et si sta ts=2 sts=2 sw=2
+  " (X)HTML
+  au FileType html set et si sta ts=2 sts=2 sw=2
+  au FileType xhtml set et si sta ts=2 sts=2 sw=2
+  au FileType html call SniffAndSetDjangoTemplateFT()
+  au FileType html.django_template set et si sta ts=2 sts=2 sw=2
+  " JavaScript
+  au FileType javascript set et si sta ts=2 sts=2 sw=2
+  " PHP
+  au FileType php set noet si sta ts=4 sts=4 sw=4
+  au FileType phtml set filetype=php
+  " YAML
+  au FileType yaml set et si sta ts=2 sts=2 sw=2
+endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Helper Functions
