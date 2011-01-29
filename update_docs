@@ -1,0 +1,13 @@
+#!/usr/bin/env ruby
+
+require 'pathname'
+require 'open3'
+
+ROOT = File.dirname(Pathname.new(__FILE__).realpath)
+SUBMODULES_DIR = 'bundle'
+
+Dir[File.join(ROOT, SUBMODULES_DIR, "*", 'doc')].each do |dir|
+  STDOUT.write ":helptags #{dir} ... "
+  IO.popen("vim -e", "w+") {|pipe| pipe.puts "helptags #{dir}"; pipe.close_write}
+  puts $?.exitstatus == 0 ? "ok" : "error"
+end
