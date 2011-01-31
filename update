@@ -7,16 +7,21 @@ SUBMODULES_DIR = 'bundle'
 
 if ARGV.include? '--clone'
   require 'yaml'
-  repos = YAML::load_file(File.join(ROOT, '.vimscripts.yml'))
+  require 'fileutils'
+  
+  repos = YAML::load_file(File.join(ROOT, 'bundles.yml'))
+  
   Dir.chdir(ROOT)
+  
   repos.each do |repo|
     script_name = File.basename(repo).gsub(/\.git$/, '')
     submodule_dir = File.join(SUBMODULES_DIR, script_name)
-    if not File.exists? submodule_dir
+    if !File.exists?(submodule_dir) || ARGV.include?('-f')
+      FileUtils.rm_f submodule_dir
       puts "Adding submodule '#{repo}' to '#{submodule_dir}'"
       system "git", "submodule", "--quiet", "add", repo, submodule_dir
     else
-      puts "[WARNING] The path #{submodule_dir} already exists, skipping cloning of #{script_name}"
+      puts "[WARNING] The path #{submodule_dir} already exists, skipping cloning of #{script_name} (use -f to force overwriting)."
     end
   end
 else
