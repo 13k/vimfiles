@@ -3,32 +3,32 @@
 require 'pathname'
 
 ROOT = File.dirname(Pathname.new(__FILE__).realpath)
-SUBMODULES_DIR = 'bundle'
+BUNDLES_DIR = 'bundle'
 
-if !File.exists?(File.join(ROOT,SUBMODULES_DIR)) or ARGV.include?('--install')
+if !File.exists?(File.join(ROOT,BUNDLES_DIR)) or ARGV.include?('--install')
   require 'yaml'
   require 'fileutils'
-  
+
   repos = YAML::load_file(File.join(ROOT, 'bundles.yml'))
-  
+
   Dir.chdir(ROOT)
-  
+
   repos.each do |repo|
     script_name = File.basename(repo).gsub(/\.git$/, '')
-    submodule_dir = File.join(SUBMODULES_DIR, script_name)
-    if !File.exists?(submodule_dir) || ARGV.include?('-f')
-      FileUtils.rm_f submodule_dir
-      puts "Adding submodule '#{repo}' to '#{submodule_dir}'"
-      system "git", "submodule", "--quiet", "add", repo, submodule_dir
+    bundle_dir = File.join(BUNDLES_DIR, script_name)
+    if !File.exists?(bundle_dir) || ARGV.include?('-f')
+      FileUtils.rm_f bundle_dir
+      puts "Adding bundle '#{script_name}'"
+      system "git", "clone", "--quiet", repo, bundle_dir
     else
-      puts "[WARNING] The path #{submodule_dir} already exists, skipping cloning of #{script_name} (use -f to force overwriting)."
+      puts "[WARNING] The path #{bundle_dir} already exists, skipping cloning of #{script_name} (use -f to force overwriting)."
     end
   end
 else
-  Dir[File.join(SUBMODULES_DIR, "*")].each do |submodule|
-    if File.exists? File.join(submodule, '.git')
-      puts "Updating #{File.basename(submodule)}"
-      Dir.chdir(submodule) do
+  Dir[File.join(BUNDLES_DIR, "*")].each do |bundle|
+    if File.exists? File.join(bundle, '.git')
+      puts "Updating #{File.basename(bundle)}"
+      Dir.chdir(bundle) do
         system "git", "checkout", "--quiet", "master"
         system "git", "pull", "--quiet"
       end
