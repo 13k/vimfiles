@@ -5,7 +5,7 @@ require 'pathname'
 ROOT = File.dirname(Pathname.new(__FILE__).realpath)
 SUBMODULES_DIR = 'bundle'
 
-if ARGV.include? '--clone'
+if !File.exists?(File.join(ROOT,SUBMODULES_DIR)) or ARGV.include?('--install')
   require 'yaml'
   require 'fileutils'
   
