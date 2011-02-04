@@ -171,6 +171,8 @@ if has('autocmd')
   au FileType ruby set et si sta ts=2 sts=2 sw=2
   " Erb
   au FileType eruby set et si sta ts=2 sts=2 sw=2
+  " Slim
+  au FileType slim set et si sta ts=2 sts=2 sw=2
   " (X)HTML
   au FileType html set et si sta ts=2 sts=2 sw=2
   au FileType xhtml set et si sta ts=2 sts=2 sw=2
