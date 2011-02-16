@@ -31,6 +31,9 @@ call pathogen#runtime_append_all_bundles()
 let g:ftplugin_sql_omni_key_right = '<PageDown>'
 let g:ftplugin_sql_omni_key_left = '<PageUp>'
 
+" command-T
+let g:CommandTMaxHeight=5
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Scripting
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
