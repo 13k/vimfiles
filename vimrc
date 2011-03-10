@@ -167,9 +167,9 @@ if has('autocmd')
   " CSS
   au FileType css set et si sta ts=2 sts=2 sw=2
   " Python
-  au FileType python set et si sta ts=4 sts=4 sw=4
+  au FileType python set et si sta ts=2 sts=2 sw=2
   au FileType python call SniffAndSetDjangoPythonFT()
-  au FileType python.django set et si sta ts=4 sts=4 sw=4
+  au FileType python.django set et si sta ts=2 sts=2 sw=2
   " Ruby
   au FileType ruby set et si sta ts=2 sts=2 sw=2
   " Erb
