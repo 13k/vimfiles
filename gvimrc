@@ -1,3 +1,6 @@
+" Background
+set background=dark
+
 " Font
 if has('win32')
 	set guifont=Consolas:h10,DejaVu\ Sans\ Mono:h10
@@ -19,4 +22,4 @@ let do_syntax_sel_menu=0
 set vb t_vb=
 
 " Color scheme
-colorscheme wombat
+colorscheme jellybeans

@@ -1,0 +1,29 @@
+#!/usr/bin/env ruby
+
+require 'fileutils'
+require 'pathname'
+require 'yaml'
+
+ROOT = File.dirname(Pathname.new(__FILE__).realpath)
+BUNDLES_DIR = File.join(ROOT, 'cache', 'bundles')
+BUNDLES_FILE = File.join(ROOT, 'bundles.yml')
+
+bundles = YAML.load_file(BUNDLES_FILE)
+bundles.map! {|repo| repo.sub /^gh:(.*)$/, 'https://github.com/\1.git' }
+
+FileUtils.mkdir_p BUNDLES_DIR unless File.exists?(BUNDLES_DIR)
+
+bundles.each do |repo|
+  script_name = File.basename(repo).sub(/\.git$/, '')
+  bundle_dir = File.join(BUNDLES_DIR, script_name)
+  if !File.exists?(bundle_dir)
+    puts "Adding #{script_name}"
+    system "git", "clone", "--quiet", repo, bundle_dir
+  else
+    puts "Updating #{script_name}"
+    Dir.chdir(bundle_dir) do
+      system "git", "checkout", "--quiet", "master"
+      system "git", "pull", "--quiet"
+    end
+  end
+end

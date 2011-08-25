@@ -24,8 +24,8 @@ endif
 
 " force ftdetect
 filetype off
-" pathogen. adds ~/.vim/bundle to rtp
-call pathogen#runtime_append_all_bundles()
+" pathogen
+call pathogen#runtime_append_all_bundles('cache/bundles')
 
 " fucking SQL ft plugin
 let g:ftplugin_sql_omni_key_right = '<PageDown>'
@@ -69,7 +69,7 @@ set suffixes=.bak,~,.swp,.o,.info,.aux,.dvi,.bbl,.blg,.brf,.cb,.ind,.idx,.ilg,.i
 
 " enable syntax highlight
 if &t_Co > 2 || has('gui_running')
-  syntax on
+  syntax enable
 endif
 " show line numbers
 set number
@@ -80,7 +80,7 @@ set ruler
 " show (partial) command in status line.
 set showcmd
 " background
-"set bg=dark
+set background=dark
 " enable mouse
 if has('mouse')
   set mouse=a
@@ -92,7 +92,8 @@ set laststatus=2
 " status line
 set statusline=[%n]\ %<%.99f\ %h%w%m%r%y%{exists('g:loaded_fugitive')?fugitive#statusline():''}%{exists('g:loaded_rvm')?rvm#statusline():''}%=%-16(\ %l,%c-%v\ %)%P
 " colors!
-colorscheme darkZ
+"let g:solarized_termtrans=1
+colorscheme torte
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Editing
@@ -162,14 +163,16 @@ if has('autocmd')
     endif
   endf
 
+  " CoffeeScript
+  au FileType coffee set et si sta ts=2 sts=2 sw=2
   " C++
   au FileType cpp set et si sta ts=4 sts=4 sw=4
   " CSS
   au FileType css set et si sta ts=2 sts=2 sw=2
   " Python
-  au FileType python set et si sta ts=2 sts=2 sw=2
+  au FileType python set et si sta ts=4 sts=4 sw=4
   au FileType python call SniffAndSetDjangoPythonFT()
-  au FileType python.django set et si sta ts=2 sts=2 sw=2
+  au FileType python.django set et si sta ts=4 sts=4 sw=4
   " Ruby
   au FileType ruby set et si sta ts=2 sts=2 sw=2
   " Erb

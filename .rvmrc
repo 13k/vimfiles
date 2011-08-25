@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+rb="ruby-$(vim -E -s --cmd 'ruby STDOUT.print "#{RUBY_VERSION}-p#{RUBY_PATCHLEVEL}"' --cmd 'quit')"
+env="${rb}@vim"
+
+if [[ -d "${rvm_path:-$HOME/.rvm}/environments" \
+  && -s "${rvm_path:-$HOME/.rvm}/environments/$env" ]] ; then
+  \. "${rvm_path:-$HOME/.rvm}/environments/$env"
+else
+  rvm --create use "$env"
+fi
