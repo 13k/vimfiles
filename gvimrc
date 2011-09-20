@@ -9,10 +9,9 @@ else
 endif
 
 " Number of lines and columns (window height and width)
+set columns=100 lines=25
 if &diff
 	set columns=150 lines=30
-else
-	set columns=100 lines=25
 endif
 
 " Don't show file types in menu
