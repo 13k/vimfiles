@@ -150,16 +150,14 @@ if has('autocmd')
   " Django template ft detection
   function SniffAndSetDjangoTemplateFT()
     if search('{{.*}}') || search('{%.*%}')
-      set ft=html.django_template
-      set syntax=htmldjango
+      set ft=htmldjango
     endif
   endf
 
   " Django python source ft detection
   function SniffAndSetDjangoPythonFT()
-    if search('^\s*from\s\+django.*import') || search('^\s*import.*django')
+    if search('^\s*from\s\+django.*import') || search('^\s*import\s\+django')
       set ft=python.django
-      set syntax=python
     endif
   endf
 
@@ -171,8 +169,11 @@ if has('autocmd')
   au FileType css set et si sta ts=2 sts=2 sw=2
   " Python
   au FileType python set et si sta ts=4 sts=4 sw=4
+  " Django
   au FileType python call SniffAndSetDjangoPythonFT()
   au FileType python.django set et si sta ts=4 sts=4 sw=4
+  au FileType html call SniffAndSetDjangoTemplateFT()
+  au FileType htmldjango set et si sta ts=4 sts=4 sw=4
   " Ruby
   au FileType ruby set et si sta ts=2 sts=2 sw=2
   " Erb
@@ -182,8 +183,6 @@ if has('autocmd')
   " (X)HTML
   au FileType html set et si sta ts=2 sts=2 sw=2
   au FileType xhtml set et si sta ts=2 sts=2 sw=2
-  au FileType html call SniffAndSetDjangoTemplateFT()
-  au FileType html.django_template set et si sta ts=2 sts=2 sw=2
   " JavaScript
   au FileType javascript set et si sta ts=2 sts=2 sw=2
   " PHP
@@ -191,6 +190,10 @@ if has('autocmd')
   au FileType phtml set filetype=php
   " YAML
   au FileType yaml set et si sta ts=2 sts=2 sw=2
+  " Java
+  au FileType java set et si sta ts=4 sts=4 sw=4
+  " Groovy
+  au FileType groovy set et si sta ts=2 sts=2 sw=2
 endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

@@ -18,4 +18,5 @@
 - gh:tpope/vim-unimpaired
 - gh:vim-scripts/vim-coffee-script
 - gh:vim-scripts/actionscript.vim--Leider
-- git://git.wincent.com/command-t.git
+- gh:vim-scripts/django.vim
+- gh:wincent/Command-T

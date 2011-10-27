@@ -27,3 +27,7 @@ bundles.each do |repo|
     end
   end
 end
+
+puts "Generating helptags ... "
+system "vim", "-c", "call pathogen#helptags()", "-c", "quit"
+puts "Done"
