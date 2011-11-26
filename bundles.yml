@@ -1,3 +1,4 @@
+- svn:scala-vim:http://lampsvn.epfl.ch/svn-repos/scala/scala-tool-support/trunk/src/vim
 - gh:bbommarito/vim-slim
 - gh:msanders/snipmate.vim
 - gh:altercation/vim-colors-solarized

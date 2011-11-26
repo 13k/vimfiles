@@ -4,27 +4,68 @@ require 'fileutils'
 require 'pathname'
 require 'yaml'
 
+def download(scm, url, dest)
+  case scm
+  when "git"
+    system "git", "clone", "--quiet", url, dest
+  when "svn"
+    system "svn", "checkout", "--quiet", url, dest
+  end
+end
+
+def update(scm, url, dest)
+  case scm
+  when "git"
+    Dir.chdir(dest) do
+      system "git", "pull", "--quiet"
+    end
+  when "svn"
+    Dir.chdir(dest) do
+      system "svn", "update", "--quiet"
+    end
+  end
+end
+
 ROOT = File.dirname(Pathname.new(__FILE__).realpath)
 BUNDLES_DIR = File.join(ROOT, 'cache', 'bundles')
 BUNDLES_FILE = File.join(ROOT, 'bundles.yml')
 
+#
+# bundle specs:
+#
+# Array of "method:name:url"
+#
+# methods:
+#   svn
+#   git
+#
+# shortcuts:
+#   "gh:user/repository" -> "git:repository:https://github.com/user/repository.git"
+#
 bundles = YAML.load_file(BUNDLES_FILE)
-bundles.map! {|repo| repo.sub /^gh:(.*)$/, 'https://github.com/\1.git' }
+bundles.map! do |repo|
+  case repo
+  when /^gh:(.*)/
+    "git:#{File.basename($1)}:https://github.com/#{$1.sub /\.git$/, ''}.git"
+  else
+    repo
+  end
+end
 
 FileUtils.mkdir_p BUNDLES_DIR unless File.exists?(BUNDLES_DIR)
 
-bundles.each do |repo|
-  script_name = File.basename(repo).sub(/\.git$/, '')
-  bundle_dir = File.join(BUNDLES_DIR, script_name)
-  if !File.exists?(bundle_dir)
-    puts "Adding #{script_name}"
-    system "git", "clone", "--quiet", repo, bundle_dir
+bundles.each do |spec|
+  spec =~ /(.*?):(.*?):(.*)/
+  scm = $~[1]
+  name = $~[2]
+  url = $~[3]
+  dest = File.join(BUNDLES_DIR, name)
+  if !File.exists?(dest)
+    puts "Adding #{name}"
+    download(scm, url, dest)
   else
-    puts "Updating #{script_name}"
-    Dir.chdir(bundle_dir) do
-      system "git", "checkout", "--quiet", "master"
-      system "git", "pull", "--quiet"
-    end
+    puts "Updating #{name}"
+    update(scm, url, dest)
   end
 end
 
