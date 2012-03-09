@@ -1,4 +1,5 @@
 - svn:scala-vim:http://lampsvn.epfl.ch/svn-repos/scala/scala-tool-support/trunk/src/vim
+- gh:majutsushi/tagbar
 - gh:bbommarito/vim-slim
 - gh:msanders/snipmate.vim
 - gh:altercation/vim-colors-solarized
@@ -17,7 +18,8 @@
 - gh:tpope/vim-repeat
 - gh:tpope/vim-surround
 - gh:tpope/vim-unimpaired
-- gh:vim-scripts/vim-coffee-script
-- gh:vim-scripts/actionscript.vim--Leider
-- gh:vim-scripts/django.vim
-- gh:wincent/Command-T
+- gh:kchmck/vim-coffee-script
+- gh:kien/ctrlp.vim
+- gh:scrooloose/nerdtree
+- gh:digitaltoad/vim-jade
+- gh:pangloss/vim-javascript
