@@ -1,5 +1,5 @@
 " Background
-set background=dark
+set background=light
 " Font
 if has('win32') || has('gui_macvim')
 	set guifont=Mensch:h10,Menlo:h10,Consolas:h10,Monaco:h10
@@ -11,6 +11,6 @@ let do_syntax_sel_menu=0
 " no fucking bells
 set vb t_vb=
 " Color scheme
-colorscheme jellybeans
+colorscheme solarized
 " Number of lines and columns
 set columns=100 lines=25
