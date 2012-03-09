@@ -167,6 +167,8 @@ if has('autocmd')
   au FileType cpp set et si sta ts=4 sts=4 sw=4
   " CSS
   au FileType css set et si sta ts=2 sts=2 sw=2
+  " SCSS
+  au FileType scss set et si sta ts=2 sts=2 sw=2
   " Python
   au FileType python set et si sta ts=4 sts=4 sw=4
   " Django
@@ -180,6 +182,8 @@ if has('autocmd')
   au FileType eruby set et si sta ts=2 sts=2 sw=2
   " Slim
   au FileType slim set et si sta ts=2 sts=2 sw=2
+  " Jade
+  au FileType jade set et si sta ts=2 sts=2 sw=2
   " (X)HTML
   au FileType html set et si sta ts=2 sts=2 sw=2
   au FileType xhtml set et si sta ts=2 sts=2 sw=2
@@ -192,6 +196,8 @@ if has('autocmd')
   au FileType yaml set et si sta ts=2 sts=2 sw=2
   " Java
   au FileType java set et si sta ts=4 sts=4 sw=4
+  " Scala
+  au FileType scala set et si sta ts=2 sts=2 sw=2
   " Groovy
   au FileType groovy set et si sta ts=2 sts=2 sw=2
 endif
