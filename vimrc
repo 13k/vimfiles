@@ -24,15 +24,13 @@ endif
 
 " force ftdetect
 filetype off
+
 " pathogen
 call pathogen#runtime_append_all_bundles('cache/bundles')
 
 " fucking SQL ft plugin
 let g:ftplugin_sql_omni_key_right = '<PageDown>'
 let g:ftplugin_sql_omni_key_left = '<PageUp>'
-
-" command-T
-let g:CommandTMaxHeight=5
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Scripting
@@ -132,12 +130,7 @@ set comments=s1:/*,mb:*,ex:*/,b:#,:%,:XCOMM,n:>,fb:-
 " Mappings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Navigate forward and back inside tabs with Shift+Left and Shift+Right
-map <silent><S-Right> :tabnext<CR>
-map <silent><S-Left> :tabprevious<CR>
-" Map CTRL+] and CTRL+T to CTRL+LeftArrow and CTRL+RightArrow
-map <silent><C-Left> <C-T>
-map <silent><C-Right> <C-]>
+runtime mappings.vim
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " FileType customizations
@@ -201,11 +194,3 @@ if has('autocmd')
   " Groovy
   au FileType groovy set et si sta ts=2 sts=2 sw=2
 endif
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Helper Functions
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-fun HamlHashToDottedClass()
-  :s@{\s*:class\s*=>\s*["']\(.\{-}\)['"]\s*}@<HAML_CLASSES>\1</HAML_CLASSES>@
-  :s@<HAML_CLASSES>\(.\{-}\)</HAML_CLASSES>@\="." . substitute(submatch(1), "\\s\\+", ".", "g")
-endfun
