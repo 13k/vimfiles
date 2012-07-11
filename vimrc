@@ -26,7 +26,8 @@ endif
 filetype off
 
 " pathogen
-call pathogen#runtime_append_all_bundles('cache/bundles')
+runtime cache/bundles/vim-pathogen/autoload/pathogen.vim
+call pathogen#infect('~/.vim/cache/bundles')
 
 " fucking SQL ft plugin
 let g:ftplugin_sql_omni_key_right = '<PageDown>'
@@ -162,6 +163,8 @@ if has('autocmd')
   au FileType css set et si sta ts=2 sts=2 sw=2
   " SCSS
   au FileType scss set et si sta ts=2 sts=2 sw=2
+  " LESS
+  au FileType less set et si sta ts=2 sts=2 sw=2
   " Python
   au FileType python set et si sta ts=4 sts=4 sw=4
   " Django

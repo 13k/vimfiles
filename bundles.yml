@@ -1,4 +1,9 @@
+- gh:tpope/vim-pathogen
+- gh:hail2u/vim-css3-syntax
+- gh:jamessan/vim-gnupg
+- gh:13k/vim-tomorrow
 - gh:altercation/vim-colors-solarized
+- gh:groenewege/vim-less
 - gh:bbommarito/vim-slim
 - gh:digitaltoad/vim-jade
 - gh:kchmck/vim-coffee-script
