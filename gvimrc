@@ -1,3 +1,5 @@
+" Always show tabline
+set showtabline=2
 " Background
 set background=light
 " Font
@@ -11,6 +13,8 @@ let do_syntax_sel_menu=0
 " no fucking bells
 set vb t_vb=
 " Color scheme
+" colorscheme Tomorrow-Night
 colorscheme solarized
+set background=light
 " Number of lines and columns
 set columns=100 lines=25
