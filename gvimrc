@@ -4,9 +4,9 @@ set showtabline=2
 set background=light
 " Font
 if has('win32') || has('gui_macvim')
-	set guifont=Mensch:h10,Menlo:h10,Consolas:h10,Monaco:h10
+	set guifont=Consolas:h10,Monaco:h10
 else
-	set guifont=Envy\ Code\ R\ 11,M+\ 1m\ 11,Liberation\ Mono\ 10,Droid\ Sans\ Mono\ 10,DejaVu\ Sans\ Mono\ 10
+	set guifont=Aurulent\ Sans\ Mono\ 10,Droid\ Sans\ Mono\ 10,Monospaced\ 10
 endif
 " Don't show file types in menu
 let do_syntax_sel_menu=0
@@ -17,4 +17,4 @@ set vb t_vb=
 colorscheme solarized
 set background=light
 " Number of lines and columns
-set columns=100 lines=25
+set columns=85 lines=24

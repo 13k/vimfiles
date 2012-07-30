@@ -183,10 +183,12 @@ if has('autocmd')
   " (X)HTML
   au FileType html set et si sta ts=2 sts=2 sw=2
   au FileType xhtml set et si sta ts=2 sts=2 sw=2
+  " XML
+  au FileType xml set et si sta ts=4 sts=4 sw=4
   " JavaScript
   au FileType javascript set et si sta ts=2 sts=2 sw=2
   " PHP
-  au FileType php set noet si sta ts=4 sts=4 sw=4
+  au FileType php set et si sta ts=4 sts=4 sw=4
   au FileType phtml set filetype=php
   " YAML
   au FileType yaml set et si sta ts=2 sts=2 sw=2
