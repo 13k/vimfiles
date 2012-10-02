@@ -25,6 +25,9 @@ endif
 " force ftdetect
 filetype off
 
+" matchit
+runtime macros/matchit.vim
+
 " pathogen
 runtime cache/bundles/vim-pathogen/autoload/pathogen.vim
 call pathogen#infect('~/.vim/cache/bundles')
@@ -93,6 +96,8 @@ set statusline=[%n]\ %<%.99f\ %h%w%m%r%y%{exists('g:loaded_fugitive')?fugitive#s
 " colors!
 "let g:solarized_termtrans=1
 colorscheme torte
+" try to set the right window size
+au GUIEnter * set lines=25 columns=85
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Editing
@@ -100,6 +105,8 @@ colorscheme torte
 
 " auto indentation on
 set autoindent
+" end of line
+set endofline
 " C auto indentation off
 set nocindent
 " don't expand tabs to spaces
@@ -198,4 +205,7 @@ if has('autocmd')
   au FileType scala set et si sta ts=2 sts=2 sw=2
   " Groovy
   au FileType groovy set et si sta ts=2 sts=2 sw=2
+
+  " Automatically remove trailing whitespace
+  au FileType c,cpp,java,php,ruby,python,javascript,css,html au BufWritePre <buffer> :%s/\s\+$//e
 endif

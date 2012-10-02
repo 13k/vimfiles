@@ -1,3 +1,5 @@
+" Options
+set guioptions=ai
 " Always show tabline
 set showtabline=2
 " Background
@@ -17,4 +19,7 @@ set vb t_vb=
 colorscheme solarized
 set background=light
 " Number of lines and columns
-set columns=85 lines=24
+set lines=25 columns=85
+" try to set the right window size
+" autocmd GUIEnter * set lines=24 columns=85
+" autocmd VimEnter * set lines=24 columns=85

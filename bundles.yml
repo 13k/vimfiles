@@ -1,3 +1,6 @@
+- gh:briancollins/vim-jst
+- gh:juvenn/mustache.vim
+- gh:wavded/vim-stylus
 - gh:tpope/vim-pathogen
 - gh:hail2u/vim-css3-syntax
 - gh:jamessan/vim-gnupg
@@ -10,6 +13,7 @@
 - gh:kien/ctrlp.vim
 - gh:majutsushi/tagbar
 - gh:mattn/gist-vim
+- gh:mattn/webapi-vim
 - gh:msanders/snipmate.vim
 - gh:pangloss/vim-javascript
 - gh:scrooloose/nerdcommenter
