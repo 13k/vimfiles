@@ -16,9 +16,8 @@ let do_syntax_sel_menu=0
 set vb t_vb=
 " Color scheme
 colorscheme Monokai-Refined
-set background=light
 " Number of lines and columns
-set lines=25 columns=85
+set lines=35 columns=130
 " try to set the right window size
-" autocmd GUIEnter * set lines=24 columns=85
-" autocmd VimEnter * set lines=24 columns=85
+autocmd GUIEnter * set lines=35 columns=130
+autocmd VimEnter * set lines=35 columns=130
