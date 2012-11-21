@@ -32,3 +32,9 @@ noremap! <C-A> <Home>
 " CTRL-E => <End>, all modes
 noremap <C-E> <End>
 noremap! <C-E> <End>
+
+" Toggle NERDTree
+nnoremap <F3> :NERDTreeToggle<CR>
+
+" Toggle Gundo
+nnoremap <F4> :GundoToggle<CR>

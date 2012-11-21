@@ -135,12 +135,6 @@ set textwidth=0
 set comments=s1:/*,mb:*,ex:*/,b:#,:%,:XCOMM,n:>,fb:-
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Mappings
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-runtime mappings.vim
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " FileType customizations
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -209,3 +203,9 @@ if has('autocmd')
   " Automatically remove trailing whitespace
   au FileType c,cpp,java,php,ruby,python,javascript,css,html au BufWritePre <buffer> :%s/\s\+$//e
 endif
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Mappings
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+runtime mappings.vim
