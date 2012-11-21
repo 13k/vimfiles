@@ -199,6 +199,10 @@ if has('autocmd')
   au FileType scala set et si sta ts=2 sts=2 sw=2
   " Groovy
   au FileType groovy set et si sta ts=2 sts=2 sw=2
+  " Shell
+  au FileType sh set et si sta ts=2 sts=2 sw=2
+  " viml
+  au FileType vim set et si sta ts=2 sts=2 sw=2
 
   " Automatically remove trailing whitespace
   au BufWritePre <buffer> :%s/\s\+$//e
