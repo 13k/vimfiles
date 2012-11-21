@@ -12,6 +12,8 @@ else
 endif
 " Don't show file types in menu
 let do_syntax_sel_menu=0
+" Don't hide mouse
+set nomousehide
 " no fucking bells
 set vb t_vb=
 " Color scheme
