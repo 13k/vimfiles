@@ -201,7 +201,7 @@ if has('autocmd')
   au FileType groovy set et si sta ts=2 sts=2 sw=2
 
   " Automatically remove trailing whitespace
-  au FileType c,cpp,java,php,ruby,python,javascript,css,html au BufWritePre <buffer> :%s/\s\+$//e
+  au BufWritePre <buffer> :%s/\s\+$//e
 endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
