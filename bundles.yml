@@ -1,3 +1,10 @@
+- gh:vim-scripts/csv.vim
+- gh:timcharper/textile.vim
+- gh:cakebaker/scss-syntax.vim
+- gh:skwp/vim-rspec
+- gh:ajf/puppet-vim
+- gh:mmalecki/vim-node.js
+- gh:nono/vim-handlebars
 - gh:sjl/gundo.vim
 - gh:jaromero/vim-monokai-refined
 - gh:briancollins/vim-jst
@@ -34,4 +41,4 @@
 - gh:tpope/vim-surround
 - gh:tpope/vim-unimpaired
 - gh:vim-ruby/vim-ruby
-- svn:scala-vim:http://lampsvn.epfl.ch/svn-repos/scala/scala-tool-support/trunk/src/vim
+- gh:rosstimson/scala-vim-support
