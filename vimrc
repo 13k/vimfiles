@@ -64,6 +64,8 @@ set ffs=unix,dos,mac
 set viminfo+=!
 " Suffixes that get lower priority when doing tab completion for filenames.
 set suffixes=.bak,~,.swp,.o,.info,.aux,.dvi,.bbl,.blg,.brf,.cb,.ind,.idx,.ilg,.inx,.out,.toc,.pyc
+" Try to find tags file withing current git repository
+set tags+=.git/tags
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " UI
@@ -133,6 +135,8 @@ set shiftwidth=4
 set textwidth=0
 " remove '//' from comment auto-insert at a newline
 set comments=s1:/*,mb:*,ex:*/,b:#,:%,:XCOMM,n:>,fb:-
+" folding method
+set foldmethod=marker
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " FileType customizations
@@ -143,18 +147,26 @@ if has('autocmd')
   filetype plugin indent on
 
   " Django template ft detection
-  function SniffAndSetDjangoTemplateFT()
+  fun! <SID>SniffAndSetDjangoTemplateFT()
     if search('{{.*}}') || search('{%.*%}')
       set ft=htmldjango
     endif
-  endf
+  endfun
 
   " Django python source ft detection
-  function SniffAndSetDjangoPythonFT()
+  fun! <SID>SniffAndSetDjangoPythonFT()
     if search('^\s*from\s\+django.*import') || search('^\s*import\s\+django')
       set ft=python.django
     endif
-  endf
+  endfun
+
+  " Strip trailing whitespace
+  fun! <SID>StripTrailingWhitespaces()
+    let l = line(".")
+    let c = col(".")
+    %s/\s\+$//e
+    call cursor(l, c)
+  endfun
 
   " CoffeeScript
   au FileType coffee set et si sta ts=2 sts=2 sw=2
@@ -204,8 +216,11 @@ if has('autocmd')
   " viml
   au FileType vim set et si sta ts=2 sts=2 sw=2
 
+  " Override filetype for handlebars+erb files
+  au BufNewFile,BufRead *.hbs.erb,*.handlebars.erb,*.hb.erb set ft=handlebars
+
   " Automatically remove trailing whitespace
-  au BufWritePre <buffer> :%s/\s\+$//e
+  au BufWritePre * :call <SID>StripTrailingWhitespaces()
 endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
