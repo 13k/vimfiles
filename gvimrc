@@ -19,9 +19,9 @@ set vb t_vb=
 " Color scheme
 colorscheme Monokai-Refined
 " Number of lines and columns
-set lines=35 columns=100
+set lines=30 columns=100
 " try to set the right window size
-autocmd GUIEnter * set lines=35 columns=100
-autocmd VimEnter * set lines=35 columns=100
+autocmd GUIEnter * set lines=30 columns=100
+autocmd VimEnter * set lines=30 columns=100
 " override NERDTree mapping
-nnoremap <F3> :set columns=175 <Bar> NERDTree<CR>
+nnoremap <F3> :set columns=160 <Bar> NERDTree<CR>
