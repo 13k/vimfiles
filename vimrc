@@ -8,6 +8,13 @@ if v:version < 700
   quit
 endif
 
+" printf oriented debugging
+fun s:debug(str)
+  exec printf('redir >> %s', '/tmp/vim.log')
+  silent echo a:str
+  redir END
+endfun
+
 if v:version > 701 && &term != "cygwin"
   set term=builtin_xterm
 endif
@@ -168,6 +175,18 @@ if has('autocmd')
     call cursor(l, c)
   endfun
 
+  fun! <SID>EnableStripTrailingWhitespaces()
+    aug StripTrailingWhitespaces
+      au BufWritePre * :call <SID>StripTrailingWhitespaces()
+    aug END
+  endfun
+
+  fun! <SID>DisableStripTrailingWhitespaces()
+    aug StripTrailingWhitespaces
+      au!
+    aug END
+  endfun
+
   " CoffeeScript
   au FileType coffee set et si sta ts=2 sts=2 sw=2
   " C++
@@ -219,8 +238,10 @@ if has('autocmd')
   " Override filetype for handlebars+erb files
   au BufNewFile,BufRead *.hbs.erb,*.handlebars.erb,*.hb.erb set ft=handlebars
 
-  " Automatically remove trailing whitespace
-  au BufWritePre * :call <SID>StripTrailingWhitespaces()
+  " Enables trailing whitespace cleaning for all files
+  au FileType * :call <SID>EnableStripTrailingWhitespaces()
+  " Disable whitespace cleaning for markdown since it is valid markup
+  au FileType markdown :call <SID>DisableStripTrailingWhitespaces()
 endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
