@@ -1,3 +1,4 @@
+- gh:wincent/Command-T
 - gh:vim-scripts/csv.vim
 - gh:timcharper/textile.vim
 - gh:cakebaker/scss-syntax.vim
@@ -19,7 +20,6 @@
 - gh:bbommarito/vim-slim
 - gh:digitaltoad/vim-jade
 - gh:kchmck/vim-coffee-script
-- gh:kien/ctrlp.vim
 - gh:majutsushi/tagbar
 - gh:mattn/gist-vim
 - gh:mattn/webapi-vim

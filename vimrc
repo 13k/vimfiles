@@ -36,8 +36,12 @@ filetype off
 runtime macros/matchit.vim
 
 " pathogen
-runtime cache/bundles/vim-pathogen/autoload/pathogen.vim
-call pathogen#infect('~/.vim/cache/bundles')
+let s:xdg_cache_dir = strlen($XDG_CACHE_HOME) > 0 ? $XDG_CACHE_HOME : $HOME . "/.cache"
+let s:bundles_dir = s:xdg_cache_dir . "/vim-bundles"
+let s:pathogen_path = s:bundles_dir . "/vim-pathogen/autoload"
+let &rtp = &rtp . "," . s:pathogen_path
+runtime pathogen.vim
+call pathogen#infect(s:bundles_dir)
 
 " fucking SQL ft plugin
 let g:ftplugin_sql_omni_key_right = '<PageDown>'
