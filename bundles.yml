@@ -32,7 +32,6 @@
 - gh:tpope/vim-fugitive
 - gh:tpope/vim-git
 - gh:tpope/vim-haml
-- gh:tpope/vim-liquid
 - gh:tpope/vim-markdown
 - gh:tpope/vim-pastie
 - gh:tpope/vim-ragtag
