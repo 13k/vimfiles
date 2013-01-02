@@ -148,6 +148,10 @@ set textwidth=0
 set comments=s1:/*,mb:*,ex:*/,b:#,:%,:XCOMM,n:>,fb:-
 " folding method
 set foldmethod=marker
+" ignore these files
+set wildignore=.*~,*.o,*.pyc,*.class,*.obj,.git,app/assets/images/**,solr/**,coverage/**,tmp/**
+" mark the 80th column
+set colorcolumn=80
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " FileType customizations
