@@ -150,20 +150,6 @@ if has('autocmd')
   " Enable filetype detection, plugins and indent files
   filetype plugin indent on
 
-  " Django template ft detection
-  fun! <SID>SniffAndSetDjangoTemplateFT()
-    if search('{{.*}}') || search('{%.*%}')
-      set ft=htmldjango
-    endif
-  endfun
-
-  " Django python source ft detection
-  fun! <SID>SniffAndSetDjangoPythonFT()
-    if search('^\s*from\s\+django.*import') || search('^\s*import\s\+django')
-      set ft=python.django
-    endif
-  endfun
-
   " Strip trailing whitespace
   fun! <SID>StripTrailingWhitespaces()
     let l = line(".")
@@ -185,9 +171,7 @@ if has('autocmd')
   " Python
   au FileType python set et si sta ts=4 sts=4 sw=4
   " Django
-  au FileType python call SniffAndSetDjangoPythonFT()
   au FileType python.django set et si sta ts=4 sts=4 sw=4
-  au FileType html call SniffAndSetDjangoTemplateFT()
   au FileType htmldjango set et si sta ts=4 sts=4 sw=4
   " Ruby
   au FileType ruby set et si sta ts=2 sts=2 sw=2
