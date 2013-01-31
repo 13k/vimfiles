@@ -1,12 +1,15 @@
 " vim: et si sta ts=2 sts=2 sw=2
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Setup
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-if v:version < 700
-  echoerr 'This vimrc requires Vim 7 or later.'
+" Setup -------------------------------------------------------------------- {{{
+
+if v:version < 703
+  echoerr 'This vimrc requires Vim 7.3 or later.'
   quit
 endif
+
+" freedesktop's xdg cache dir
+let s:xdg_cache_dir = strlen($XDG_CACHE_HOME) > 0 ? $XDG_CACHE_HOME : $HOME . "/.cache"
+let s:vim_cache_dir = s:xdg_cache_dir . "/vim"
 
 " printf oriented debugging
 fun s:debug(str)
@@ -22,12 +25,11 @@ endif
 if has('multi_byte')
   " Legacy encoding is the system default encoding
   set encoding=utf-8
-  let legacy_encoding=&encoding
 endif
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Scripts/Plugins setup
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" }}}
+
+" Scripts/Plugins setup ---------------------------------------------------- {{{
 
 " force ftdetect
 filetype off
@@ -35,29 +37,31 @@ filetype off
 " matchit
 runtime macros/matchit.vim
 
+" nerdtree
+let g:NERDTreeIgnore = ['\.sock$', '^\.git$[[dir]]']
+for suffix in split(&suffixes, ',')
+  let g:NERDTreeIgnore += [ escape(suffix, '.~') . '$' ]
+endfor
+
 " pathogen
-let s:xdg_cache_dir = strlen($XDG_CACHE_HOME) > 0 ? $XDG_CACHE_HOME : $HOME . "/.cache"
-let s:bundles_dir = s:xdg_cache_dir . "/vim-bundles"
+let s:bundles_dir = s:vim_cache_dir . "/bundles"
 let s:pathogen_path = s:bundles_dir . "/vim-pathogen/autoload"
 let &rtp = &rtp . "," . s:pathogen_path
 runtime pathogen.vim
 call pathogen#infect(s:bundles_dir)
+call pathogen#helptags()
 
-" fucking SQL ft plugin
-let g:ftplugin_sql_omni_key_right = '<PageDown>'
-let g:ftplugin_sql_omni_key_left = '<PageUp>'
+" }}}
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Scripting
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Scripting ---------------------------------------------------------------- {{{
 
 " It's a common mistake to type the capital letter instead of the lowercased one
 command W w
 command Q q
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" General settings
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" }}}
+
+" General settings --------------------------------------------------------- {{{
 
 " Do case insensitive matching
 set ignorecase
@@ -67,8 +71,6 @@ set smartcase
 set incsearch
 " don't be compatible with vi!
 set nocompatible
-" don't save backups
-set nobackup
 " support this types of files in this order
 set ffs=unix,dos,mac
 " I don't care if vim can't save viminfo
@@ -78,20 +80,23 @@ set suffixes=.bak,~,.swp,.o,.info,.aux,.dvi,.bbl,.blg,.brf,.cb,.ind,.idx,.ilg,.i
 " Try to find tags file withing current git repository
 set tags+=.git/tags
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" UI
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" }}}
+
+" UI ----------------------------------------------------------------------- {{{
 
 " enable syntax highlight
 if &t_Co > 2 || has('gui_running')
   syntax enable
+  syntax sync minlines=0
 endif
 " show line numbers
 set number
-" don't highlight searchs
-set nohlsearch
+" highlight searches
+set hlsearch
 " always show cursor position
 set ruler
+" show current mode
+set showmode
 " show (partial) command in status line.
 set showcmd
 " background
@@ -104,18 +109,39 @@ endif
 set vb t_vb=
 " status line always shown
 set laststatus=2
-" status line
-set statusline=[%n]\ %<%.99f\ %h%w%m%r%y%{exists('g:loaded_fugitive')?fugitive#statusline():''}%{exists('g:loaded_rvm')?rvm#statusline():''}%=%-16(\ %l,%c-%v\ %)%P
+" show wildcard completion menu
+set wildmenu
+" complete till longest match then open wildmenu
+set wildmode=longest:full
+" show at least 1 line of context when scrolling
+set scrolloff=1
+" show 5 columns of context when horizontal scrolling
+set sidescrolloff=5
+" show unprintable chars as hex
+set display+=uhex
+" show last line
+set display+=lastline
+" prettier listchars
+if &listchars ==# 'eol:$'
+  set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
+  if &termencoding ==# 'utf-8' || &encoding ==# 'utf-8'
+    let &listchars = "tab:\u21e5 ,trail:\u2423,extends:\u21c9,precedes:\u21c7,nbsp:\u26ad"
+    let &fillchars = "vert:\u259a,fold:\u00b7"
+  endif
+endif
 " colors!
-"let g:solarized_termtrans=1
 colorscheme torte
 " try to set the right window size
 au GUIEnter * set lines=25 columns=85
+" status line
+set statusline=[%n]\ %<%.99f\ %h%w%m%r%y%{exists('g:loaded_fugitive')?fugitive#statusline():''}%=%-16(\ %l,%c-%v\ %)%P
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Editing
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" }}}
 
+" Editing ------------------------------------------------------------------ {{{
+
+" file formats precedence
+set fileformats=unix,dos,mac
 " auto indentation on
 set autoindent
 " end of line
@@ -125,23 +151,28 @@ set nocindent
 " don't expand tabs to spaces
 set noexpandtab
 " no smart tab
-set nosmarttab
+set smarttab
+" timeout on mappings too
+set ttimeout
+set ttimeoutlen=50
 " don't wrap lines
 set nowrap
 " show matching brackets.
 set noshowmatch
 " allow backspacing over ai, line breaks, start of insert
 set backspace=indent,eol,start
+" do not scan included files on completion
+set complete-=i
 " allow line wrapping when moving cursor
 set whichwrap=b,s,<,>,[,]
 " format options (comment leader, )
 set formatoptions+=r
 " tab stop
-set tabstop=4
+set tabstop=2
 " soft tab stop
-set softtabstop=4
+set softtabstop=2
 " shift width
-set shiftwidth=4
+set shiftwidth=2
 " no line wrap
 set textwidth=0
 " remove '//' from comment auto-insert at a newline
@@ -152,10 +183,25 @@ set foldmethod=marker
 set wildignore=.*~,*.o,*.pyc,*.class,*.obj,.git,app/assets/images/**,solr/**,coverage/**,tmp/**
 " mark the 80th column
 set colorcolumn=80
+" swap files directory
+if isdirectory(s:vim_cache_dir . "/swap")
+  let &directory = s:vim_cache_dir . "/swap"
+endif
+" backup files directory
+if isdirectory(s:vim_cache_dir . "/backup")
+  let &backupdir = s:vim_cache_dir . "/backup"
+endif
+" undo stuff
+if isdirectory(s:vim_cache_dir . "/undo")
+  let &undodir = s:vim_cache_dir . "/undo"
+  set undofile
+  set undolevels=1000
+  set undoreload=10000
+endif
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" FileType customizations
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" }}}
+
+" FileType customizations -------------------------------------------------- {{{
 
 if has('autocmd')
   " Enable filetype detection, plugins and indent files
@@ -236,8 +282,10 @@ if has('autocmd')
   au FileType markdown :call <SID>DisableStripTrailingWhitespaces()
 endif
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Mappings
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" }}}
+
+" Mappings ----------------------------------------------------------------- {{{
 
 runtime mappings.vim
+
+" }}}
