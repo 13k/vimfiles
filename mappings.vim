@@ -1,3 +1,29 @@
+" Vim. Live it. ------------------------------------------------------- {{{
+nnoremap <up> <nop>
+nnoremap <down> <nop>
+nnoremap <left> <nop>
+nnoremap <right> <nop>
+inoremap <up> <nop>
+inoremap <down> <nop>
+inoremap <left> <nop>
+inoremap <right> <nop>
+nnoremap j gj
+nnoremap k gk
+" }}}
+
+" Make Y consistent with C and D
+nnoremap Y y$
+
+" Sane regexes
+nnoremap / /\v
+vnoremap / /\v
+cnoremap %s/ %s/\v
+
+" Clear highlighted searches
+if maparg('<C-L>', 'n') ==# ''
+  nnoremap <silent> <C-L> :nohlsearch<CR><C-L>
+endif
+
 " Navigate forward and back inside tabs with Shift+Left and Shift+Right
 map <silent><S-Right> :tabnext<CR>
 map <silent><S-Left> :tabprevious<CR>
@@ -34,7 +60,7 @@ noremap <C-E> <End>
 noremap! <C-E> <End>
 
 " Toggle NERDTree
-nnoremap <F3> :NERDTreeToggle<CR>
+nnoremap <leader>n :NERDTreeToggle<CR>
 
 " Toggle Gundo
-nnoremap <F4> :GundoToggle<CR>
+nnoremap <leader>u :GundoToggle<CR>
