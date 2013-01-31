@@ -27,4 +27,4 @@ autocmd VimEnter * set lines=30 columns=100
 " override NERDTree mapping
 nnoremap <F3> :set columns=160 <Bar> NERDTree<CR>
 " load powerline
-python from powerline.ext.vim import source_plugin; source_plugin()
+python from powerline.bindings.vim import source_plugin; source_plugin()
