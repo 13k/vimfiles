@@ -17,7 +17,7 @@
 - gh:13k/vim-tomorrow
 - gh:altercation/vim-colors-solarized
 - gh:groenewege/vim-less
-- gh:bbommarito/vim-slim
+- gh:slim-template/vim-slim
 - gh:digitaltoad/vim-jade
 - gh:kchmck/vim-coffee-script
 - gh:majutsushi/tagbar
