@@ -28,7 +28,7 @@ end
 
 ROOT = File.dirname(Pathname.new(__FILE__).realpath)
 XDG_CACHE_HOME = ENV['XDG_CACHE_HOME'] || File.join(ENV['HOME'], '.cache')
-BUNDLES_DIR = File.join(XDG_CACHE_HOME, 'vim-bundles')
+BUNDLES_DIR = File.join(XDG_CACHE_HOME, 'vim', 'bundles')
 BUNDLES_FILE = File.join(ROOT, 'bundles.yml')
 
 #
