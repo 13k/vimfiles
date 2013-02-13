@@ -2,6 +2,8 @@
 set guioptions=aei
 " Always show tabline
 set showtabline=2
+" Always show status line
+set laststatus=2
 " Background
 set background=light
 " Font

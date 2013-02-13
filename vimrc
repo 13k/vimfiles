@@ -108,7 +108,7 @@ endif
 " no fucking bells!
 set vb t_vb=
 " status line always shown
-set laststatus=2
+set laststatus=1
 " show wildcard completion menu
 set wildmenu
 " complete till longest match then open wildmenu
