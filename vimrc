@@ -8,8 +8,8 @@ if v:version < 703
 endif
 
 " freedesktop's xdg cache dir
-let s:xdg_cache_dir = strlen($XDG_CACHE_HOME) > 0 ? $XDG_CACHE_HOME : $HOME . "/.cache"
-let s:vim_cache_dir = s:xdg_cache_dir . "/vim"
+let g:xdg_cache_dir = strlen($XDG_CACHE_HOME) > 0 ? $XDG_CACHE_HOME : $HOME . "/.cache"
+let g:vim_cache_dir = g:xdg_cache_dir . "/vim"
 
 " printf oriented debugging
 fun s:debug(str)
@@ -44,11 +44,11 @@ for suffix in split(&suffixes, ',')
 endfor
 
 " pathogen
-let s:bundles_dir = s:vim_cache_dir . "/bundles"
-let s:pathogen_path = s:bundles_dir . "/vim-pathogen/autoload"
+let g:bundles_dir = g:vim_cache_dir . "/bundles"
+let s:pathogen_path = g:bundles_dir . "/vim-pathogen/autoload"
 let &rtp = &rtp . "," . s:pathogen_path
 runtime pathogen.vim
-call pathogen#infect(s:bundles_dir)
+call pathogen#infect(g:bundles_dir)
 call pathogen#helptags()
 
 " }}}
@@ -184,16 +184,16 @@ set wildignore=.*~,*.o,*.pyc,*.class,*.obj,.git,app/assets/images/**,solr/**,cov
 " mark the 80th column
 set colorcolumn=80
 " swap files directory
-if isdirectory(s:vim_cache_dir . "/swap")
-  let &directory = s:vim_cache_dir . "/swap"
+if isdirectory(g:vim_cache_dir . "/swap")
+  let &directory = g:vim_cache_dir . "/swap"
 endif
 " backup files directory
-if isdirectory(s:vim_cache_dir . "/backup")
-  let &backupdir = s:vim_cache_dir . "/backup"
+if isdirectory(g:vim_cache_dir . "/backup")
+  let &backupdir = g:vim_cache_dir . "/backup"
 endif
 " undo stuff
-if isdirectory(s:vim_cache_dir . "/undo")
-  let &undodir = s:vim_cache_dir . "/undo"
+if isdirectory(g:vim_cache_dir . "/undo")
+  let &undodir = g:vim_cache_dir . "/undo"
   set undofile
   set undolevels=1000
   set undoreload=10000

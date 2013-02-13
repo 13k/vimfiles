@@ -25,16 +25,19 @@ install: $(SYMLINKS) $(CACHE_TARGETS)
 bundle: install
 	ruby bundle
 
-cmd-t: $(CACHE_PREFIX)/bundles/Command-T/ruby/command-t/extconf.rb
-	[ -f ".ruby-version" -a ! -f "$(shell dirname $<)/.ruby-version" ] && cp .ruby-version "$(shell dirname $<)/.ruby-version"
-	(cd "$(shell dirname $<)" && ruby extconf.rb && make)
-
-cext: bundle cmd-t
+bundle-install: bundle cmd-t powerline
 
 $(SYMLINKS_PREFIX)/.%: %
 	ln -s "$(abspath $<)" "$@"
 
 $(CACHE_PREFIX)/%:
 	mkdir -p "$@"
+
+cmd-t: $(CACHE_PREFIX)/bundles/Command-T/ruby/command-t/extconf.rb
+	[ -f ".ruby-version" -a ! -f "$(shell dirname $<)/.ruby-version" ] && cp .ruby-version "$(shell dirname $<)/.ruby-version" || true
+	(cd "$(shell dirname $<)" && ruby extconf.rb && make)
+
+powerline: $(CACHE_PREFIX)/bundles/powerline/setup.py
+	(cd "$(shell dirname $<)" && python setup.py build && sudo python setup.py install)
 
 .PHONY: all install
