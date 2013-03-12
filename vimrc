@@ -51,6 +51,9 @@ runtime pathogen.vim
 call pathogen#infect(g:bundles_dir)
 call pathogen#helptags()
 
+" ack-vim
+let g:ackprg = 'ag --nogroup --nocolor --column'
+
 " }}}
 
 " Scripting ---------------------------------------------------------------- {{{
