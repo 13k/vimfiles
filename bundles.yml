@@ -1,3 +1,6 @@
+- gh:13k/vim-tomorrow
+- gh:jaromero/vim-monokai-refined
+- gh:altercation/vim-colors-solarized
 - gh:mileszs/ack.vim
 - gh:Lokaltog/powerline
 - gh:wincent/Command-T
@@ -9,15 +12,12 @@
 - gh:mmalecki/vim-node.js
 - gh:nono/vim-handlebars
 - gh:sjl/gundo.vim
-- gh:jaromero/vim-monokai-refined
 - gh:briancollins/vim-jst
 - gh:juvenn/mustache.vim
 - gh:wavded/vim-stylus
 - gh:tpope/vim-pathogen
 - gh:hail2u/vim-css3-syntax
 - gh:jamessan/vim-gnupg
-- gh:13k/vim-tomorrow
-- gh:altercation/vim-colors-solarized
 - gh:groenewege/vim-less
 - gh:slim-template/vim-slim
 - gh:digitaltoad/vim-jade

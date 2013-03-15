@@ -18,6 +18,8 @@ DIRECTORIES += undo
 
 CACHE_TARGETS = $(addprefix $(CACHE_PREFIX)/, $(DIRECTORIES))
 
+INSTALL_BUNDLES = cmd-t powerline
+
 all: install
 
 install: $(SYMLINKS) $(CACHE_TARGETS)
@@ -25,7 +27,7 @@ install: $(SYMLINKS) $(CACHE_TARGETS)
 bundle: install
 	ruby bundle
 
-bundle-install: bundle cmd-t powerline
+bundle-install: bundle $(INSTALL_BUNDLES)
 
 $(SYMLINKS_PREFIX)/.%: %
 	ln -s "$(abspath $<)" "$@"
