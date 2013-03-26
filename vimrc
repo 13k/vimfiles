@@ -44,7 +44,7 @@ let g:bundles_dir = g:vim_cache_dir . "/bundles"
 let s:pathogen_path = g:bundles_dir . "/vim-pathogen/autoload"
 let &rtp = &rtp . "," . s:pathogen_path
 runtime pathogen.vim
-call pathogen#infect(g:bundles_dir)
+call pathogen#infect(g:bundles_dir . "/{}")
 call pathogen#helptags()
 
 " ack-vim
