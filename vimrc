@@ -18,10 +18,6 @@ fun s:debug(str)
   redir END
 endfun
 
-if v:version > 701 && &term != "cygwin"
-  set term=builtin_xterm
-endif
-
 if has('multi_byte')
   " Legacy encoding is the system default encoding
   set encoding=utf-8
@@ -87,11 +83,13 @@ set tags+=.git/tags
 
 " UI ----------------------------------------------------------------------- {{{
 
+" colors! colors!
+set t_Co=256
+" colors! colors!
+colorscheme Tomorrow-Night
 " enable syntax highlight
-if &t_Co > 2 || has('gui_running')
-  syntax enable
-  syntax sync minlines=0
-endif
+syntax enable
+syntax sync minlines=0
 " show line numbers
 set number
 " highlight searches
@@ -102,8 +100,6 @@ set ruler
 set showmode
 " show (partial) command in status line.
 set showcmd
-" background
-set background=dark
 " enable mouse
 if has('mouse')
   set mouse=a
@@ -132,10 +128,6 @@ if &listchars ==# 'eol:$'
     let &fillchars = "vert:\u259a,fold:\u00b7"
   endif
 endif
-" colors!
-colorscheme torte
-" try to set the right window size
-au GUIEnter * set lines=25 columns=85
 " status line
 set statusline=[%n]\ %<%.99f\ %h%w%m%r%y%{exists('g:loaded_fugitive')?fugitive#statusline():''}%=%-16(\ %l,%c-%v\ %)%P
 
@@ -183,7 +175,7 @@ set comments=s1:/*,mb:*,ex:*/,b:#,:%,:XCOMM,n:>,fb:-
 " folding method
 set foldmethod=marker
 " ignore these files
-set wildignore=.*~,*.o,*.pyc,*.class,*.obj,.git,app/assets/images/**,solr/**,coverage/**,tmp/**
+set wildignore=*~,*.o,*.pyc,*.class,*.obj,.git,.svn,doc/app,coverage,log,solr,tmp,vendor,public/uploads,app/assets/images
 " mark the 80th column
 set colorcolumn=80
 " swap files directory
