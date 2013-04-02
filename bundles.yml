@@ -56,6 +56,7 @@
 - gh:tpope/vim-ragtag
 - gh:tpope/vim-surround
 - gh:tpope/vim-repeat
+- gh:tpope/vim-dispatch
 
 - gh:mileszs/ack.vim
 - gh:jamessan/vim-gnupg
