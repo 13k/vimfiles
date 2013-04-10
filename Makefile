@@ -37,7 +37,7 @@ $(CACHE_PREFIX)/%:
 
 cmd-t: $(CACHE_PREFIX)/bundles/Command-T/ruby/command-t/extconf.rb
 	[ -f ".ruby-version" -a ! -f "$(shell dirname $<)/.ruby-version" ] && cp .ruby-version "$(shell dirname $<)/.ruby-version" || true
-	(cd "$(shell dirname $<)" && ruby extconf.rb && make)
+	(cd "$(shell dirname $<)" && ruby extconf.rb && make clean all)
 
 powerline: $(CACHE_PREFIX)/bundles/powerline/setup.py
 	(cd "$(shell dirname $<)" && python setup.py build && sudo python setup.py install)
