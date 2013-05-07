@@ -130,6 +130,10 @@ if &listchars ==# 'eol:$'
 endif
 " status line
 set statusline=[%n]\ %<%.99f\ %h%w%m%r%y%{exists('g:loaded_fugitive')?fugitive#statusline():''}%=%-16(\ %l,%c-%v\ %)%P
+" split to the right
+set splitright
+" split to the bottom
+set splitbelow
 
 " }}}
 
@@ -270,6 +274,9 @@ if has('autocmd')
 
   " Override filetype for handlebars+erb files
   au BufNewFile,BufRead *.hbs.erb,*.handlebars.erb,*.hb.erb set ft=handlebars
+
+  " Detect/override .enj, .enjoei files (ERB templates)
+  au BufNewFile,BufRead *.enj,*.enjoei set ft=eruby
 
   " Enables trailing whitespace cleaning for all files
   au FileType * :call <SID>EnableStripTrailingWhitespaces()

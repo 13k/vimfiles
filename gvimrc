@@ -27,8 +27,8 @@ set lines=30 columns=100
 autocmd GUIEnter * set lines=30 columns=100
 autocmd VimEnter * set lines=30 columns=100
 " try to fix gvim artifacts when scrolling/jumping around
-set ttyfast
-set ttyscroll=3
+"set ttyfast
+"set ttyscroll=3
 " override NERDTree mapping
 nnoremap <F3> :set columns=160 <Bar> NERDTree<CR>
 " load powerline vim plugin
