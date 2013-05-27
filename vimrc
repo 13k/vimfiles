@@ -294,3 +294,9 @@ endif
 runtime mappings.vim
 
 " }}}
+
+" Commands ----------------------------------------------------------------- {{{
+
+runtime commands.vim
+
+" }}}
