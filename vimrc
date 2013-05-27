@@ -107,7 +107,7 @@ endif
 " no fucking bells!
 set vb t_vb=
 " status line always shown
-set laststatus=1
+set laststatus=2
 " show wildcard completion menu
 set wildmenu
 " complete till longest match then open wildmenu
@@ -129,7 +129,10 @@ if &listchars ==# 'eol:$'
   endif
 endif
 " status line
-set statusline=[%n]\ %<%.99f\ %h%w%m%r%y%{exists('g:loaded_fugitive')?fugitive#statusline():''}%=%-16(\ %l,%c-%v\ %)%P
+" set statusline=[%n]\ %<%.99f\ %h%w%m%r%y%{exists('g:loaded_fugitive')?fugitive#statusline():''}%=%-16(\ %l,%c-%v\ %)%P
+" load powerline vim plugin
+let &rtp = &rtp . "," . g:bundles_dir . "/powerline/powerline/bindings/vim/plugin"
+runtime powerline.vim
 " split to the right
 set splitright
 " split to the bottom

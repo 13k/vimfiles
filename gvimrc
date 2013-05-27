@@ -31,6 +31,3 @@ autocmd VimEnter * set lines=30 columns=100
 "set ttyscroll=3
 " override NERDTree mapping
 nnoremap <F3> :set columns=160 <Bar> NERDTree<CR>
-" load powerline vim plugin
-let &rtp = &rtp . "," . g:bundles_dir . "/powerline/powerline/bindings/vim/plugin"
-runtime powerline.vim
