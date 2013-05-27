@@ -64,3 +64,7 @@ nnoremap <leader>n :NERDTreeToggle<CR>
 
 " Toggle Gundo
 nnoremap <leader>u :GundoToggle<CR>
+
+" Resize window splits
+nnoremap <silent> + :exe "resize " . (winheight(0) * 3/2)<CR>
+nnoremap <silent> - :exe "resize " . (winheight(0) * 2/3)<CR>
