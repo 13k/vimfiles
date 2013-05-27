@@ -25,21 +25,21 @@ all: install
 install: $(SYMLINKS) $(CACHE_TARGETS)
 
 bundle: install
-	ruby bundle
+	[ -n "${NOPULL}" ] || ruby bundle
 
 bundle-install: bundle $(INSTALL_BUNDLES)
 
 $(SYMLINKS_PREFIX)/.%: %
 	ln -s "$(abspath $<)" "$@"
 
-$(CACHE_PREFIX)/%:
-	mkdir -p "$@"
-
-cmd-t: $(CACHE_PREFIX)/bundles/Command-T/ruby/command-t/extconf.rb
+cmd-t: $(CACHE_PREFIX)/bundles/Command-T/ruby/command-t/ext.so
 	[ -f ".ruby-version" -a ! -f "$(shell dirname $<)/.ruby-version" ] && cp .ruby-version "$(shell dirname $<)/.ruby-version" || true
 	(cd "$(shell dirname $<)" && ruby extconf.rb && make clean all)
 
-powerline: $(CACHE_PREFIX)/bundles/powerline/setup.py
-	(cd "$(shell dirname $<)" && python setup.py build && sudo python setup.py install)
+powerline: $(CACHE_PREFIX)/bundles/powerline/build/lib/powerline/__init__.py
+	(cd "$(CACHE_PREFIX)/bundles/powerline" && python setup.py build && sudo python setup.py install)
+
+$(CACHE_PREFIX)/%:
+	mkdir -p "$@"
 
 .PHONY: all install
