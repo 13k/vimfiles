@@ -39,6 +39,8 @@
 - gh:kchmck/vim-coffee-script
 - gh:pangloss/vim-javascript
 
+- gh:jnwhiteh/vim-golang
+
 ### plugins
 
 - gh:tpope/vim-pathogen
