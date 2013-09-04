@@ -45,6 +45,7 @@
 
 - gh:tpope/vim-pathogen
 
+- gh:sjl/splice.vim
 - gh:sjl/gundo.vim
 - gh:wincent/Command-T
 - gh:Lokaltog/powerline
