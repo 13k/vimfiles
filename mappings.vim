@@ -1,4 +1,4 @@
-" Vim. Live it. ------------------------------------------------------- {{{
+" Vim. Live it.
 nnoremap <up> <nop>
 nnoremap <down> <nop>
 nnoremap <left> <nop>
@@ -9,7 +9,6 @@ inoremap <left> <nop>
 inoremap <right> <nop>
 nnoremap j gj
 nnoremap k gk
-" }}}
 
 " Make Y consistent with C and D
 nnoremap Y y$

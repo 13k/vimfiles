@@ -1,8 +1,7 @@
 # prefix to install symlinks
 SYMLINKS_PREFIX ?= $(HOME)
 # dotfiles destinations, relative to $(PREFIX)
-DOTFILES  = vimrc
-DOTFILES += gvimrc
+DOTFILES = vimrc
 
 ###
 

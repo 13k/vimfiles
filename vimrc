@@ -25,38 +25,14 @@ endif
 
 " }}}
 
-" Scripts/Plugins setup ---------------------------------------------------- {{{
+" Load Pathogen early ------------------------------------------------------ {{{
 
-" force ftdetect
-filetype off
-
-" matchit
-runtime macros/matchit.vim
-
-" nerdtree
-let g:NERDTreeIgnore = ['\.sock$', '^\.git$[[dir]]']
-for suffix in split(&suffixes, ',')
-  let g:NERDTreeIgnore += [ escape(suffix, '.~') . '$' ]
-endfor
-
-" pathogen
 let g:bundles_dir = g:vim_cache_dir . "/bundles"
 let s:pathogen_path = g:bundles_dir . "/vim-pathogen/autoload"
 let &rtp = &rtp . "," . s:pathogen_path
 runtime pathogen.vim
 call pathogen#infect(g:bundles_dir . "/{}")
 call pathogen#helptags()
-
-" ack-vim
-let g:ackprg = 'ag --nogroup --nocolor --column'
-
-" }}}
-
-" Scripting ---------------------------------------------------------------- {{{
-
-" It's a common mistake to type the capital letter instead of the lowercased one
-command W w
-command Q q
 
 " }}}
 
@@ -128,11 +104,6 @@ if &listchars ==# 'eol:$'
     let &fillchars = "vert:\u259a,fold:\u00b7"
   endif
 endif
-" status line
-" set statusline=[%n]\ %<%.99f\ %h%w%m%r%y%{exists('g:loaded_fugitive')?fugitive#statusline():''}%=%-16(\ %l,%c-%v\ %)%P
-" load powerline vim plugin
-let &rtp = &rtp . "," . g:bundles_dir . "/powerline/powerline/bindings/vim/plugin"
-runtime powerline.vim
 " split to the right
 set splitright
 " split to the bottom
@@ -142,6 +113,8 @@ set splitbelow
 
 " Editing ------------------------------------------------------------------ {{{
 
+" force ftdetect
+filetype off
 " file formats precedence
 set fileformats=unix,dos,mac
 " auto indentation on
@@ -182,7 +155,7 @@ set comments=s1:/*,mb:*,ex:*/,b:#,:%,:XCOMM,n:>,fb:-
 " folding method
 set foldmethod=marker
 " ignore these files
-set wildignore=*~,*.o,*.pyc,*.class,*.obj,.git,.svn,doc/app,coverage,log,solr,tmp,vendor,public/uploads,app/assets/images,app/assets/fonts
+set wildignore=*~,*.o,*.pyc,*.class,*.obj,.git,.svn
 " mark the 80th column
 set colorcolumn=80
 " swap files directory
@@ -203,88 +176,42 @@ endif
 
 " }}}
 
+" Scripts/Plugins setup ---------------------------------------------------- {{{
+
+" matchit
+runtime macros/matchit.vim
+
+" nerdtree
+let g:NERDTreeIgnore = ['\.sock$', '^\.git$[[dir]]']
+for suffix in split(&suffixes, ',')
+  let g:NERDTreeIgnore += [ escape(suffix, '.~') . '$' ]
+endfor
+
+" load powerline vim plugin
+python from powerline.vim import setup as powerline_setup
+python powerline_setup()
+python del powerline_setup
+
+" ack-vim
+let g:ackprg = 'ag --nogroup --nocolor --column'
+
+" cmd-t
+let g:CommandTWildIgnore=&wildignore . ",**/bower_components/*,app/assets/fonts/*,app/assets/images/*,log/*,tmp/*,vendor/*"
+
+" }}}
+
+" Scripting ---------------------------------------------------------------- {{{
+
+" It's a common mistake to type the capital letter instead of the lowercased one
+command W w
+command Q q
+
+" }}}
+
 " FileType customizations -------------------------------------------------- {{{
 
 if has('autocmd')
-  " Enable filetype detection, plugins and indent files
-  filetype plugin indent on
-
-  " Strip trailing whitespace
-  fun! <SID>StripTrailingWhitespaces()
-    let l = line(".")
-    let c = col(".")
-    %s/\s\+$//e
-    call cursor(l, c)
-  endfun
-
-  fun! <SID>EnableStripTrailingWhitespaces()
-    aug StripTrailingWhitespaces
-      au BufWritePre * :call <SID>StripTrailingWhitespaces()
-    aug END
-  endfun
-
-  fun! <SID>DisableStripTrailingWhitespaces()
-    aug StripTrailingWhitespaces
-      au!
-    aug END
-  endfun
-
-  " CoffeeScript
-  au FileType coffee set et si sta ts=2 sts=2 sw=2
-  " C++
-  au FileType cpp set et si sta ts=4 sts=4 sw=4
-  " CSS
-  au FileType css set et si sta ts=2 sts=2 sw=2
-  " SCSS
-  au FileType scss set et si sta ts=2 sts=2 sw=2
-  " LESS
-  au FileType less set et si sta ts=2 sts=2 sw=2
-  " Python
-  au FileType python set et si sta ts=4 sts=4 sw=4
-  " Django
-  au FileType python.django set et si sta ts=4 sts=4 sw=4
-  au FileType htmldjango set et si sta ts=4 sts=4 sw=4
-  " Ruby
-  au FileType ruby set et si sta ts=2 sts=2 sw=2
-  " Erb
-  au FileType eruby set et si sta ts=2 sts=2 sw=2
-  " Slim
-  au FileType slim set et si sta ts=2 sts=2 sw=2
-  " Jade
-  au FileType jade set et si sta ts=2 sts=2 sw=2
-  " (X)HTML
-  au FileType html set et si sta ts=2 sts=2 sw=2
-  au FileType xhtml set et si sta ts=2 sts=2 sw=2
-  " XML
-  au FileType xml set et si sta ts=4 sts=4 sw=4
-  " JavaScript
-  au FileType javascript set et si sta ts=2 sts=2 sw=2
-  " PHP
-  au FileType php set et si sta ts=4 sts=4 sw=4
-  au FileType phtml set filetype=php
-  " YAML
-  au FileType yaml set et si sta ts=2 sts=2 sw=2
-  " Java
-  au FileType java set et si sta ts=4 sts=4 sw=4
-  " Scala
-  au FileType scala set et si sta ts=2 sts=2 sw=2
-  " Groovy
-  au FileType groovy set et si sta ts=2 sts=2 sw=2
-  " Shell
-  au FileType sh set et si sta ts=2 sts=2 sw=2
-  " viml
-  au FileType vim set et si sta ts=2 sts=2 sw=2
-
-  " Override filetype for handlebars+erb files
-  au BufNewFile,BufRead *.hbs.erb,*.handlebars.erb,*.hb.erb set ft=handlebars
-
-  " Detect/override .enj, .enjoei files (ERB templates)
-  au BufNewFile,BufRead *.enj,*.enjoei set ft=eruby
-
-  " Enables trailing whitespace cleaning for all files
-  au FileType * :call <SID>EnableStripTrailingWhitespaces()
-  " Disable whitespace cleaning for markdown since it is valid markup
-  au FileType markdown :call <SID>DisableStripTrailingWhitespaces()
+  runtime filetypes.vim
 endif
 
 " }}}
@@ -298,5 +225,13 @@ runtime mappings.vim
 " Commands ----------------------------------------------------------------- {{{
 
 runtime commands.vim
+
+" }}}
+
+" GUI ---------------------------------------------------------------------- {{{
+
+if has('gui_running')
+  runtime gui.vim
+endif
 
 " }}}
