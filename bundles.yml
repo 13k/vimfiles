@@ -60,10 +60,12 @@
 - gh:tpope/vim-surround
 - gh:tpope/vim-repeat
 - gh:tpope/vim-dispatch
+- gh:tpope/vim-unimpaired
 
 - gh:mileszs/ack.vim
 - gh:jamessan/vim-gnupg
 - gh:tpope/vim-fugitive
+- gh:ngmy/vim-rubocop
 
 - gh:tpope/vim-rails
 - gh:skwp/vim-rspec
