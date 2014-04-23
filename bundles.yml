@@ -61,6 +61,7 @@
 - gh:tpope/vim-repeat
 - gh:tpope/vim-dispatch
 - gh:tpope/vim-unimpaired
+- gh:Shougo/unite.vim
 
 - gh:mileszs/ack.vim
 - gh:jamessan/vim-gnupg
