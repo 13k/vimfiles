@@ -155,7 +155,7 @@ set comments=s1:/*,mb:*,ex:*/,b:#,:%,:XCOMM,n:>,fb:-
 " folding method
 set foldmethod=marker
 " ignore these files
-set wildignore=*~,*.o,*.pyc,*.class,*.obj,.git,.svn
+set wildignore=*~,*.o,*.pyc,*.class,*.obj,.git,.svn,*.jpg,*.jpeg,*.png,*.gif
 " mark the 80th column
 set colorcolumn=80
 " swap files directory
