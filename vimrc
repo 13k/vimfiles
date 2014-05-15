@@ -198,6 +198,10 @@ let g:ackprg = 'ag --nogroup --nocolor --column'
 " cmd-t
 let g:CommandTWildIgnore=&wildignore . ",**/bower_components/*,app/assets/fonts/*,app/assets/images/*,log/*,tmp/*,vendor/*"
 
+" gitgutter
+let g:gitgutter_realtime = 1
+let g:gitgutter_eager = 1
+
 " }}}
 
 " Scripting ---------------------------------------------------------------- {{{

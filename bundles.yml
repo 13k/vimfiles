@@ -62,6 +62,7 @@
 - gh:tpope/vim-dispatch
 - gh:tpope/vim-unimpaired
 - gh:Shougo/unite.vim
+- gh:airblade/vim-gitgutter
 
 - gh:mileszs/ack.vim
 - gh:jamessan/vim-gnupg
