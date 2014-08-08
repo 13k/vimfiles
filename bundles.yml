@@ -39,7 +39,7 @@
 - gh:kchmck/vim-coffee-script
 - gh:pangloss/vim-javascript
 
-- gh:jnwhiteh/vim-golang
+- gh:fatih/vim-go
 
 ### plugins
 
@@ -53,7 +53,9 @@
 - gh:scrooloose/nerdtree
 - gh:mattn/gist-vim
 - gh:mattn/webapi-vim
-- gh:msanders/snipmate.vim
+- gh:mattn/emmet-vim
+- gh:SirVer/ultisnips
+- gh:honza/vim-snippets
 - gh:majutsushi/tagbar
 - gh:tpope/vim-endwise
 - gh:tpope/vim-ragtag
