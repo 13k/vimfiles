@@ -4,25 +4,27 @@ require 'fileutils'
 require 'pathname'
 require 'yaml'
 
-def download(scm, url, dest)
-  case scm
-  when "git"
-    system "git", "clone", "--quiet", url, dest
-  when "svn"
-    system "svn", "checkout", "--quiet", url, dest
+def download(options)
+  args = case options[:scm]
+    when "git"
+      ["git", "clone", "--quiet", options[:url], options[:dest]]
+    when "svn"
+      ["svn", "checkout", "--quiet", options[:url], options[:dest]]
   end
+
+  system(*args)
 end
 
-def update(scm, url, dest)
-  case scm
-  when "git"
-    Dir.chdir(dest) do
-      system "git", "pull", "--quiet"
-    end
-  when "svn"
-    Dir.chdir(dest) do
-      system "svn", "update", "--quiet"
-    end
+def update(options)
+  args = case options[:scm]
+    when "git"
+      %w[git pull --quiet]
+    when "svn"
+      %w[svn update --quiet]
+  end
+
+  Dir.chdir(options[:dest]) do
+    system(*args)
   end
 end
 
@@ -43,33 +45,49 @@ BUNDLES_FILE = File.join(ROOT, 'bundles.yml')
 # shortcuts:
 #   "gh:user/repository" -> "git:repository:https://github.com/user/repository.git"
 #
+bundle_re = /(.*?):(.*?):(.*)/
 bundles = YAML.load_file(BUNDLES_FILE)
 bundles.map! do |repo|
-  case repo
-  when /^gh:(.*)/
-    "git:#{File.basename($1)}:https://github.com/#{$1.sub /\.git$/, ''}.git"
-  else
-    repo
+  bundle = case repo
+    when /^gh:(.*)/
+      "git:#{File.basename($1)}:https://github.com/#{$1.sub /\.git$/, ''}.git"
+    else
+      repo
+  end
+
+  match = bundle.match(bundle_re)
+
+  {
+    scm: match[1],
+    name: match[2],
+    url: match[3],
+  }
+end
+
+FileUtils.mkdir_p(BUNDLES_DIR) unless File.exists?(BUNDLES_DIR)
+
+Dir[File.join(BUNDLES_DIR, "*")].each do |dir|
+  name = File.basename(dir)
+
+  unless bundles.find {|b| name == b[:name] }
+    puts "[-] Removing #{name}"
+    FileUtils.rm_rf(dir)
   end
 end
 
-FileUtils.mkdir_p BUNDLES_DIR unless File.exists?(BUNDLES_DIR)
-
 bundles.each do |spec|
-  spec =~ /(.*?):(.*?):(.*)/
-  scm = $~[1]
-  name = $~[2]
-  url = $~[3]
-  dest = File.join(BUNDLES_DIR, name)
+  dest = File.join(BUNDLES_DIR, spec[:name])
+  options = spec.merge(dest: dest)
+
   if !File.exists?(dest)
-    puts "Adding #{name}"
-    download(scm, url, dest)
+    puts "[+] Adding #{spec[:name]}"
+    download(options)
   else
-    puts "Updating #{name}"
-    update(scm, url, dest)
+    puts "[u] Updating #{spec[:name]}"
+    update(options)
   end
 end
 
 puts "Generating helptags ... "
-system "vim", "-c", "call pathogen#helptags()", "-c", "quit"
+system("vim", "-c", "call pathogen#helptags()", "-c", "quit")
 puts "Done"
