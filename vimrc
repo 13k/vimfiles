@@ -202,6 +202,9 @@ let g:CommandTWildIgnore=&wildignore . ",**/bower_components/*,app/assets/fonts/
 let g:gitgutter_realtime = 1
 let g:gitgutter_eager = 1
 
+" splice
+let g:splice_wrap = "nowrap"
+
 " }}}
 
 " Scripting ---------------------------------------------------------------- {{{
