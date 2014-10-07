@@ -50,7 +50,6 @@
 - gh:sjl/splice.vim
 - gh:sjl/gundo.vim
 - gh:wincent/Command-T
-- gh:Lokaltog/powerline
 - gh:scrooloose/nerdcommenter
 - gh:scrooloose/nerdtree
 - gh:mattn/gist-vim

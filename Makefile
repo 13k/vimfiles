@@ -17,7 +17,7 @@ DIRECTORIES += undo
 
 CACHE_TARGETS = $(addprefix $(CACHE_PREFIX)/, $(DIRECTORIES))
 
-INSTALL_BUNDLES = cmd-t powerline
+INSTALL_BUNDLES = cmd-t
 
 all: install
 
@@ -34,9 +34,6 @@ $(SYMLINKS_PREFIX)/.%: %
 cmd-t: $(CACHE_PREFIX)/bundles/Command-T/ruby/command-t/ext.so
 	[ -f ".ruby-version" -a ! -f "$(shell dirname $<)/.ruby-version" ] && cp .ruby-version "$(shell dirname $<)/.ruby-version" || true
 	(cd "$(shell dirname $<)" && ruby extconf.rb && make clean all)
-
-powerline: $(CACHE_PREFIX)/bundles/powerline/build/lib/powerline/__init__.py
-	(cd "$(CACHE_PREFIX)/bundles/powerline" && python setup.py build && sudo python setup.py install)
 
 $(CACHE_PREFIX)/%:
 	mkdir -p "$@"
