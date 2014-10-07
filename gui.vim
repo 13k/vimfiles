@@ -23,6 +23,6 @@ set vb t_vb=
 " Color scheme
 colorscheme Tomorrow-Night-Eighties
 " Number of lines and columns
-set lines=40 columns=169
+set lines=30 columns=115
 " Do not highlight current line under cursor
 set nocursorline
