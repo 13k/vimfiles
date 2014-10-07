@@ -205,6 +205,9 @@ let g:gitgutter_eager = 1
 " splice
 let g:splice_wrap = "nowrap"
 
+" vim-go
+let g:go_fmt_command = "gofmt"
+
 " }}}
 
 " Scripting ---------------------------------------------------------------- {{{
