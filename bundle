@@ -80,10 +80,10 @@ bundles.each do |spec|
   options = spec.merge(dest: dest)
 
   if !File.exists?(dest)
-    puts "[+] Adding #{spec[:name]}"
+    puts "[+] #{spec[:name]}"
     download(options)
   else
-    puts "[u] Updating #{spec[:name]}"
+    puts "[u] #{spec[:name]}"
     update(options)
   end
 end

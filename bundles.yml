@@ -43,8 +43,10 @@
 
 ### plugins
 
+# runtime
 - gh:tpope/vim-pathogen
 
+# editor
 - gh:sjl/splice.vim
 - gh:sjl/gundo.vim
 - gh:wincent/Command-T
@@ -65,12 +67,15 @@
 - gh:tpope/vim-unimpaired
 - gh:Shougo/unite.vim
 - gh:airblade/vim-gitgutter
+- gh:caigithub/a_pair
 
+# external tools
 - gh:mileszs/ack.vim
 - gh:jamessan/vim-gnupg
 - gh:tpope/vim-fugitive
 - gh:ngmy/vim-rubocop
 
+# frameworks/libs
 - gh:tpope/vim-rails
 - gh:skwp/vim-rspec
 - gh:tpope/vim-bundler
