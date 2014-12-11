@@ -19,9 +19,7 @@ vnoremap / /\v
 cnoremap %s/ %s/\v
 
 " Clear highlighted searches
-if maparg('<C-L>', 'n') ==# ''
-  nnoremap <silent> <C-L> :nohlsearch<CR><C-L>
-endif
+nnoremap <silent><C-N> :nohlsearch<CR>
 
 " Navigate forward and back inside tabs with Shift+Left and Shift+Right
 map <silent><S-Right> :tabnext<CR>
@@ -36,34 +34,30 @@ map <silent><C-Right> <C-]>
 noremap <S-CR> <Esc>
 noremap! <S-CR> <Esc>
 
-" Scroll page N lines down
-" CTRL-J => CTRL-E
-nnoremap <C-J> <C-E>
-
-" Scroll page N lines up
-" CTRL-K => CTRL-Y
-nnoremap <C-K> <C-Y>
-
 " Increment number under cursor
 " CTRL-I => CTRL-A
 nnoremap <C-I> <C-A>
 
-" Begin of line
+" Begin/End of line
 " CTRL-A => <Home>, all modes
-noremap <C-A> <Home>
-noremap! <C-A> <Home>
-
-" End of line
-" CTRL-E => <End>, all modes
-noremap <C-E> <End>
-noremap! <C-E> <End>
+noremap <C-A> ^
+noremap! <C-A> ^
+noremap <C-E> $
+noremap! <C-E> $
 
 " Toggle NERDTree
-nnoremap <leader>n :NERDTreeToggle<CR>
+nnoremap <silent><leader>n :NERDTreeToggle<CR>
 
 " Toggle Gundo
-nnoremap <leader>u :GundoToggle<CR>
+nnoremap <silent><leader>u :GundoToggle<CR>
 
 " Resize window splits
-nnoremap <silent> + :exe "resize " . (winheight(0) * 3/2)<CR>
-nnoremap <silent> - :exe "resize " . (winheight(0) * 2/3)<CR>
+nnoremap <silent>+ :resize +3<CR>
+nnoremap <silent>_ <C-W>_
+nnoremap <silent>- :resize -3<CR>
+
+" Navigate through window splits
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
