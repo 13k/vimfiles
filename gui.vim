@@ -8,11 +8,11 @@ set laststatus=2
 set background=light
 " Font
 if has('gui_macvim')
-	set guifont=Source\ Code\ Pro\ for\ Powerline:h13,Meslo\ LG\ S\ DZ\ for\ Powerline:h13,Menlo:h13,Monaco:h13
+	set guifont=Sauce\ Code\ Powerline\ Light:h13,Monaco:h13
 elseif has('win32')
-  set guifont=Consolas:h12
+  set guifont=Sauce\ Code\ Powerline:h13,Consolas:h12
 else
-	set guifont=Source\ Code\ Pro\ for\ Powerline\ 10,Aurulent\ Sans\ Mono\ 10,Droid\ Sans\ Mono\ 10,Monospaced\ 10
+	set guifont=Sauce\ Code\ Powerline\ 10,Monospaced\ 10
 endif
 " Don't show file types in menu
 let do_syntax_sel_menu=0
