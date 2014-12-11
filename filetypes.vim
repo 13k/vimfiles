@@ -73,6 +73,8 @@ au FileType groovy set et si sta ts=2 sts=2 sw=2
 au FileType sh set et si sta ts=2 sts=2 sw=2
 " viml
 au FileType vim set et si sta ts=2 sts=2 sw=2
+" Perl
+au FileType perl set et si sta ts=4 sts=4 sw=4
 
 " Override filetype for handlebars+erb files
 au BufNewFile,BufRead *.hbs.erb,*.handlebars.erb,*.hb.erb set ft=handlebars
