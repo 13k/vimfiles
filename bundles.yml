@@ -9,33 +9,27 @@
 
 ### syntax
 
-- gh:vim-scripts/csv.vim
+- gh:vim-ruby/vim-ruby
+- gh:fatih/vim-go
 - gh:tpope/vim-git
-
 - gh:timcharper/textile.vim
 - gh:tpope/vim-markdown
-
 - gh:slim-template/vim-slim
 - gh:digitaltoad/vim-jade
 - gh:nono/vim-handlebars
 - gh:briancollins/vim-jst
 - gh:juvenn/mustache.vim
 - gh:tpope/vim-haml
-
 - gh:hail2u/vim-css3-syntax
 - gh:cakebaker/scss-syntax.vim
 - gh:wavded/vim-stylus
 - gh:groenewege/vim-less
-
-- gh:vim-ruby/vim-ruby
 - gh:rosstimson/scala-vim-support
-
 - gh:kchmck/vim-coffee-script
 - gh:pangloss/vim-javascript
-
-- gh:fatih/vim-go
-
 - gh:vim-scripts/applescript.vim
+- gh:vim-scripts/csv.vim
+- gh:13k/vim-nginx
 
 ### plugins
 
