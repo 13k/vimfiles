@@ -2,16 +2,10 @@
 
 ### colorschemes
 
+- gh:tomasr/molokai
 - gh:13k/vim-tomorrow
 - gh:jaromero/vim-monokai-refined
 - gh:altercation/vim-colors-solarized
-- gh:fugalh/desert.vim
-- gh:jnurmine/Zenburn
-- gh:vim-scripts/Wombat
-- gh:vim-scripts/darkZ
-- gh:nanotech/jellybeans.vim
-- gh:vim-scripts/torte.vim
-- gh:vim-scripts/Zmrok
 
 ### syntax
 
