@@ -8,7 +8,7 @@ set laststatus=2
 set background=light
 " Font
 if has('gui_macvim')
-	set guifont=Sauce\ Code\ Powerline\ Light:h13,Monaco:h13
+	set guifont=Sauce\ Code\ Powerline\ Light:h14,Monaco:h13
 elseif has('win32')
   set guifont=Sauce\ Code\ Powerline:h13,Consolas:h12
 else
@@ -21,7 +21,7 @@ set nomousehide
 " no fucking bells
 set vb t_vb=
 " Color scheme
-colorscheme Tomorrow-Night-Eighties
+colorscheme molokai
 " Number of lines and columns
 set lines=30 columns=115
 " Do not highlight current line under cursor
