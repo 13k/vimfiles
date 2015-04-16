@@ -62,7 +62,8 @@ set tags+=.git/tags
 " colors! colors!
 set t_Co=256
 " colors! colors!
-colorscheme Tomorrow-Night
+colorscheme molokai
+let g:rehash256 = 1
 " enable syntax highlight
 syntax enable
 syntax sync minlines=0
@@ -210,11 +211,9 @@ let g:go_fmt_command = "gofmt"
 
 " }}}
 
-" Scripting ---------------------------------------------------------------- {{{
+" Commands ----------------------------------------------------------------- {{{
 
-" It's a common mistake to type the capital letter instead of the lowercased one
-command W w
-command Q q
+runtime commands.vim
 
 " }}}
 
@@ -229,12 +228,6 @@ endif
 " Mappings ----------------------------------------------------------------- {{{
 
 runtime mappings.vim
-
-" }}}
-
-" Commands ----------------------------------------------------------------- {{{
-
-runtime commands.vim
 
 " }}}
 
