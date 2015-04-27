@@ -30,6 +30,7 @@
 - gh:vim-scripts/applescript.vim
 - gh:vim-scripts/csv.vim
 - gh:13k/vim-nginx
+- gh:mitsuhiko/vim-jinja
 
 ### plugins
 
