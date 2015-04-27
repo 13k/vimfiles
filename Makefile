@@ -33,7 +33,7 @@ $(SYMLINKS_PREFIX)/.%: %
 
 cmd-t: $(CACHE_PREFIX)/bundles/Command-T/ruby/command-t/ext.so
 	[ -f ".ruby-version" -a ! -f "$(shell dirname $<)/.ruby-version" ] && cp .ruby-version "$(shell dirname $<)/.ruby-version" || true
-	(cd "$(shell dirname $<)" && ruby extconf.rb && make clean all)
+	(cd "$(shell dirname $<)" && ruby extconf.rb && make clean && make all)
 
 $(CACHE_PREFIX)/%:
 	mkdir -p "$@"
