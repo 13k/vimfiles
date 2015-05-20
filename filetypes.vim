@@ -117,5 +117,9 @@ au FileType markdown :call DisableStripTrailingWhitespaces()
 "au FileType ruby :call SetRailsIgnores()
 " }}}
 
+" Jinja2 {{{
+au BufNewFile,BufRead *.jinja,*.j2 set ft=jinja
+" }}}
+
 " Enables trailing whitespace cleaning for all files
 au FileType * :call EnableStripTrailingWhitespaces()
