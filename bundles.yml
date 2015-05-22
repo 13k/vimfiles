@@ -28,6 +28,7 @@
 - gh:13k/vim-nginx
 - gh:mitsuhiko/vim-jinja
 - gh:chrisbra/csv.vim
+- gh:elzr/vim-json
 
 ### plugins
 
