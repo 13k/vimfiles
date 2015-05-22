@@ -33,9 +33,3 @@ def load_bundles(bundles_file)
     }
   end
 end
-
-def update_bundles_docs
-  puts "Generating helptags ..."
-  system("vim", "-c", "call pathogen#helptags()", "-c", "quit")
-  puts "Done"
-end
