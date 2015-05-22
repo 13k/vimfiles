@@ -92,7 +92,7 @@ def install_bundle_task(name, &block)
 end
 
 def clean_bundle_task(name)
-  bundle = Bundle.new(name: bundle_name)
+  bundle = Bundle.new(name: name)
 
   Rake::Task.define_task(bundle.task_name) do
     rm_rf bundle.destination
