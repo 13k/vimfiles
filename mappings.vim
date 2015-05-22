@@ -25,10 +25,6 @@ nnoremap <silent><C-N> :nohlsearch<CR>
 map <silent><S-Right> :tabnext<CR>
 map <silent><S-Left> :tabprevious<CR>
 
-" Map CTRL+] and CTRL+T to CTRL+LeftArrow and CTRL+RightArrow
-map <silent><C-Left> <C-T>
-map <silent><C-Right> <C-]>
-
 " Exit modes using <Shift-Enter>
 " SHIFT-CR => <Esc>, all modes
 noremap <S-CR> <Esc>
@@ -44,9 +40,6 @@ noremap <C-A> ^
 noremap! <C-A> ^
 noremap <C-E> $
 noremap! <C-E> $
-
-" Toggle NERDTree
-nnoremap <silent><leader>n :NERDTreeToggle<CR>
 
 " Toggle Gundo
 nnoremap <silent><leader>u :GundoToggle<CR>

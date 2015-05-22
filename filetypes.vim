@@ -1,6 +1,10 @@
 " Enable filetype detection, plugins and indent files
 filetype plugin indent on
 
+" Go {{{
+au FileType go set noet si sta ts=2 sts=2 sw=2
+" }}}
+
 " CoffeeScript {{{
 au FileType coffee set et si sta ts=2 sts=2 sw=2
 " }}}
@@ -84,7 +88,7 @@ au FileType groovy set et si sta ts=2 sts=2 sw=2
 au FileType sh set noet si sta ts=2 sts=2 sw=2
 " }}}
 
-" viml {{{
+" VimL {{{
 au FileType vim set et si sta ts=2 sts=2 sw=2
 " }}}
 
@@ -102,19 +106,9 @@ au BufNewFile,BufRead *.applescript set ft=applescript
 au BufNewFile,BufRead *.hbs.erb,*.handlebars.erb,*.hb.erb set ft=handlebars
 " }}}
 
-" Enjoei {{{
-" Detect/override .enj, .enjoei files (ERB templates)
-au BufNewFile,BufRead *.enj,*.enjoei set ft=eruby
-" }}}
-
 " Markdown {{{
 " Disable whitespace cleaning for markdown since it is valid markup
 au FileType markdown :call DisableStripTrailingWhitespaces()
-" }}}
-
-" Rails {{{
-" Sets rails wildignore
-"au FileType ruby :call SetRailsIgnores()
 " }}}
 
 " Jinja2 {{{

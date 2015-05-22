@@ -32,7 +32,6 @@ let s:pathogen_path = g:bundles_dir . "/vim-pathogen/autoload"
 let &rtp = &rtp . "," . s:pathogen_path
 runtime pathogen.vim
 call pathogen#infect(g:bundles_dir . "/{}")
-call pathogen#helptags()
 
 " }}}
 
@@ -182,19 +181,10 @@ endif
 " matchit
 runtime macros/matchit.vim
 
-" nerdtree
-let g:NERDTreeIgnore = ['\.sock$', '^\.git$[[dir]]']
-for suffix in split(&suffixes, ',')
-  let g:NERDTreeIgnore += [ escape(suffix, '.~') . '$' ]
-endfor
-
 " load powerline vim plugin
 python from powerline.vim import setup as powerline_setup
 python powerline_setup()
 python del powerline_setup
-
-" ack-vim
-let g:ackprg = 'ag --nogroup --nocolor --column'
 
 " cmd-t
 let g:CommandTWildIgnore=&wildignore . ",**/bower_components/*,app/assets/fonts/*,app/assets/images/*,log/*,tmp/*,vendor/*"
@@ -202,6 +192,7 @@ let g:CommandTWildIgnore=&wildignore . ",**/bower_components/*,app/assets/fonts/
 " gitgutter
 let g:gitgutter_realtime = 1
 let g:gitgutter_eager = 1
+let g:gitgutter_map_keys = 0
 
 " splice
 let g:splice_wrap = "nowrap"

@@ -26,10 +26,3 @@ fun! DisableStripTrailingWhitespaces()
     au!
   aug END
 endfun
-
-fun! SetRailsIgnores()
-  let ignored = ['doc/app', 'coverage', 'log', 'solr', 'tmp', 'vendor', 'public/uploads', 'app/assets/images', 'app/assets/fonts']
-  for subdir in ignored
-    let &wildignore = &wildignore . "," . subdir
-  endfor
-endfun
