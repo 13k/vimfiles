@@ -55,6 +55,7 @@
 - gh:Shougo/unite.vim
 - gh:airblade/vim-gitgutter
 - gh:caigithub/a_pair
+- gh:AndrewRadev/linediff.vim
 
 # external tools
 - gh:mileszs/ack.vim
