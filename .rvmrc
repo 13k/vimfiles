@@ -1,4 +1,0 @@
-#!/usr/bin/env bash
-
-rb="ruby-$(vim -E -s --cmd 'ruby STDOUT.print "#{RUBY_VERSION}-p#{RUBY_PATCHLEVEL}"' --cmd 'quit')"
-rvm use "$rb"
