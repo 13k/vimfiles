@@ -1,5 +1,9 @@
 ---
 
+### runtime
+
+- gh:tpope/vim-pathogen
+
 ### colorschemes
 
 - gh:tomasr/molokai
@@ -29,11 +33,9 @@
 - gh:mitsuhiko/vim-jinja
 - gh:chrisbra/csv.vim
 - gh:elzr/vim-json
+- gh:jeroenbourgois/vim-actionscript
 
 ### plugins
-
-# runtime
-- gh:tpope/vim-pathogen
 
 # editor
 - gh:sjl/splice.vim
