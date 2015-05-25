@@ -116,13 +116,13 @@ def dotfiles_map
 end
 
 cache_dirs.each do |dir|
-  directory dir
+  directory dir.to_s
 end
 
 dotfiles_map.each do |src, dest|
-  file dest => src do
-    mkdir_p(dest.dirname)
-    ln_sf(src, dest)
+  file dest.to_s => src.to_s do
+    mkdir_p(dest.dirname.to_s)
+    ln_sf(src.to_s, dest.to_s)
   end
 end
 
