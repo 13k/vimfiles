@@ -7,7 +7,7 @@ set laststatus=2
 " Background
 set background=light
 " Font
-if has('gui_macvim')
+if has('gui_macvim') || has('gui_vimr')
 	set guifont=Sauce\ Code\ Powerline\ Light:h14,Monaco:h13
 elseif has('win32')
   set guifont=Sauce\ Code\ Powerline:h13,Consolas:h12
