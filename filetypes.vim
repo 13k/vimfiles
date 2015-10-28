@@ -115,5 +115,9 @@ au FileType markdown :call DisableStripTrailingWhitespaces()
 au BufNewFile,BufRead *.jinja,*.j2 set ft=jinja
 " }}}
 
+" nginx {{{
+au FileType nginx set et si sta ts=2 sts=2 sw=2
+" }}}
+
 " Enables trailing whitespace cleaning for all files
 au FileType * :call EnableStripTrailingWhitespaces()
