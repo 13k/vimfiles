@@ -186,6 +186,7 @@ endif
 runtime macros/matchit.vim
 
 " load powerline vim plugin
+python sys.path.insert(0, "/usr/local/lib/python2.7/site-packages")
 python from powerline.vim import setup as powerline_setup
 python powerline_setup()
 python del powerline_setup
