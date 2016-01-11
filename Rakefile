@@ -40,9 +40,9 @@ class BundleTask < Rake::Task
   def update_cmd(bundle)
     case bundle.scm
       when :git
-        ["git", "--git-dir=#{bundle.destination}/.git", "pull", "--quiet", "--no-rebase"]
+        ["git", "-C", bundle.destination.to_s, "pull", "--quiet", "--no-rebase"]
       when :hg
-        ["hg", "--repository=#{bundle.destination}", "--quiet", "pull"]
+        ["hg", "-R", bundle.destination.to_s, "--quiet", "pull", "-u"]
     end
   end
 
