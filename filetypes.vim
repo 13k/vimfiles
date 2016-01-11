@@ -63,6 +63,10 @@ au FileType xml set et si sta ts=4 sts=4 sw=4
 au FileType javascript set et si sta ts=2 sts=2 sw=2
 " }}}
 
+" TypeScript {{{
+au FileType typescript set et si sta ts=2 sts=2 sw=2
+" }}}
+
 " PHP {{{
 au FileType php set et si sta ts=4 sts=4 sw=4
 au FileType phtml set filetype=php
