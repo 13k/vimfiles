@@ -44,10 +44,12 @@ noremap! <C-E> $
 " Toggle Gundo
 nnoremap <silent><leader>u :GundoToggle<CR>
 
-" Resize window splits
-nnoremap <silent>+ :resize +3<CR>
+" Resize window vertically (max)
 nnoremap <silent>_ <C-W>_
-nnoremap <silent>- :resize -3<CR>
+" Resize window horizontally (max)
+nnoremap <silent>\| <C-W>\|
+" Maximize window
+nnoremap <silent>+ :resize<CR> | :vertical resize<CR>
 
 " Navigate through window splits
 nnoremap <C-J> <C-W><C-J>
