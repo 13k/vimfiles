@@ -127,5 +127,9 @@ au BufNewFile,BufRead *.jinja,*.j2 set ft=jinja
 au FileType nginx set et si sta ts=2 sts=2 sw=2
 " }}}
 
+" SQL {{{
+au FileType sql set et si sta ts=2 sts=2 sw=2
+" }}}
+
 " Enables trailing whitespace cleaning for all files
 au FileType * :call EnableStripTrailingWhitespaces()
