@@ -26,3 +26,8 @@ colorscheme molokai
 set lines=30 columns=115
 " Do not highlight current line under cursor
 set nocursorline
+" Search
+highlight Search guibg=#4FC3F7 guifg=#212121
+" Cursor
+highlight Cursor guibg=#c0c0c0 guifg=#000000
+highlight iCursor guibg=#ffffff guifg=#000000
