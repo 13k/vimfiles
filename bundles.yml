@@ -13,14 +13,12 @@
 - gh:vim-ruby/vim-ruby
 - gh:fatih/vim-go
 - gh:tpope/vim-git
-- gh:timcharper/textile.vim
 - gh:tpope/vim-markdown
 - gh:slim-template/vim-slim
 - gh:digitaltoad/vim-jade
 - gh:nono/vim-handlebars
 - gh:briancollins/vim-jst
 - gh:juvenn/mustache.vim
-- gh:tpope/vim-haml
 - gh:hail2u/vim-css3-syntax
 - gh:cakebaker/scss-syntax.vim
 - gh:wavded/vim-stylus
@@ -43,9 +41,6 @@
 - gh:sjl/gundo.vim
 - gh:ctrlpvim/ctrlp.vim
 - gh:scrooloose/nerdcommenter
-- gh:mattn/webapi-vim # gist dependency
-- gh:mattn/emmet-vim # gist dependency
-- gh:mattn/gist-vim
 - gh:SirVer/ultisnips
 - gh:honza/vim-snippets
 - gh:tpope/vim-endwise
@@ -58,12 +53,15 @@
 - gh:AndrewRadev/linediff.vim
 
 # external tools
+- gh:mattn/webapi-vim # gist dependency
+- gh:mattn/emmet-vim # gist dependency
+- gh:mattn/gist-vim
 - gh:rking/ag.vim
 - gh:jamessan/vim-gnupg
 - gh:tpope/vim-fugitive
-- gh:ngmy/vim-rubocop
+- gh:rizzatti/dash.vim
 
 # frameworks/libs
+- gh:tpope/vim-bundler
 - gh:tpope/vim-rails
 - gh:skwp/vim-rspec
-- gh:tpope/vim-bundler
