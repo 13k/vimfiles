@@ -212,6 +212,9 @@ let g:splice_wrap = "nowrap"
 " vim-go
 let g:go_fmt_command = "gofmt"
 
+" vim-clang-format
+let g:clang_format_fallback_style = "Google"
+
 " }}}
 
 " Commands ----------------------------------------------------------------- {{{
