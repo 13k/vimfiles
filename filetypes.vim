@@ -1,6 +1,13 @@
 " Enable filetype detection, plugins and indent files
 filetype plugin indent on
 
+" All {{{
+
+" Enables trailing whitespace cleaning for all files
+au FileType * :call EnableStripTrailingWhitespaces()
+
+" }}}
+
 " Go {{{
 au FileType go set noet si sta ts=2 sts=2 sw=2
 " }}}
@@ -130,6 +137,3 @@ au FileType nginx set et si sta ts=2 sts=2 sw=2
 " SQL {{{
 au FileType sql set et si sta ts=2 sts=2 sw=2
 " }}}
-
-" Enables trailing whitespace cleaning for all files
-au FileType * :call EnableStripTrailingWhitespaces()
