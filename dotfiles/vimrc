@@ -215,6 +215,9 @@ let g:go_fmt_command = "gofmt"
 " vim-clang-format
 let g:clang_format_fallback_style = "Google"
 
+" vim-ack
+let g:ackprg = 'ag --vimgrep'
+
 " }}}
 
 " Commands ----------------------------------------------------------------- {{{
