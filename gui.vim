@@ -12,7 +12,7 @@ if has('gui_macvim') || has('gui_vimr')
 elseif has('win32')
   set guifont=Operator\ Mono:h13,Hack\ Regular:h13,Sauce\ Code\ Powerline\ Light:h13,Source\ Code\ Pro\ Light:h14,Consolas:h12
 else
-  set guifont=Operator\ Mono 12,Source\ Code\ Pro\ 12,Inconsolata\ 12,Monospaced\ 10
+  set guifont=Operator\ Mono\ weight=330\ 12,Source\ Code\ Pro\ 12,Inconsolata\ 12,Monospaced\ 10
 endif
 " Don't show file types in menu
 let do_syntax_sel_menu=0
