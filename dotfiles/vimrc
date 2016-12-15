@@ -213,6 +213,7 @@ let g:splice_wrap = "nowrap"
 let g:go_fmt_command = "gofmt"
 
 " vim-clang-format
+let g:clang_format_autosave = 0
 let g:clang_format_fallback_style = "Google"
 
 " vim-ack
