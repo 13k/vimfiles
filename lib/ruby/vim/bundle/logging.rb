@@ -14,7 +14,7 @@ module Rake
   end
 end
 
-module Colors
+module Logging
   def colorize(text, color_code)
     "\033[#{color_code}m#{text}\033[0m"
   end
@@ -33,13 +33,11 @@ module Colors
       colorize(text, color_code)
     end
   end
-end
 
-include Colors
-
-def say(msg)
-  LOG_M.synchronize do
-    STDOUT.puts(msg)
-    STDOUT.flush
+  def say(msg)
+    LOG_M.synchronize do
+      STDOUT.puts(msg)
+      STDOUT.flush
+    end
   end
 end

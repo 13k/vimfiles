@@ -12,6 +12,8 @@ $LOAD_PATH.unshift(PWD.join("lib", "ruby"))
 require 'vim/bundle'
 require 'vim/dotfiles'
 
+self.extend Logging
+
 DOTFILES_NAME = "dotfiles".freeze
 CACHE_NAMES = %w[
   bundles
