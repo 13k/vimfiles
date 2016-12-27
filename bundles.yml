@@ -60,6 +60,7 @@
 - gh:jamessan/vim-gnupg
 - gh:tpope/vim-fugitive
 - gh:rizzatti/dash.vim
+- gh:13k/vim-clang-format
 
 # frameworks/libs
 - gh:tpope/vim-bundler
