@@ -8,7 +8,7 @@
 
 - gh:tomasr/molokai
 
-### syntax
+### syntax/platforms
 
 - gh:vim-ruby/vim-ruby
 - gh:fatih/vim-go
@@ -51,10 +51,10 @@
 - gh:tpope/vim-unimpaired
 - gh:airblade/vim-gitgutter
 - gh:AndrewRadev/linediff.vim
+- gh:mattn/emmet-vim
 
 # external tools
 - gh:mattn/webapi-vim # gist dependency
-- gh:mattn/emmet-vim # gist dependency
 - gh:mattn/gist-vim
 - gh:mileszs/ack.vim
 - gh:jamessan/vim-gnupg
