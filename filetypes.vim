@@ -62,6 +62,10 @@ au FileType html set et si sta ts=2 sts=2 sw=2
 au FileType xhtml set et si sta ts=2 sts=2 sw=2
 " }}}
 
+" Liquid {{{
+au FileType liquid set et si sta ts=2 sts=2 sw=2
+" }}}
+
 " XML {{{
 au FileType xml set et si sta ts=4 sts=4 sw=4
 " }}}
