@@ -33,7 +33,7 @@ au FileType less set et si sta ts=2 sts=2 sw=2
 " }}}
 
 " Python {{{
-au FileType python set et si sta ts=4 sts=4 sw=4
+au FileType python set et si sta ts=4 sts=4 sw=4 wildignore+=*.pyc,*.egg,*/__pycache__,*/*.egg-info
 " }}}
 
 " Django {{{
