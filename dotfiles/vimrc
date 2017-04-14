@@ -185,42 +185,8 @@ endif
 " matchit
 runtime macros/matchit.vim
 
-" load powerline vim plugin
-if has('python3')
-  python3 sys.path.insert(0, "/usr/local/lib/python3.6/site-packages")
-  python3 from powerline.vim import setup as powerline_setup
-  python3 powerline_setup()
-  python3 del powerline_setup
-elseif has('python')
-  python sys.path.insert(0, "/usr/local/lib/python2.7/site-packages")
-  python from powerline.vim import setup as powerline_setup
-  python powerline_setup()
-  python del powerline_setup
-endif
-
-" cmd-t
-let g:CommandTFileScanner = 'ruby'
-
-" gitgutter
-let g:gitgutter_realtime = 1
-let g:gitgutter_eager = 1
-let g:gitgutter_map_keys = 0
-
-" splice
-let g:splice_wrap = "nowrap"
-
-" vim-go
-let g:go_fmt_command = "gofmt"
-let g:go_fmt_autosave = 1
-
-let g:go_info_mode = "guru"
-
-" vim-clang-format
-let g:clang_format_autosave = 0
-let g:clang_format_fallback_style = "Google"
-
-" vim-ack
-let g:ackprg = 'ag --vimgrep'
+" external plugins
+runtime plugins.vim
 
 " }}}
 
