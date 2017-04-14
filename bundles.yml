@@ -61,6 +61,7 @@
 - gh:tpope/vim-fugitive
 - gh:rizzatti/dash.vim
 - gh:13k/vim-clang-format
+- gh:mindriot101/vim-yapf
 
 # frameworks/libs
 - gh:tpope/vim-bundler
