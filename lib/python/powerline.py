@@ -1,10 +1,10 @@
 import os
 import sys
 
-POWERLINE_PIP_PATH_ENV_VAR = "POWERLINE_PIP_PATH"
+POWERLINE_PATH_ENV_VAR = "POWERLINE_PKG_PATH"
 
 def setup_powerline():
-    path = os.getenv(POWERLINE_PIP_PATH_ENV_VAR)
+    path = os.getenv(POWERLINE_PATH_ENV_VAR)
 
     if path is None:
         return
@@ -20,4 +20,4 @@ def setup_powerline():
 
 setup_powerline()
 del setup_powerline
-del POWERLINE_PIP_PATH_ENV_VAR
+del POWERLINE_PATH_ENV_VAR
