@@ -33,6 +33,7 @@
 - gh:elzr/vim-json
 - gh:jeroenbourgois/vim-actionscript
 - gh:leafgarland/typescript-vim
+- gh:cespare/vim-toml
 
 ### plugins
 
