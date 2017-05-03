@@ -1,10 +1,14 @@
+if !has('autocmd')
+  finish
+endif
+
 " Enable filetype detection, plugins and indent files
 filetype plugin indent on
 
 " All {{{
 
 " Enables trailing whitespace cleaning for all files
-au FileType * :call EnableStripTrailingWhitespaces()
+au FileType * :call editor#EnableStripTrailingWhitespaces()
 
 " }}}
 
@@ -127,7 +131,7 @@ au BufNewFile,BufRead *.hbs.erb,*.handlebars.erb,*.hb.erb set ft=handlebars
 
 " Markdown {{{
 " Disable whitespace cleaning for markdown since it is valid markup
-au FileType markdown :call DisableStripTrailingWhitespaces()
+au FileType markdown :call editor#DisableStripTrailingWhitespaces()
 " }}}
 
 " Jinja2 {{{

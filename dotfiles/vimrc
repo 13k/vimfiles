@@ -11,28 +11,18 @@ endif
 let g:xdg_cache_dir = strlen($XDG_CACHE_HOME) > 0 ? $XDG_CACHE_HOME : $HOME . "/.cache"
 let g:vim_cache_dir = g:xdg_cache_dir . "/vim"
 
-" printf oriented debugging
-fun s:debug(str)
-  exec printf('redir >> %s', '/tmp/vim.log')
-  silent echo a:str
-  redir END
-endfun
-
 if has('multi_byte')
   " Legacy encoding is the system default encoding
   set encoding=utf-8
 endif
-
-set pyxversion=0
 
 " }}}
 
 " Load Pathogen early ------------------------------------------------------ {{{
 
 let g:bundles_dir = g:vim_cache_dir . "/bundles"
-let s:pathogen_path = g:bundles_dir . "/vim-pathogen/autoload"
-let &rtp = &rtp . "," . s:pathogen_path
-runtime pathogen.vim
+let s:pathogen_path = g:bundles_dir . "/vim-pathogen"
+let &rtp .= "," . s:pathogen_path
 call pathogen#infect(g:bundles_dir . "/{}")
 
 " }}}
@@ -122,7 +112,7 @@ set splitbelow
 " force ftdetect
 filetype off
 " file formats precedence
-set fileformats=unix,dos,mac
+set fileformats=unix,mac,dos
 " auto indentation on
 set autoindent
 " end of line
@@ -179,44 +169,6 @@ if isdirectory(g:vim_cache_dir . "/undo")
   set undofile
   set undolevels=1000
   set undoreload=10000
-endif
-
-" }}}
-
-" Scripts/Plugins setup ---------------------------------------------------- {{{
-
-" matchit
-runtime macros/matchit.vim
-
-" external plugins
-runtime plugins.vim
-
-" }}}
-
-" Commands ----------------------------------------------------------------- {{{
-
-runtime commands.vim
-
-" }}}
-
-" FileType customizations -------------------------------------------------- {{{
-
-if has('autocmd')
-  runtime filetypes.vim
-endif
-
-" }}}
-
-" Mappings ----------------------------------------------------------------- {{{
-
-runtime mappings.vim
-
-" }}}
-
-" GUI ---------------------------------------------------------------------- {{{
-
-if has('gui_running')
-  runtime gui.vim
 endif
 
 " }}}

@@ -1,3 +1,7 @@
+if !has('gui_running')
+  finish
+endif
+
 " Options
 set guioptions=aei
 " Always show tabline

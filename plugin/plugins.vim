@@ -1,3 +1,6 @@
+" matchit
+packadd! matchit
+
 " powerline
 if has('pythonx')
   pyxfile $HOME/.vim/lib/python/powerline.py
@@ -29,3 +32,6 @@ let g:yapf_style = "facebook"
 
 " vim-ack
 let g:ackprg = 'ag --vimgrep'
+
+" editorconfig-vim
+let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
