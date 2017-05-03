@@ -53,6 +53,7 @@
 - gh:airblade/vim-gitgutter
 - gh:AndrewRadev/linediff.vim
 - gh:mattn/emmet-vim
+- gh:editorconfig/editorconfig-vim
 
 # external tools
 - gh:mattn/webapi-vim # gist dependency
