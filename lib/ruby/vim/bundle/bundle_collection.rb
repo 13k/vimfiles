@@ -1,3 +1,4 @@
+require 'forwardable'
 require 'yaml'
 
 require 'vim/bundle/bundle'
@@ -14,12 +15,17 @@ require 'vim/bundle/bundle'
 #   "fs:<directory>" -> "fs:<directory_name>:file://<directory>"
 #
 class BundleCollection
+  include Enumerable
+  extend Forwardable
+
   BUNDLE_SPEC_RE = /\A(?<src>.+?):(?<name>.+?):(?<url>.+)\z/.freeze
 
   BUNDLE_SPEC_SHORTCUTS = {
     /^fs:(.*)/ => ->(match) { "fs:#{File.basename(match[1])}:file://#{match[1]}" },
     /^gh:(.*)/ => ->(match) { "git:#{File.basename(match[1])}:https://github.com/#{match[1].sub(/\.git$/, '')}.git" },
   }.freeze
+
+  def_delegator :bundles, :each
 
   def initialize(bundles_file, bundles_dir)
     @bundles_file = bundles_file
@@ -34,9 +40,15 @@ class BundleCollection
   end
 
   def removed_bundles
-    @bundles_dir.each_child.select do |child|
-      child.directory? && !include?(child.basename.to_s)
-    end.map do |child|
+    removed = if @bundles_dir.exist?
+      @bundles_dir.each_child.select do |child|
+        child.directory? && !include?(child.basename.to_s)
+      end
+    else
+      []
+    end
+
+    removed.map do |child|
       Bundle.new(name: child.basename.to_s)
     end
   end

@@ -72,7 +72,7 @@ dotfiles_map.each do |src, dest|
   end
 end
 
-bundles_tasks = bundle_collection.bundles.map do |bundle|
+bundles_tasks = bundle_collection.map do |bundle|
   bundle_task(bundle)
 end
 
