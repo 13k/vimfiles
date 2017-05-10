@@ -2,8 +2,6 @@
 packadd matchit
 
 
-" cmd-t
-let g:CommandTFileScanner = 'ruby'
 
 " gitgutter
 let g:gitgutter_realtime = 1
