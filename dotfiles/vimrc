@@ -14,6 +14,7 @@ let g:vim_cache_dir = g:xdg_cache_dir . "/vim"
 if has('multi_byte')
   " Legacy encoding is the system default encoding
   set encoding=utf-8
+  scriptencoding utf-8
 endif
 
 " }}}
