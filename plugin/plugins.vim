@@ -1,5 +1,5 @@
 " matchit
-packadd! matchit
+packadd matchit
 
 " powerline
 if has('pythonx')
