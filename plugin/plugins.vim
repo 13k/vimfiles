@@ -1,10 +1,6 @@
 " matchit
 packadd matchit
 
-" powerline
-if has('pythonx')
-  pyxfile $HOME/.vim/lib/python/powerline.py
-endif
 
 " cmd-t
 let g:CommandTFileScanner = 'ruby'
