@@ -8,6 +8,10 @@
 
 - gh:tomasr/molokai
 
+### UI
+
+- gh:itchyny/lightline.vim
+
 ### syntax/platforms
 
 - gh:vim-ruby/vim-ruby
@@ -27,7 +31,7 @@
 - gh:kchmck/vim-coffee-script
 - gh:pangloss/vim-javascript
 - gh:vim-scripts/applescript.vim
-- gh:13k/vim-nginx
+- gh:fatih/vim-nginx
 - gh:mitsuhiko/vim-jinja
 - gh:chrisbra/csv.vim
 - gh:elzr/vim-json
