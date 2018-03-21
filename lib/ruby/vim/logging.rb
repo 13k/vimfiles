@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'thread'
 
 LOG_M = Mutex.new
