@@ -147,6 +147,9 @@ fun! vimrc#plugins#plugs()
   Plug 'Shougo/deoplete.nvim'
   Plug 'zchee/deoplete-go', { 'do': 'make' }
 
+  """ ui (must come last)
+  Plug 'ryanoasis/vim-devicons'
+
   " }}}
 
   call plug#end()
