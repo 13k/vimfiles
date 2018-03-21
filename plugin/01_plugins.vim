@@ -1,9 +1,14 @@
-" matchit
+" matchit {{{
+
 packadd matchit
+
+" }}}
 
 " lightline {{{
 let g:lightline = {
   \   'colorscheme': 'seoul256',
+  \   'separator': { 'left': '', 'right': '' },
+  \   'subseparator': { 'left': '', 'right': '' },
   \   'active': {
   \     'left': [
   \       [ 'mode', 'paste' ],
@@ -23,6 +28,12 @@ let g:lightline = {
   \     'linter_errors': 'error',
   \     'linter_ok': 'left',
   \   },
+  \   'component_expand': {
+  \     'linter_checking': 'lightline#ale#checking',
+  \     'linter_warnings': 'lightline#ale#warnings',
+  \     'linter_errors': 'lightline#ale#errors',
+  \     'linter_ok': 'lightline#ale#ok',
+  \   },
   \   'component_function': {
   \     'mode': 'vimrc#lightline#Mode',
   \     'lineinfo': 'vimrc#lightline#Info',
@@ -35,13 +46,12 @@ let g:lightline = {
   \     'fugitive': 'vimrc#lightline#Fugitive',
   \     'ctrlp_mark': 'vimrc#lightline#CtrlPMark',
   \     'go': 'vimrc#lightline#Go',
-  \     'linter_checking': 'lightline#ale#checking',
-  \     'linter_warnings': 'lightline#ale#warnings',
-  \     'linter_errors': 'lightline#ale#errors',
-  \     'linter_ok': 'lightline#ale#ok',
   \   },
   \ }
 
+let g:vimrc#lightline#readonly_icon = "\uf023" " ''
+let g:vimrc#lightline#fugitive_icon = "\uf126" " ''
+let g:vimrc#lightline#modified_icon = " \uf044" " '*'
 let g:lightline#ale#indicator_checking = "\uf110 "
 let g:lightline#ale#indicator_warnings = "\uf071"
 let g:lightline#ale#indicator_errors = "\uf05e"

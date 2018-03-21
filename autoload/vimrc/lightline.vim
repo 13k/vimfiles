@@ -18,15 +18,13 @@ fun! vimrc#lightline#Mode()
 endfun
 
 fun! vimrc#lightline#Readonly()
-  let icon = ''
-  return &ft !~? 'help' && &readonly ? icon : ''
+  return &ft !~? 'help' && &readonly ? g:vimrc#lightline#readonly_icon : ''
 endfun
 
 fun! vimrc#lightline#Fugitive()
   if exists('*fugitive#head')
-    let icon = ''
     let head = fugitive#head()
-    return strlen(head) ? printf("%s %s", icon, head) : ''
+    return empty(head) ? '' : printf("%s %s", g:vimrc#lightline#fugitive_icon, head)
   endif
 
   return ''
@@ -61,7 +59,7 @@ fun! vimrc#lightline#Filename()
 endfun
 
 fun! vimrc#lightline#Modified()
-  return &modified ? '*' : ''
+  return &modified ? g:vimrc#lightline#modified_icon : ''
 endfun
 
 fun! vimrc#lightline#CtrlPMark()
