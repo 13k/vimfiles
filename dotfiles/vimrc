@@ -2,29 +2,26 @@
 
 " Setup -------------------------------------------------------------------- {{{
 
-if v:version < 703
-  echoerr 'This vimrc requires Vim 7.3 or later.'
+if v:version < 800
+  echoerr 'This vimrc requires Vim 8.0 or later.'
   quit
 endif
 
-" freedesktop's xdg cache dir
-let g:xdg_cache_dir = strlen($XDG_CACHE_HOME) > 0 ? $XDG_CACHE_HOME : $HOME . "/.cache"
-let g:vim_cache_dir = g:xdg_cache_dir . "/vim"
-
 if has('multi_byte')
-  " Legacy encoding is the system default encoding
   set encoding=utf-8
   scriptencoding utf-8
 endif
 
-" }}}
+set nocompatible
 
-" Load Pathogen early ------------------------------------------------------ {{{
+" Paths
+call vimrc#paths#setup()
 
-let g:bundles_dir = g:vim_cache_dir . "/bundles"
-let s:pathogen_path = g:bundles_dir . "/vim-pathogen"
-let &rtp .= "," . s:pathogen_path
-call pathogen#infect(g:bundles_dir . "/{}")
+" Python
+call vimrc#python#setup()
+
+" Plugins
+call vimrc#plugins#setup()
 
 " }}}
 
@@ -55,14 +52,17 @@ set secure
 
 " UI ----------------------------------------------------------------------- {{{
 
-" colors! colors!
-set t_Co=256
-" colors! colors!
-colorscheme molokai
-let g:rehash256 = 1
 " enable syntax highlight
 syntax enable
 syntax sync minlines=0
+" colors! colors!
+set t_Co=256
+let g:rehash256 = 1
+" background
+set background=dark
+" colorscheme
+"colorscheme molokai
+colorscheme adventurous
 " show line numbers
 set number
 " highlight searches
@@ -70,7 +70,7 @@ set hlsearch
 " always show cursor position
 set ruler
 " show current mode
-set showmode
+set noshowmode
 " show (partial) command in status line.
 set showcmd
 " enable mouse
@@ -157,19 +157,13 @@ set wildignorecase
 " mark the 80th column
 set colorcolumn=80
 " swap files directory
-if isdirectory(g:vim_cache_dir . "/swap")
-  let &directory = g:vim_cache_dir . "/swap"
-endif
+let &directory = g:vimrc#paths#vim_swap
 " backup files directory
-if isdirectory(g:vim_cache_dir . "/backup")
-  let &backupdir = g:vim_cache_dir . "/backup"
-endif
+let &backupdir = g:vimrc#paths#vim_backup
 " undo stuff
-if isdirectory(g:vim_cache_dir . "/undo")
-  let &undodir = g:vim_cache_dir . "/undo"
-  set undofile
-  set undolevels=1000
-  set undoreload=10000
-endif
+let &undodir = g:vimrc#paths#vim_undo
+set undofile
+set undolevels=1000
+set undoreload=10000
 
 " }}}

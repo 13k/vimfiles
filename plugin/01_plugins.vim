@@ -2,33 +2,46 @@
 packadd matchit
 
 let g:lightline = {
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'fugitive', 'filename', 'modified', 'ctrlpmark', 'go' ] ],
-      \   'right': [ [ 'lineinfo' ],
-      \              [ 'percent' ],
-      \              [ 'fileformat', 'fileencoding', 'filetype' ] ]
-      \ },
-      \ 'component_function': {
-      \   'mode': 'LightLineMode',
-      \   'lineinfo': 'LightLineInfo',
-      \   'percent': 'LightLinePercent',
-      \   'modified': 'LightLineModified',
-      \   'filename': 'LightLineFilename',
-      \   'fileformat': 'LightLineFileformat',
-      \   'filetype': 'LightLineFiletype',
-      \   'fileencoding': 'LightLineFileencoding',
-      \   'fugitive': 'LightLineFugitive',
-      \   'ctrlpmark': 'LightLineCtrlPMark',
-      \   'go': 'LightLineGo',
-      \ },
-      \ }
+  \  'colorscheme': 'wombat',
+  \  'active': {
+  \    'left': [ [ 'mode', 'paste' ],
+  \              [ 'fugitive', 'filename', 'go' ] ],
+  \    'right': [ [ 'lineinfo' ],
+  \               [ 'percent' ],
+  \               [ 'fileformat', 'fileencoding', 'filetype' ] ]
+  \  },
+  \  'component_function': {
+  \    'mode': 'LightLineMode',
+  \    'lineinfo': 'LightLineInfo',
+  \    'percent': 'LightLinePercent',
+  \    'modified': 'LightLineModified',
+  \    'filename': 'LightLineFilename',
+  \    'fileformat': 'LightLineFileformat',
+  \    'filetype': 'LightLineFiletype',
+  \    'fileencoding': 'LightLineFileencoding',
+  \    'fugitive': 'LightLineFugitive',
+  \    'ctrlp_mark': 'LightLineCtrlPMark',
+  \    'go': 'LightLineGo',
+  \  },
+  \}
+
+let s:lightlineModes = {
+  \ 'ControlP': 'CtrlP',
+  \ 'vimfiler': 'VimFiler',
+\}
+
+function! s:lightlineModes.default()
+  return winwidth(0) > 60 ? lightline#mode() : ''
+endfunction
 
 function! LightLineMode()
   let fname = expand('%:t')
-  return fname == 'ControlP' ? 'CtrlP' :
-        \ &ft == 'vimfiler' ? 'VimFiler' :
-        \ winwidth(0) > 60 ? lightline#mode() : ''
+
+  if has_key(s:lightlineModes, fname)
+    return get(s:lightlineModes, fname)
+  endif
+
+  return s:lightlineModes.default()
 endfunction
 
 function! LightLineReadonly()
@@ -47,29 +60,38 @@ function! LightLineFugitive()
 endfunction
 
 function! LightLineFilename()
-  let fname = expand('%:t')
   if mode() == 't'
     return ''
   endif
 
-  return fname == 'ControlP' ? g:lightline.ctrlp_item :
-        \ &ft == 'vimfiler' ? vimfiler#get_status_string() :
-        \ ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
-        \ ('' != fname ? fname : '[No Name]')
+  let fname = expand('%:t')
+
+  if fname == 'ControlP' && has_key(g:lightline, 'ctrlp_item')
+    return g:lightline.ctrlp_item
+  elseif &ft == 'vimfiler'
+    return vimfiler#get_status_string()
+  else
+    let llfn = ''
+
+    if LightLineReadonly() != ''
+      let llfn = LightLineReadonly() . ' '
+    end
+
+    let llfn .= (fname != '' ? fname : '[No Name]')
+
+    if LightLineModified() != ''
+      let llfn .= LightLineModified()
+    endif
+
+    return llfn
+  end
 endfunction
 
 function! LightLineModified()
-  if &ft == "help"
-    return ""
-  elseif &modified
-    return "+"
-  elseif &modifiable
-    return ""
-  else
-    return ""
-  endif
+  return &modified ? '*' : ''
 endfunction
 
+" TODO: fix this
 function! LightLineCtrlPMark()
   if expand('%:t') =~ 'ControlP'
     call lightline#link('iR'[g:lightline.ctrlp_regex])
@@ -134,3 +156,13 @@ let g:ackprg = 'ag --vimgrep'
 
 " editorconfig-vim
 let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
+
+" splitjoin
+let g:splitjoin_ruby_hanging_args = 0
+let g:splitjoin_ruby_trailing_comma = 1
+let g:splitjoin_ruby_do_block_split = 1
+let g:splitjoin_ruby_curly_braces = 0
+let g:splitjoin_ruby_heredoc_type = '<<-'
+
+" deoplete
+let g:deoplete#enable_at_startup = 0

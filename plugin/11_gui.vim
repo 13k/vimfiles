@@ -8,8 +8,6 @@ set guioptions=aei
 set showtabline=2
 " Always show status line
 set laststatus=2
-" Background
-set background=light
 " Font
 if has('gui_macvim') || has('gui_vimr')
   set guifont=Operator\ Mono\ Light:h14,Source\ Code\ Pro\ Light:h14,Hack\ Regular:h14,Monaco:h13
@@ -24,8 +22,6 @@ let do_syntax_sel_menu=0
 set nomousehide
 " no fucking bells
 set vb t_vb=
-" Color scheme
-colorscheme molokai
 " Number of lines and columns
 set lines=30 columns=115
 " Do not highlight current line under cursor
