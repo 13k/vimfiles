@@ -7,8 +7,8 @@ packadd matchit
 " lightline {{{
 let g:lightline = {
   \   'colorscheme': 'seoul256',
-  \   'separator': { 'left': '', 'right': '' },
-  \   'subseparator': { 'left': '', 'right': '' },
+  \   'separator': { 'left': "\ue0c6", 'right': "\ue0c7" },
+  \   'subseparator': { 'left': "\ue0bb", 'right': "\ue0bb" },
   \   'active': {
   \     'left': [
   \       [ 'mode', 'paste' ],
@@ -36,13 +36,13 @@ let g:lightline = {
   \   },
   \   'component_function': {
   \     'mode': 'vimrc#lightline#Mode',
-  \     'lineinfo': 'vimrc#lightline#Info',
+  \     'lineinfo': 'vimrc#lightline#LineInfo',
   \     'percent': 'vimrc#lightline#Percent',
   \     'modified': 'vimrc#lightline#Modified',
   \     'filename': 'vimrc#lightline#Filename',
-  \     'fileformat': 'vimrc#lightline#Fileformat',
-  \     'filetype': 'vimrc#lightline#Filetype',
-  \     'fileencoding': 'vimrc#lightline#Fileencoding',
+  \     'fileformat': 'vimrc#lightline#FileFormat',
+  \     'filetype': 'vimrc#lightline#FileType',
+  \     'fileencoding': 'vimrc#lightline#FileEncoding',
   \     'fugitive': 'vimrc#lightline#Fugitive',
   \     'ctrlp_mark': 'vimrc#lightline#CtrlPMark',
   \     'go': 'vimrc#lightline#Go',

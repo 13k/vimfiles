@@ -82,19 +82,41 @@ fun! vimrc#lightline#Go()
   return exists('*go#statusline#Show') ? go#statusline#Show() : ''
 endfun
 
-fun! vimrc#lightline#Fileformat()
-  return winwidth(0) > 70 ? &fileformat : ''
+fun! vimrc#lightline#FileFormatSymbol()
+  return ''
+  "return WebDevIconsGetFileFormatSymbol()
 endfun
 
-fun! vimrc#lightline#Filetype()
-  return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype : 'plaintext') : ''
+fun! vimrc#lightline#FileTypeSymbol()
+  return ''
+  "return WebDevIconsGetFileTypeSymbol()
 endfun
 
-fun! vimrc#lightline#Fileencoding()
+fun! vimrc#lightline#FileFormat()
+  if winwidth(0) <= 70 || empty(&fileformat)
+    return ''
+  endif
+
+  return &fileformat . ' ' . vimrc#lightline#FileFormatSymbol()
+endfun
+
+fun! vimrc#lightline#FileType()
+  if winwidth(0) <= 70
+    return ''
+  endif
+
+  if empty(&filetype)
+    return 'text'
+  endif
+
+  return &filetype . ' ' . vimrc#lightline#FileTypeSymbol()
+endfun
+
+fun! vimrc#lightline#FileEncoding()
   return winwidth(0) > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
 endfun
 
-fun! vimrc#lightline#Info()
+fun! vimrc#lightline#LineInfo()
   return winwidth(0) > 60 ? printf("%3d:%-2d", line('.'), col('.')) : ''
 endfun
 

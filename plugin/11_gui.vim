@@ -10,11 +10,13 @@ set showtabline=2
 set laststatus=2
 " Font
 if has('gui_macvim') || has('gui_vimr')
-  set guifont=Operator\ Mono\ Light:h14,Source\ Code\ Pro\ Light:h14,Hack\ Regular:h14,Monaco:h13
+  "set guifont=Operator\ Mono\ Light:h14,Source\ Code\ Pro\ Light:h14,Hack\ Regular:h14,Monaco:h13
+  set guifont=SauceCodePro\ Nerd\ Font:h14,Monaco:h13
 elseif has('win32')
   set guifont=Operator\ Mono:h13,Source\ Code\ Pro\ Light:h13,Hack\ Regular:h13,Consolas:h12
 else
-  set guifont=Operator\ Mono\ weight=330\ 12,Source\ Code\ Pro\ 12,Hack\ Regular\ 12,Inconsolata\ 12,Monospaced\ 10
+  "set guifont=Operator\ Mono\ weight=330\ 12,Source\ Code\ Pro\ 12,Hack\ Regular\ 12,Inconsolata\ 12,Monospaced\ 10
+  set guifont=SauceCodePro\ Nerd\ Font\ 12,Inconsolata\ 12,monospaced\ 10
 endif
 " Don't show file types in menu
 let do_syntax_sel_menu=0
