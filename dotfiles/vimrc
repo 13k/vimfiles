@@ -152,7 +152,7 @@ set comments=s1:/*,mb:*,ex:*/,b:#,:%,:XCOMM,n:>,fb:-
 " folding method
 set foldmethod=marker
 " ignore these files
-set wildignore=*~,*.swp,*.o,*.so,*.dll,*.exe,*.class,*.obj,*.zip,*.tar*,*.bz2,*.7z,*.jpg,*.jpeg,*.png,*.gif,*.ico,*/.git,*/.svn,*/.hg
+set wildignore=*~,*.swp,*.o,*.so,*.dll,*.exe,*.class,*.obj,*.zip,*.tar*,*.bz2,*.7z,*.jpg,*.jpeg,*.png,*.gif,*.ico,*/.git,*/.svn,*/.hg,*.egg-info
 set wildignorecase
 " mark the 80th column
 set colorcolumn=80

@@ -65,6 +65,7 @@ fun! vimrc#plugins#plugs()
   Plug 'Dru89/vim-adventurous'
   Plug 'tomasr/molokai'
   Plug 'itchyny/lightline.vim'
+  Plug 'maximbaz/lightline-ale'
 
   """ syntax/platforms
 

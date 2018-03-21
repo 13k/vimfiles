@@ -1,168 +1,137 @@
 " matchit
 packadd matchit
 
+" lightline {{{
 let g:lightline = {
-  \  'colorscheme': 'wombat',
-  \  'active': {
-  \    'left': [ [ 'mode', 'paste' ],
-  \              [ 'fugitive', 'filename', 'go' ] ],
-  \    'right': [ [ 'lineinfo' ],
-  \               [ 'percent' ],
-  \               [ 'fileformat', 'fileencoding', 'filetype' ] ]
-  \  },
-  \  'component_function': {
-  \    'mode': 'LightLineMode',
-  \    'lineinfo': 'LightLineInfo',
-  \    'percent': 'LightLinePercent',
-  \    'modified': 'LightLineModified',
-  \    'filename': 'LightLineFilename',
-  \    'fileformat': 'LightLineFileformat',
-  \    'filetype': 'LightLineFiletype',
-  \    'fileencoding': 'LightLineFileencoding',
-  \    'fugitive': 'LightLineFugitive',
-  \    'ctrlp_mark': 'LightLineCtrlPMark',
-  \    'go': 'LightLineGo',
-  \  },
-  \}
+  \   'colorscheme': 'seoul256',
+  \   'active': {
+  \     'left': [
+  \       [ 'mode', 'paste' ],
+  \       [ 'fugitive' ],
+  \       [ 'filename' ],
+  \       [ 'ctrlp_mark', 'go' ],
+  \     ],
+  \     'right': [
+  \       [ 'lineinfo' ],
+  \       [ 'filetype', 'fileformat', 'fileencoding', ],
+  \       [ 'linter_checking', 'linter_errors', 'linter_warnings' ],
+  \     ]
+  \   },
+  \   'component_type': {
+  \     'linter_checking': 'left',
+  \     'linter_warnings': 'warning',
+  \     'linter_errors': 'error',
+  \     'linter_ok': 'left',
+  \   },
+  \   'component_function': {
+  \     'mode': 'vimrc#lightline#Mode',
+  \     'lineinfo': 'vimrc#lightline#Info',
+  \     'percent': 'vimrc#lightline#Percent',
+  \     'modified': 'vimrc#lightline#Modified',
+  \     'filename': 'vimrc#lightline#Filename',
+  \     'fileformat': 'vimrc#lightline#Fileformat',
+  \     'filetype': 'vimrc#lightline#Filetype',
+  \     'fileencoding': 'vimrc#lightline#Fileencoding',
+  \     'fugitive': 'vimrc#lightline#Fugitive',
+  \     'ctrlp_mark': 'vimrc#lightline#CtrlPMark',
+  \     'go': 'vimrc#lightline#Go',
+  \     'linter_checking': 'lightline#ale#checking',
+  \     'linter_warnings': 'lightline#ale#warnings',
+  \     'linter_errors': 'lightline#ale#errors',
+  \     'linter_ok': 'lightline#ale#ok',
+  \   },
+  \ }
 
-let s:lightlineModes = {
-  \ 'ControlP': 'CtrlP',
-  \ 'vimfiler': 'VimFiler',
-\}
-
-function! s:lightlineModes.default()
-  return winwidth(0) > 60 ? lightline#mode() : ''
-endfunction
-
-function! LightLineMode()
-  let fname = expand('%:t')
-
-  if has_key(s:lightlineModes, fname)
-    return get(s:lightlineModes, fname)
-  endif
-
-  return s:lightlineModes.default()
-endfunction
-
-function! LightLineReadonly()
-  let icon = ''
-  return &ft !~? 'help' && &readonly ? icon : ''
-endfunction
-
-function! LightLineFugitive()
-  if exists('*fugitive#head')
-    let icon = ''
-    let head = fugitive#head()
-    return strlen(head) ? printf("%s %s", icon, head) : ''
-  endif
-
-  return ''
-endfunction
-
-function! LightLineFilename()
-  if mode() == 't'
-    return ''
-  endif
-
-  let fname = expand('%:t')
-
-  if fname == 'ControlP' && has_key(g:lightline, 'ctrlp_item')
-    return g:lightline.ctrlp_item
-  elseif &ft == 'vimfiler'
-    return vimfiler#get_status_string()
-  else
-    let llfn = ''
-
-    if LightLineReadonly() != ''
-      let llfn = LightLineReadonly() . ' '
-    end
-
-    let llfn .= (fname != '' ? fname : '[No Name]')
-
-    if LightLineModified() != ''
-      let llfn .= LightLineModified()
-    endif
-
-    return llfn
-  end
-endfunction
-
-function! LightLineModified()
-  return &modified ? '*' : ''
-endfunction
-
-" TODO: fix this
-function! LightLineCtrlPMark()
-  if expand('%:t') =~ 'ControlP'
-    call lightline#link('iR'[g:lightline.ctrlp_regex])
-    return lightline#concatenate([g:lightline.ctrlp_prev, g:lightline.ctrlp_item
-          \ , g:lightline.ctrlp_next], 0)
-  else
-    return ''
-  endif
-endfunction
-
-function! LightLineGo()
-  return exists('*go#statusline#Show') ? go#statusline#Show() : ''
-endfunction
-
-function! LightLineFileformat()
-  return winwidth(0) > 70 ? &fileformat : ''
-endfunction
-
-function! LightLineFiletype()
-  return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype : 'plaintext') : ''
-endfunction
-
-function! LightLineFileencoding()
-  return winwidth(0) > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
-endfunction
-
-function! LightLineInfo()
-  return winwidth(0) > 60 ? printf("%3d:%-2d", line('.'), col('.')) : ''
-endfunction
-
-function! LightLinePercent()
-  return &ft =~? 'vimfiler' ? '' : (100 * line('.') / line('$')) . '%'
-endfunction
+let g:lightline#ale#indicator_checking = "\uf110 "
+let g:lightline#ale#indicator_warnings = "\uf071"
+let g:lightline#ale#indicator_errors = "\uf05e"
+let g:lightline#ale#indicator_ok = "\uf00c"
 
 if exists('g:loaded_lightline')
   set noshowmode
 endif
 
-" gitgutter
+" }}}
+
+" ctrlp {{{
+let g:ctrlp_status_func = {
+  \   'main': 'vimrc#ctrlp#StatusMain',
+  \   'prog': 'vimrc#ctrlp#StatusProg',
+  \ }
+
+" }}}
+
+" gitgutter {{{
 let g:gitgutter_realtime = 1
 let g:gitgutter_eager = 1
 let g:gitgutter_map_keys = 0
 
-" splice
+" }}}
+
+" splice {{{
+
 let g:splice_wrap = "nowrap"
 
-" vim-go
+" }}}
+
+" vim-go {{{
+
 let g:go_fmt_command = "gofmt"
 let g:go_fmt_autosave = 1
 
 let g:go_info_mode = "guru"
 
-" vim-clang-format
+" }}}
+
+" vim-clang-format {{{
+
 let g:clang_format_autosave = 0
 let g:clang_format_fallback_style = "Google"
 
-" vim-yapf
+" }}}
+
+" vim-yapf {{{
+
 let g:yapf_style = "facebook"
 
-" vim-ack
+" }}}
+
+" vim-ack {{{
+
 let g:ackprg = 'ag --vimgrep'
 
-" editorconfig-vim
+" }}}
+
+" editorconfig-vim {{{
+
 let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
 
-" splitjoin
+" }}}
+
+" splitjoin {{{
+
 let g:splitjoin_ruby_hanging_args = 0
 let g:splitjoin_ruby_trailing_comma = 1
 let g:splitjoin_ruby_do_block_split = 1
 let g:splitjoin_ruby_curly_braces = 0
 let g:splitjoin_ruby_heredoc_type = '<<-'
 
-" deoplete
+" }}}
+
+" ale {{{
+
+let g:ale_sign_column_always = 1
+let g:ale_sign_error = '>>'
+let g:ale_sign_warning = '--'
+
+" background colors matching SignColumn in `adventurous` colorscheme
+highlight ALEErrorSign ctermbg=234 ctermfg=DarkRed guibg=#1C1C1C guifg=#D3422E cterm=NONE gui=NONE
+highlight ALEWarningSign ctermbg=234 ctermfg=Yellow guibg=#1C1C1C guifg=#F5BB12 cterm=NONE gui=NONE
+
+" }}}
+
+" deoplete {{{
+
 let g:deoplete#enable_at_startup = 0
+
+" }}}
