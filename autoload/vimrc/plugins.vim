@@ -108,6 +108,7 @@ fun! vimrc#plugins#plugs()
   Plug 'junegunn/fzf.vim'
   Plug 'mattn/emmet-vim'
   Plug 'scrooloose/nerdcommenter'
+  Plug 'scrooloose/nerdtree'
   Plug 'SirVer/ultisnips'
   Plug 'sjl/gundo.vim'
   Plug 'sjl/splice.vim'
