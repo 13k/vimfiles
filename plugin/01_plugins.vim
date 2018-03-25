@@ -5,6 +5,7 @@ packadd matchit
 " }}}
 
 " lightline {{{
+
 let g:lightline = {
   \   'colorscheme': 'seoul256',
   \   'separator': { 'left': "\ue0c6", 'right': "\ue0c7" },
@@ -64,14 +65,25 @@ endif
 " }}}
 
 " ctrlp {{{
+
 let g:ctrlp_status_func = {
   \   'main': 'vimrc#ctrlp#StatusMain',
   \   'prog': 'vimrc#ctrlp#StatusProg',
   \ }
 
+let g:ctrlp_user_command = [
+  \   '.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard',
+  \ ]
+
+let g:ctrlp_custom_ignore = {
+  \   'dir': '\.git$\|\.yardoc\|public$|log\|tmp$',
+  \   'file': '\.so$\|\.dat$|\.DS_Store$'
+  \ }
+
 " }}}
 
 " gitgutter {{{
+
 let g:gitgutter_realtime = 1
 let g:gitgutter_eager = 1
 let g:gitgutter_map_keys = 0
