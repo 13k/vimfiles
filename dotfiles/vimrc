@@ -138,8 +138,8 @@ set backspace=indent,eol,start
 set complete-=i
 " allow line wrapping when moving cursor
 set whichwrap=b,s,<,>,[,]
-" format options (comment leader, )
-set formatoptions+=r
+" format options
+set formatoptions=tcroqlnj
 " tab stop
 set tabstop=2
 " soft tab stop
