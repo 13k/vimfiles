@@ -84,9 +84,14 @@ let g:ctrlp_custom_ignore = {
 
 " gitgutter {{{
 
-let g:gitgutter_realtime = 1
-let g:gitgutter_eager = 1
-let g:gitgutter_map_keys = 0
+" disable when in diff or splice modes
+if &diff || exists('g:splice_prefix')
+  let g:gitgutter_enabled = 0
+else
+  let g:gitgutter_realtime = 1
+  let g:gitgutter_eager = 1
+  let g:gitgutter_map_keys = 0
+end
 
 " }}}
 
@@ -142,13 +147,25 @@ let g:splitjoin_ruby_heredoc_type = '<<-'
 
 " ale {{{
 
-let g:ale_sign_column_always = 1
-let g:ale_sign_error = '>>'
-let g:ale_sign_warning = '--'
+" disable when in diff or splice modes
+if &diff || exists('g:splice_prefix')
+  let g:ale_enabled = 0
+else
+  let g:ale_sign_column_always = 1
+  let g:ale_sign_error = '>>'
+  let g:ale_sign_warning = '--'
 
-" background colors matching SignColumn in `adventurous` colorscheme
-highlight ALEErrorSign ctermbg=234 ctermfg=DarkRed guibg=#1C1C1C guifg=#D3422E cterm=NONE gui=NONE
-highlight ALEWarningSign ctermbg=234 ctermfg=Yellow guibg=#1C1C1C guifg=#F5BB12 cterm=NONE gui=NONE
+  " background colors matching SignColumn in `adventurous` colorscheme
+  highlight ALEErrorSign ctermbg=234 ctermfg=DarkRed guibg=#1C1C1C guifg=#D3422E cterm=NONE gui=NONE
+  highlight ALEWarningSign ctermbg=234 ctermfg=Yellow guibg=#1C1C1C guifg=#F5BB12 cterm=NONE gui=NONE
+
+  let s:ale_stylelint_options = '--cache'
+  let g:ale_css_stylelint_options = s:ale_stylelint_options
+  let g:ale_less_stylelint_options = s:ale_stylelint_options
+  let g:ale_sass_stylelint_options = s:ale_stylelint_options
+  let g:ale_scss_stylelint_options = s:ale_stylelint_options
+  let g:ale_stylus_stylelint_options = s:ale_stylelint_options
+endif
 
 " }}}
 
