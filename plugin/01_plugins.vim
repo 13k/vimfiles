@@ -151,13 +151,19 @@ let g:splitjoin_ruby_heredoc_type = '<<-'
 if &diff || exists('g:splice_prefix')
   let g:ale_enabled = 0
 else
+  " background colors matching SignColumn in `adventurous` colorscheme
+  highlight ALEErrorSign ctermbg=234 ctermfg=DarkRed guibg=#1C1C1C guifg=#D3422E cterm=NONE gui=NONE
+  highlight ALEWarningSign ctermbg=234 ctermfg=Yellow guibg=#1C1C1C guifg=#F5BB12 cterm=NONE gui=NONE
+
   let g:ale_sign_column_always = 1
   let g:ale_sign_error = '>>'
   let g:ale_sign_warning = '--'
 
-  " background colors matching SignColumn in `adventurous` colorscheme
-  highlight ALEErrorSign ctermbg=234 ctermfg=DarkRed guibg=#1C1C1C guifg=#D3422E cterm=NONE gui=NONE
-  highlight ALEWarningSign ctermbg=234 ctermfg=Yellow guibg=#1C1C1C guifg=#F5BB12 cterm=NONE gui=NONE
+  let g:ale_linters = {
+    \   'ruby': ['brakeman', 'rails_best_practices', 'rubocop', 'ruby', 'rufo'],
+    \ }
+
+  let g:ale_ruby_rubocop_executable = './bin/rubocop'
 
   let s:ale_stylelint_options = '--cache'
   let g:ale_css_stylelint_options = s:ale_stylelint_options
