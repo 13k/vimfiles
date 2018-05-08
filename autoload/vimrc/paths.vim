@@ -2,12 +2,12 @@ fun! vimrc#paths#join(...)
   return join(a:000, '/')
 endfun
 
-fun! vimrc#paths#expired(path, max_age)
+fun! vimrc#paths#isExpired(path, max_age)
   return localtime() > (getftime(a:path) + a:max_age)
 endfun
 
-fun! vimrc#paths#touch(path)
-  exe "silent !touch " . shellescape(a:path)
+fun! vimrc#paths#writeTimestamp(path)
+  return writefile([localtime()], a:path, 'ws')
 endfun
 
 fun! vimrc#paths#setup()

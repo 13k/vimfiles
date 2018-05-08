@@ -10,54 +10,106 @@ fun! vimrc#plugins#setup()
   let g:vimrc#plugins#plug_path = vimrc#paths#join(g:vimrc#paths#vim_cache, 'plug')
   let g:vimrc#plugins#plug_update_interval = 1 * 24 * 3600
 
-  let plug_script_path = vimrc#paths#join(g:vimrc#plugins#plug_path, 'autoload', 'plug.vim')
-  let plug_timestamp_path = vimrc#paths#join(g:vimrc#plugins#plug_path, 'last_update.txt')
+  let s:plug_script_path = vimrc#paths#join(g:vimrc#plugins#plug_path, 'autoload', 'plug.vim')
+  let s:plug_timestamp_path = vimrc#paths#join(g:vimrc#plugins#plug_path, 'last_update.txt')
+  let s:prompt_answers = {
+    \ 'skip': 0,
+    \ 'update': 1,
+    \ 'postpone': 2,
+  \ }
 
-  let did_install = vimrc#plugins#plugInstall(plug_script_path)
-  let expired = vimrc#paths#expired(plug_timestamp_path, g:vimrc#plugins#plug_update_interval)
-
-  if did_install
-    call vimrc#paths#touch(plug_timestamp_path)
-    redraw!
-  elseif expired
-    call vimrc#plugins#plugUpgrade()
-    call vimrc#plugins#plugUpdate()
-    call vimrc#paths#touch(plug_timestamp_path)
-    redraw!
-  endif
-
-  let &rtp .= ',' . g:vimrc#plugins#plug_path
-  call vimrc#plugins#plugs()
+  call vimrc#plugins#activate()
 endfun
 
-fun! vimrc#plugins#plugInstall(script_path)
-  if !empty(getftype(a:script_path))
+fun! vimrc#plugins#activate()
+  let perform_install = vimrc#plugins#autoInstall()
+  call vimrc#plugins#runtimePath()
+  call plug#begin(g:vimrc#plugins#plugged_path)
+  call vimrc#plugins#plugs()
+
+  if perform_install
+    call vimrc#plugins#install()
+    call vimrc#plugins#updateTimestamp()
+  endif
+
+  call vimrc#plugins#autoUpdate()
+  call plug#end()
+endfun
+
+fun! vimrc#plugins#runtimePath()
+  let &rtp .= ',' . g:vimrc#plugins#plug_path
+endfun
+
+fun! vimrc#plugins#isInstalled()
+  return !empty(getftype(s:plug_script_path))
+endfun
+
+fun! vimrc#plugins#autoInstall()
+  if vimrc#plugins#isInstalled()
     return 0
   endif
 
-  exe "silent !curl --create-dirs -fLo " . shellescape(a:script_path) . " "
+  exe "silent !curl --create-dirs -fLo " . shellescape(s:plug_script_path) . " "
     \ "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
 
-  autocmd VimEnter * PlugInstall --sync | quit | source $MYVIMRC
   return 1
 endfun
 
-fun! vimrc#plugins#plugUpgrade()
-  autocmd VimEnter * PlugUpgrade
+fun! vimrc#plugins#isExpired()
+  return vimrc#paths#isExpired(s:plug_timestamp_path, g:vimrc#plugins#plug_update_interval)
 endfun
 
-fun! vimrc#plugins#plugUpdate()
-  autocmd VimEnter * PlugUpdate --sync | quit
+fun! vimrc#plugins#updateTimestamp()
+  call vimrc#paths#writeTimestamp(s:plug_timestamp_path)
+endfun
+
+fun! vimrc#plugins#autoUpdate()
+  if !vimrc#plugins#isExpired()
+    return 0
+  endif
+
+  let answer = vimrc#plugins#promptUpdate()
+
+  if answer == s:prompt_answers.update
+    call vimrc#plugins#upgrade()
+    call vimrc#plugins#update()
+    call vimrc#plugins#updateTimestamp()
+  elseif answer == s:prompt_answers.postpone
+    call vimrc#plugins#updateTimestamp()
+  endif
+
+  return 1
+endfun
+
+fun! vimrc#plugins#promptUpdate()
+  let question = 'Update plugins? ([Y]es / [n]o / [p]ostpone) '
+  let answer = tolower(input(question))
+
+  if empty(answer) || answer == 'yes' || answer == 'y'
+    return s:prompt_answers.update
+  elseif answer == 'postpone' || answer == 'p'
+    return s:prompt_answers.postpone
+  else
+    return s:prompt_answers.skip
+  end
+endfun
+
+fun! vimrc#plugins#install()
+  PlugInstall --sync
+  source $MYVIMRC
+  quit
+endfun
+
+fun! vimrc#plugins#upgrade()
+  PlugUpgrade
+endfun
+
+fun! vimrc#plugins#update()
+  PlugUpdate --sync
+  quit
 endfun
 
 fun! vimrc#plugins#plugs()
-  if exists('g:vimrc#plugins#plugs_once')
-    return
-  endif
-  let g:vimrc#plugins#plugs_once = 1
-
-  call plug#begin(g:vimrc#plugins#plugged_path)
-
   " Plugs ------------------------------------------------------------------ {{{
 
   """ ui
@@ -152,6 +204,4 @@ fun! vimrc#plugins#plugs()
   Plug 'ryanoasis/vim-devicons'
 
   " }}}
-
-  call plug#end()
 endfun
