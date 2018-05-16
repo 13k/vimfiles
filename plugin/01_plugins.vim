@@ -1,3 +1,5 @@
+scriptencoding utf-8
+
 " matchit {{{
 
 packadd matchit
@@ -97,29 +99,29 @@ end
 
 " splice {{{
 
-let g:splice_wrap = "nowrap"
+let g:splice_wrap = 'nowrap'
 
 " }}}
 
 " vim-go {{{
 
-let g:go_fmt_command = "gofmt"
+let g:go_fmt_command = 'gofmt'
 let g:go_fmt_autosave = 1
 
-let g:go_info_mode = "guru"
+let g:go_info_mode = 'guru'
 
 " }}}
 
 " vim-clang-format {{{
 
 let g:clang_format_autosave = 0
-let g:clang_format_fallback_style = "Google"
+let g:clang_format_fallback_style = 'Google'
 
 " }}}
 
 " vim-yapf {{{
 
-let g:yapf_style = "facebook"
+let g:yapf_style = 'facebook'
 
 " }}}
 
@@ -155,6 +157,13 @@ else
   highlight ALEErrorSign ctermbg=234 ctermfg=DarkRed guibg=#1C1C1C guifg=#D3422E cterm=NONE gui=NONE
   highlight ALEWarningSign ctermbg=234 ctermfg=Yellow guibg=#1C1C1C guifg=#F5BB12 cterm=NONE gui=NONE
 
+  let g:ale_lint_on_text_changed = 'never'
+  let g:ale_lint_on_insert_leave = 1
+  let g:ale_lint_on_enter = 1
+  let g:ale_lint_on_save = 1
+  let g:ale_lint_on_filetype_changed = 1
+  let g:ale_open_list = 0
+  let g:ale_list_window_size = 3
   let g:ale_sign_column_always = 1
   let g:ale_sign_error = '>>'
   let g:ale_sign_warning = '--'
@@ -171,6 +180,11 @@ else
   let g:ale_sass_stylelint_options = s:ale_stylelint_options
   let g:ale_scss_stylelint_options = s:ale_stylelint_options
   let g:ale_stylus_stylelint_options = s:ale_stylelint_options
+
+  augroup CloseLoclistWindowGroup
+    autocmd!
+    autocmd QuitPre * if empty(&buftype) | lclose | endif
+  augroup END
 endif
 
 " }}}
