@@ -12,11 +12,12 @@ fun! vimrc#plugins#setup()
 
   let s:plug_script_path = vimrc#paths#join(g:vimrc#plugins#plug_path, 'autoload', 'plug.vim')
   let s:plug_timestamp_path = vimrc#paths#join(g:vimrc#plugins#plug_path, 'last_update.txt')
+
   let s:prompt_answers = {
-    \ 'skip': 0,
-    \ 'update': 1,
-    \ 'postpone': 2,
-  \ }
+    \   'update': 1,
+    \   'skip': 2,
+    \   'postpone': 3,
+    \ }
 
   call vimrc#plugins#activate()
 endfun
@@ -26,17 +27,21 @@ fun! vimrc#plugins#activate()
   call vimrc#plugins#runtimePath()
   call plug#begin(g:vimrc#plugins#plugged_path)
   call vimrc#plugins#plugs()
+  call plug#end()
 
   if l:perform_install
-    call vimrc#plugins#autoInstallPlugins()
+    augroup VimrcPluginsInit
+      au BufEnter * call vimrc#plugins#autoInstallPlugins()
+    augroup END
   endif
 
-  call vimrc#plugins#autoUpdate()
-  call plug#end()
+  augroup VimrcPluginsInit
+    au BufEnter * call vimrc#plugins#autoUpdate()
+  augroup END
 endfun
 
 fun! vimrc#plugins#runtimePath()
-  let &runtimepath = join([&runtimepath, g:vimrc#plugins#plug_path], ',')
+  let &runtimepath = join([g:vimrc#plugins#plug_path, &runtimepath], ',')
 endfun
 
 fun! vimrc#plugins#isInstalled()
@@ -48,15 +53,14 @@ fun! vimrc#plugins#autoInstall()
     return 0
   endif
 
-  redraw
-  silent echo 'Installing plug.vim'
+  echo 'Installing plug.vim'
 
   exe join(
     \   [
     \     'silent',
     \     '!curl',
     \     '--create-dirs',
-    \     '-fLo',
+    \     '-sfLo',
     \     shellescape(s:plug_script_path),
     \     'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim',
     \   ],
@@ -86,11 +90,11 @@ fun! vimrc#plugins#autoUpdate()
 
   let l:answer = vimrc#plugins#promptUpdate()
 
-  if l:answer == s:prompt_answers.update
+  if l:answer == s:prompt_answers['update']
     call vimrc#plugins#upgrade()
     call vimrc#plugins#update()
     call vimrc#plugins#updateTimestamp()
-  elseif l:answer == s:prompt_answers.postpone
+  elseif l:answer == s:prompt_answers['postpone']
     call vimrc#plugins#updateTimestamp()
   endif
 
@@ -98,16 +102,13 @@ fun! vimrc#plugins#autoUpdate()
 endfun
 
 fun! vimrc#plugins#promptUpdate()
-  let l:question = 'Update plugins? ([Y]es / [n]o / [p]ostpone) '
-  let l:answer = input(l:question)
+  let l:answer = confirm('Update plugins?', "&Yep\n&Nope\n&Postpone")
 
-  if empty(l:answer) || l:answer ==? 'yes' || l:answer ==? 'y'
-    return s:prompt_answers.update
-  elseif l:answer ==? 'postpone' || l:answer ==? 'p'
-    return s:prompt_answers.postpone
-  else
-    return s:prompt_answers.skip
-  end
+  if l:answer == 0
+    let l:answer = s:prompt_answers['skip']
+  endif
+
+  return l:answer
 endfun
 
 fun! vimrc#plugins#install()
