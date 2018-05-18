@@ -5,7 +5,7 @@ endif
 " Enable filetype detection, plugins and indent files
 filetype plugin indent on
 
-augroup FiletypeDetection
+augroup FiletypeCustomization
 
   " AppleScript
   au BufNewFile,BufRead *.applescript set ft=applescript
@@ -16,5 +16,8 @@ augroup FiletypeDetection
 
   " Jinja
   au BufNewFile,BufRead *.jinja,*.j2 set ft=jinja
+
+  " Python
+  au Filetype python call vimrc#yapf#setup()
 
 augroup END
