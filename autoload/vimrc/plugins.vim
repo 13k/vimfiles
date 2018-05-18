@@ -218,6 +218,7 @@ fun! vimrc#plugins#plugs() abort
   Plug 'zchee/deoplete-go', { 'do': 'make' }
 
   " formatting
+  Plug 'google/yapf', { 'rtp': 'plugins/vim', 'for': 'python' }
   Plug 'prettier/vim-prettier', {
     \   'do': 'yarn install',
     \   'for': [
