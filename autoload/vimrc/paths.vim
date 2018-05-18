@@ -1,16 +1,16 @@
-fun! vimrc#paths#join(...)
+fun! vimrc#paths#join(...) abort
   return join(a:000, '/')
 endfun
 
-fun! vimrc#paths#isExpired(path, max_age)
+fun! vimrc#paths#isExpired(path, max_age) abort
   return localtime() > (getftime(a:path) + a:max_age)
 endfun
 
-fun! vimrc#paths#writeTimestamp(path)
+fun! vimrc#paths#writeTimestamp(path) abort
   return writefile([localtime()], a:path, 'ws')
 endfun
 
-fun! vimrc#paths#setup()
+fun! vimrc#paths#setup() abort
   if exists('g:vimrc#paths#setup_once')
     return
   endif

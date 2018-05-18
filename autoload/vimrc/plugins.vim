@@ -1,4 +1,4 @@
-fun! vimrc#plugins#setup()
+fun! vimrc#plugins#setup() abort
   if exists('g:vimrc#plugins#setup_once')
     return
   endif
@@ -22,7 +22,7 @@ fun! vimrc#plugins#setup()
   call vimrc#plugins#activate()
 endfun
 
-fun! vimrc#plugins#activate()
+fun! vimrc#plugins#activate() abort
   let l:perform_install = vimrc#plugins#autoInstall()
   call vimrc#plugins#runtimePath()
   call plug#begin(g:vimrc#plugins#plugged_path)
@@ -40,15 +40,15 @@ fun! vimrc#plugins#activate()
   augroup END
 endfun
 
-fun! vimrc#plugins#runtimePath()
+fun! vimrc#plugins#runtimePath() abort
   let &runtimepath = join([g:vimrc#plugins#plug_path, &runtimepath], ',')
 endfun
 
-fun! vimrc#plugins#isInstalled()
+fun! vimrc#plugins#isInstalled() abort
   return !empty(getftype(s:plug_script_path))
 endfun
 
-fun! vimrc#plugins#autoInstall()
+fun! vimrc#plugins#autoInstall() abort
   if vimrc#plugins#isInstalled()
     return 0
   endif
@@ -70,20 +70,20 @@ fun! vimrc#plugins#autoInstall()
   return 1
 endfun
 
-fun! vimrc#plugins#isExpired()
+fun! vimrc#plugins#isExpired() abort
   return vimrc#paths#isExpired(s:plug_timestamp_path, g:vimrc#plugins#plug_update_interval)
 endfun
 
-fun! vimrc#plugins#updateTimestamp()
+fun! vimrc#plugins#updateTimestamp() abort
   call vimrc#paths#writeTimestamp(s:plug_timestamp_path)
 endfun
 
-fun! vimrc#plugins#autoInstallPlugins()
+fun! vimrc#plugins#autoInstallPlugins() abort
   call vimrc#plugins#install()
   call vimrc#plugins#updateTimestamp()
 endfun
 
-fun! vimrc#plugins#autoUpdate()
+fun! vimrc#plugins#autoUpdate() abort
   if !vimrc#plugins#isExpired()
     return 0
   endif
@@ -101,7 +101,7 @@ fun! vimrc#plugins#autoUpdate()
   return 1
 endfun
 
-fun! vimrc#plugins#promptUpdate()
+fun! vimrc#plugins#promptUpdate() abort
   let l:answer = confirm('Update plugins?', "&Yep\n&Nope\n&Postpone")
 
   if l:answer == 0
@@ -111,22 +111,22 @@ fun! vimrc#plugins#promptUpdate()
   return l:answer
 endfun
 
-fun! vimrc#plugins#install()
+fun! vimrc#plugins#install() abort
   PlugInstall --sync
   source $MYVIMRC
   quit
 endfun
 
-fun! vimrc#plugins#upgrade()
+fun! vimrc#plugins#upgrade() abort
   PlugUpgrade
 endfun
 
-fun! vimrc#plugins#update()
+fun! vimrc#plugins#update() abort
   PlugUpdate --sync
   quit
 endfun
 
-fun! vimrc#plugins#plugs()
+fun! vimrc#plugins#plugs() abort
   " Plugs ------------------------------------------------------------------ {{{
 
   """ ui
@@ -223,13 +223,13 @@ fun! vimrc#plugins#plugs()
   " }}}
 endfun
 
-fun! vimrc#plugins#editorconfig()
+fun! vimrc#plugins#editorconfig() abort
   augroup EditorConfigInit
     au BufEnter * call vimrc#plugins#editorconfigCheck()
   augroup END
 endfun
 
-fun! vimrc#plugins#editorconfigCheck()
+fun! vimrc#plugins#editorconfigCheck() abort
   let l:core_bin = get(g:, 'EditorConfig_exec_path')
 
   if l:core_bin == 0 || empty(l:core_bin)

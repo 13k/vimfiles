@@ -1,4 +1,4 @@
-fun! vimrc#python#setup()
+fun! vimrc#python#setup() abort
   if exists('g:vimrc#python#setup_once')
     return
   endif

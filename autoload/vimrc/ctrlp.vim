@@ -1,4 +1,4 @@
-fun! vimrc#ctrlp#StatusMain(focus, byfname, regex, prev, item, next, marked)
+fun! vimrc#ctrlp#StatusMain(focus, byfname, regex, prev, item, next, marked) abort
   let g:lightline.ctrlp = {}
   let g:lightline.ctrlp.regex = a:regex
   let g:lightline.ctrlp.prev = a:prev
@@ -7,6 +7,6 @@ fun! vimrc#ctrlp#StatusMain(focus, byfname, regex, prev, item, next, marked)
   return lightline#statusline(0)
 endfun
 
-fun! vimrc#ctrlp#StatusProg(str)
+fun! vimrc#ctrlp#StatusProg(str) abort
   return lightline#statusline(0)
 endfun
