@@ -221,3 +221,21 @@ fun! vimrc#plugins#plugs()
 
   " }}}
 endfun
+
+fun! vimrc#plugins#editorconfig()
+  augroup EditorConfigInit
+    au BufEnter * call vimrc#plugins#editorconfigCheck()
+  augroup END
+endfun
+
+fun! vimrc#plugins#editorconfigCheck()
+  let l:core_bin = get(g:, 'EditorConfig_exec_path')
+
+  if l:core_bin == 0 || empty(l:core_bin)
+    let l:core_bin = 'editorconfig'
+  endif
+
+  if !executable(l:core_bin)
+    call confirm('EditorConfig core is not installed, formatting will NOT happen')
+  endif
+endfun

@@ -135,6 +135,8 @@ let g:ackprg = 'ag --vimgrep'
 
 let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
 
+call vimrc#plugins#editorconfig()
+
 " }}}
 
 " splitjoin {{{
