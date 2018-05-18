@@ -217,6 +217,22 @@ fun! vimrc#plugins#plugs() abort
   Plug 'Shougo/deoplete.nvim'
   Plug 'zchee/deoplete-go', { 'do': 'make' }
 
+  " formatting
+  Plug 'prettier/vim-prettier', {
+    \   'do': 'yarn install',
+    \   'for': [
+    \     'javascript',
+    \     'typescript',
+    \     'css',
+    \     'less',
+    \     'scss',
+    \     'json',
+    \     'graphql',
+    \     'markdown',
+    \     'vue',
+    \   ]
+    \ }
+
   """ ui (must come last)
   Plug 'ryanoasis/vim-devicons'
 
