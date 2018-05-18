@@ -189,12 +189,12 @@ fun! vimrc#plugins#plugs() abort
   Plug 'tpope/vim-unimpaired'
 
   " external tools
-  Plug '13k/vim-clang-format'
   Plug 'jamessan/vim-gnupg'
   Plug 'mattn/gist-vim'
   Plug 'mattn/webapi-vim' " gist dependency
   Plug 'mileszs/ack.vim'
   Plug 'mindriot101/vim-yapf'
+  Plug 'rhysd/vim-clang-format'
   Plug 'tpope/vim-fugitive'
 
   " frameworks/libs
@@ -218,7 +218,6 @@ fun! vimrc#plugins#plugs() abort
   Plug 'zchee/deoplete-go', { 'do': 'make' }
 
   " formatting
-  Plug 'google/yapf', { 'rtp': 'plugins/vim', 'for': 'python' }
   Plug 'prettier/vim-prettier', {
     \   'do': 'yarn install',
     \   'for': [
@@ -234,26 +233,11 @@ fun! vimrc#plugins#plugs() abort
     \   ]
     \ }
 
+  Plug 'ruby-formatter/rufo-vim'
+  Plug 'z0mbix/vim-shfmt', { 'for': 'sh' }
+
   """ ui (must come last)
   Plug 'ryanoasis/vim-devicons'
 
   " }}}
-endfun
-
-fun! vimrc#plugins#editorconfig() abort
-  augroup EditorConfigInit
-    au BufEnter * call vimrc#plugins#editorconfigCheck()
-  augroup END
-endfun
-
-fun! vimrc#plugins#editorconfigCheck() abort
-  let l:core_bin = get(g:, 'EditorConfig_exec_path')
-
-  if l:core_bin == 0 || empty(l:core_bin)
-    let l:core_bin = 'editorconfig'
-  endif
-
-  if !executable(l:core_bin)
-    call confirm('EditorConfig core is not installed, formatting will NOT happen')
-  endif
 endfun

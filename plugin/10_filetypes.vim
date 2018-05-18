@@ -20,4 +20,13 @@ augroup FiletypeCustomization
   " Python
   au Filetype python call vimrc#yapf#setup()
 
+  " Ruby
+  au Filetype ruby call vimrc#rufo#setup()
+
+  " C, C++, Obj-C, Protobuf
+  au FileType c,cpp,objc,protobuf call vimrc#clang_format#setup()
+
+  " Shell
+  au Filetype sh call vimrc#shfmt#setup()
+
 augroup END

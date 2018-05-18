@@ -112,30 +112,9 @@ let g:go_info_mode = 'guru'
 
 " }}}
 
-" vim-clang-format {{{
-
-let g:clang_format_autosave = 0
-let g:clang_format_fallback_style = 'Google'
-
-" }}}
-
-" vim-yapf {{{
-
-let g:yapf_style = 'facebook'
-
-" }}}
-
 " vim-ack {{{
 
 let g:ackprg = 'ag --vimgrep'
-
-" }}}
-
-" editorconfig-vim {{{
-
-let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
-
-call vimrc#plugins#editorconfig()
 
 " }}}
 
@@ -146,6 +125,14 @@ let g:splitjoin_ruby_trailing_comma = 1
 let g:splitjoin_ruby_do_block_split = 1
 let g:splitjoin_ruby_curly_braces = 0
 let g:splitjoin_ruby_heredoc_type = '<<-'
+
+" }}}
+
+" editorconfig-vim {{{
+
+let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
+
+call vimrc#editorconfig#setup()
 
 " }}}
 
@@ -194,5 +181,41 @@ endif
 " deoplete {{{
 
 let g:deoplete#enable_at_startup = 0
+
+" }}}
+
+" rufo-vim {{{
+
+let g:rufo_auto_formatting = 1
+
+" }}}
+
+" vim-shfmt {{{
+
+let g:shfmt_fmt_on_save = 1
+
+" }}}
+
+" vim-yapf {{{
+
+let g:yapf_style = 'pep8'
+let g:vimrc#yapf#auto_format = 1
+
+" }}}
+
+" vim-clang-format {{{
+
+let g:clang_format#code_style = 'google'
+let g:clang_format#auto_format = 1
+let g:clang_format#detect_style_file = 1
+
+" }}}
+
+" vim-prettier {{{
+
+" still requires files to have `@format` tag
+" TODO: configure auto formatting despite the `@format` tag
+" https://github.com/prettier/vim-prettier#configuration
+let g:prettier#autoformat = 1
 
 " }}}
