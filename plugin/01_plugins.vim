@@ -186,7 +186,7 @@ let g:deoplete#enable_at_startup = 0
 
 " rufo-vim {{{
 
-let g:rufo_auto_formatting = 1
+let g:rufo_auto_formatting = 0
 
 " }}}
 
