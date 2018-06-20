@@ -189,11 +189,11 @@ fun! vimrc#plugins#plugs() abort
   Plug 'tpope/vim-unimpaired'
 
   " external tools
+  Plug 'google/yapf', { 'rtp': 'plugins/vim', 'for': 'python' }
   Plug 'jamessan/vim-gnupg'
   Plug 'mattn/gist-vim'
   Plug 'mattn/webapi-vim' " gist dependency
   Plug 'mileszs/ack.vim'
-  Plug 'mindriot101/vim-yapf'
   Plug 'rhysd/vim-clang-format'
   Plug 'tpope/vim-fugitive'
 

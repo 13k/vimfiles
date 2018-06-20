@@ -198,7 +198,6 @@ let g:shfmt_fmt_on_save = 1
 
 " vim-yapf {{{
 
-let g:yapf_style = 'pep8'
 let g:vimrc#yapf#auto_format = 1
 
 " }}}

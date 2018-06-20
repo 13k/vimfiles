@@ -1,19 +1,18 @@
 fun! vimrc#yapf#setup() abort
-  if !exists(':Yapf')
+  if !exists(':YAPF')
     return
   endif
 
-  nmap <buffer> <Leader>P :Yapf<CR>
+  nmap <buffer> <Leader>P :YAPF<CR>
+  vmap <buffer> <Leader>P :'<,'>YAPF<CR>
 
-  if get(g:, 'vimrc#yapf#auto_format')
-    augroup YapfAutoFormat
-      au BufWritePre * call vimrc#yapf#autoFormat()
-    augroup END
-  endif
+  augroup YapfAutoFormat
+    au BufWritePre * call vimrc#yapf#autoFormat()
+  augroup END
 endfun
 
 fun! vimrc#yapf#autoFormat()
-  if &filetype ==# 'python'
-    Yapf
+  if &filetype ==# 'python' && get(g:, 'vimrc#yapf#auto_format')
+    YAPF
   endif
 endfun
