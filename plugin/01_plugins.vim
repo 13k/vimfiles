@@ -192,13 +192,13 @@ let g:rufo_auto_formatting = 0
 
 " vim-shfmt {{{
 
-let g:shfmt_fmt_on_save = 1
+let g:shfmt_fmt_on_save = 0
 
 " }}}
 
 " vim-yapf {{{
 
-let g:vimrc#yapf#auto_format = 1
+let g:vimrc#yapf#auto_format = 0
 
 " }}}
 
