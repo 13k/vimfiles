@@ -143,6 +143,7 @@ fun! vimrc#plugins#plugs() abort
   Plug 'cespare/vim-toml'
   Plug 'chrisbra/csv.vim'
   Plug 'digitaltoad/vim-jade'
+  Plug 'elixir-lang/vim-elixir'
   Plug 'elzr/vim-json'
   Plug 'fatih/vim-go'
   Plug 'fatih/vim-nginx'
