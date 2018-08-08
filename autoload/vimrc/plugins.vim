@@ -8,7 +8,7 @@ fun! vimrc#plugins#setup() abort
 
   let g:vimrc#plugins#plugged_path = vimrc#paths#join(g:vimrc#paths#vim_cache, 'plugged')
   let g:vimrc#plugins#plug_path = vimrc#paths#join(g:vimrc#paths#vim_cache, 'plug')
-  let g:vimrc#plugins#plug_update_interval = 1 * 24 * 3600
+  let g:vimrc#plugins#plug_update_interval = 5 * 24 * 3600 " 5 days
 
   let s:plug_script_path = vimrc#paths#join(g:vimrc#plugins#plug_path, 'autoload', 'plug.vim')
   let s:plug_timestamp_path = vimrc#paths#join(g:vimrc#plugins#plug_path, 'last_update.txt')
