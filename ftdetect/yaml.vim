@@ -1,1 +1,1 @@
-autocmd BufNew,BufRead *.reek setf yaml
+autocmd BufNewFile,BufRead *.reek setf yaml
