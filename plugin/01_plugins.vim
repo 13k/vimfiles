@@ -127,10 +127,6 @@ call vimrc#editorconfig#setup()
 if &diff || exists('g:splice_prefix')
   let g:ale_enabled = 0
 else
-  " background colors matching SignColumn in `adventurous` colorscheme
-  highlight ALEErrorSign ctermbg=234 ctermfg=DarkRed guibg=#1C1C1C guifg=#D3422E cterm=NONE gui=NONE
-  highlight ALEWarningSign ctermbg=234 ctermfg=Yellow guibg=#1C1C1C guifg=#F5BB12 cterm=NONE gui=NONE
-
   let g:ale_fix_on_save = 1
   let g:ale_lint_on_enter = 1
   let g:ale_lint_on_filetype_changed = 1

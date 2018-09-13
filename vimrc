@@ -12,8 +12,6 @@ if has('multi_byte')
   scriptencoding utf-8
 endif
 
-set nocompatible
-
 " Paths
 call vimrc#paths#setup()
 
@@ -33,10 +31,8 @@ set ignorecase
 set smartcase
 " incremental search
 set incsearch
-" don't be compatible with vi!
-set nocompatible
 " support this types of files in this order
-set ffs=unix,dos,mac
+set fileformats=unix,dos,mac
 " I don't care if vim can't save viminfo
 set viminfo+=!
 " Suffixes that get lower priority when doing tab completion for filenames.
@@ -51,6 +47,8 @@ set secure
 " }}}
 
 " UI ----------------------------------------------------------------------- {{{
+
+call vimrc#ui#setup()
 
 " enable syntax highlight
 syntax enable
@@ -79,7 +77,7 @@ if has('mouse')
   set mouse=a
 endif
 " no fucking bells!
-set vb t_vb=
+set visualbell t_vb=
 " status line always shown
 set laststatus=2
 " show wildcard completion menu
