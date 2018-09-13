@@ -1,5 +1,5 @@
 fun! vimrc#editorconfig#setup() abort
-  augroup EditorConfigInit
+  augroup vimrc#editorconfig#init
     au BufEnter * call vimrc#editorconfig#check()
   augroup END
 endfun

@@ -23,33 +23,33 @@ fun! vimrc#plugins#setup() abort
 endfun
 
 fun! vimrc#plugins#activate() abort
-  let l:perform_install = vimrc#plugins#autoInstall()
-  call vimrc#plugins#runtimePath()
+  let l:perform_install = vimrc#plugins#auto_install()
+  call vimrc#plugins#runtime_path()
   call plug#begin(g:vimrc#plugins#plugged_path)
   call vimrc#plugins#plugs()
   call plug#end()
 
   if l:perform_install
-    augroup VimrcPluginsInit
-      au BufEnter * call vimrc#plugins#autoInstallPlugins()
+    augroup vimrc#plugins#init
+      au BufEnter * call vimrc#plugins#auto_install_plugins()
     augroup END
   endif
 
-  augroup VimrcPluginsInit
-    au BufEnter * call vimrc#plugins#autoUpdate()
+  augroup vimrc#plugins#init
+    au BufEnter * call vimrc#plugins#auto_update()
   augroup END
 endfun
 
-fun! vimrc#plugins#runtimePath() abort
+fun! vimrc#plugins#runtime_path() abort
   let &runtimepath = join([g:vimrc#plugins#plug_path, &runtimepath], ',')
 endfun
 
-fun! vimrc#plugins#isInstalled() abort
+fun! vimrc#plugins#is_installed() abort
   return !empty(getftype(s:plug_script_path))
 endfun
 
-fun! vimrc#plugins#autoInstall() abort
-  if vimrc#plugins#isInstalled()
+fun! vimrc#plugins#auto_install() abort
+  if vimrc#plugins#is_installed()
     return 0
   endif
 
@@ -70,38 +70,38 @@ fun! vimrc#plugins#autoInstall() abort
   return 1
 endfun
 
-fun! vimrc#plugins#isExpired() abort
-  return vimrc#paths#isExpired(s:plug_timestamp_path, g:vimrc#plugins#plug_update_interval)
+fun! vimrc#plugins#is_expired() abort
+  return vimrc#paths#is_expired(s:plug_timestamp_path, g:vimrc#plugins#plug_update_interval)
 endfun
 
-fun! vimrc#plugins#updateTimestamp() abort
-  call vimrc#paths#writeTimestamp(s:plug_timestamp_path)
+fun! vimrc#plugins#update_timestamp() abort
+  call vimrc#paths#write_timestamp(s:plug_timestamp_path)
 endfun
 
-fun! vimrc#plugins#autoInstallPlugins() abort
+fun! vimrc#plugins#auto_install_plugins() abort
   call vimrc#plugins#install()
-  call vimrc#plugins#updateTimestamp()
+  call vimrc#plugins#update_timestamp()
 endfun
 
-fun! vimrc#plugins#autoUpdate() abort
-  if !vimrc#plugins#isExpired()
+fun! vimrc#plugins#auto_update() abort
+  if !vimrc#plugins#is_expired()
     return 0
   endif
 
-  let l:answer = vimrc#plugins#promptUpdate()
+  let l:answer = vimrc#plugins#prompt_update()
 
   if l:answer == s:prompt_answers['update']
     call vimrc#plugins#upgrade()
     call vimrc#plugins#update()
-    call vimrc#plugins#updateTimestamp()
+    call vimrc#plugins#update_timestamp()
   elseif l:answer == s:prompt_answers['postpone']
-    call vimrc#plugins#updateTimestamp()
+    call vimrc#plugins#update_timestamp()
   endif
 
   return 1
 endfun
 
-fun! vimrc#plugins#promptUpdate() abort
+fun! vimrc#plugins#prompt_update() abort
   let l:answer = confirm('Update plugins?', "&Yep\n&Nope\n&Postpone")
 
   if l:answer == 0

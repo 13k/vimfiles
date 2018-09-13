@@ -8,10 +8,28 @@ packadd matchit
 
 " lightline {{{
 
+let g:vimrc#lightline#readonly_icon = "\uf023" " ''
+let g:vimrc#lightline#fugitive_icon = "\uf126" " ''
+let g:vimrc#lightline#modified_icon = " \uf044" " '*'
+let g:vimrc#lightline#separator_left = "\ue0c6"
+let g:vimrc#lightline#separator_right = "\ue0c7"
+let g:vimrc#lightline#subseparator_left = "\ue0bb"
+let g:vimrc#lightline#subseparator_right = "\ue0bb"
+let g:lightline#ale#indicator_checking = "\uf110 "
+let g:lightline#ale#indicator_warnings = "\uf071"
+let g:lightline#ale#indicator_errors = "\uf05e"
+let g:lightline#ale#indicator_ok = "\uf00c"
+
 let g:lightline = {
   \   'colorscheme': 'seoul256',
-  \   'separator': { 'left': "\ue0c6", 'right': "\ue0c7" },
-  \   'subseparator': { 'left': "\ue0bb", 'right': "\ue0bb" },
+  \   'separator': {
+  \     'left': g:vimrc#lightline#separator_left,
+  \     'right': g:vimrc#lightline#separator_right,
+  \   },
+  \   'subseparator': {
+  \     'left': g:vimrc#lightline#subseparator_left,
+  \     'right': g:vimrc#lightline#subseparator_right,
+  \   },
   \   'active': {
   \     'left': [
   \       [ 'mode', 'paste' ],
@@ -22,43 +40,35 @@ let g:lightline = {
   \     'right': [
   \       [ 'lineinfo' ],
   \       [ 'filetype', 'fileformat', 'fileencoding', ],
-  \       [ 'linter_checking', 'linter_errors', 'linter_warnings' ],
+  \       [ 'linter_checking', 'linter_ok', 'linter_errors', 'linter_warnings' ],
   \     ]
   \   },
   \   'component_type': {
   \     'linter_checking': 'left',
+  \     'linter_ok': 'left',
   \     'linter_warnings': 'warning',
   \     'linter_errors': 'error',
-  \     'linter_ok': 'left',
   \   },
   \   'component_expand': {
   \     'linter_checking': 'lightline#ale#checking',
+  \     'linter_ok': 'lightline#ale#ok',
   \     'linter_warnings': 'lightline#ale#warnings',
   \     'linter_errors': 'lightline#ale#errors',
-  \     'linter_ok': 'lightline#ale#ok',
   \   },
   \   'component_function': {
-  \     'mode': 'vimrc#lightline#Mode',
-  \     'lineinfo': 'vimrc#lightline#LineInfo',
-  \     'percent': 'vimrc#lightline#Percent',
-  \     'modified': 'vimrc#lightline#Modified',
-  \     'filename': 'vimrc#lightline#Filename',
-  \     'fileformat': 'vimrc#lightline#FileFormat',
-  \     'filetype': 'vimrc#lightline#FileType',
-  \     'fileencoding': 'vimrc#lightline#FileEncoding',
-  \     'fugitive': 'vimrc#lightline#Fugitive',
-  \     'ctrlp_mark': 'vimrc#lightline#CtrlPMark',
-  \     'go': 'vimrc#lightline#Go',
+  \     'mode': 'vimrc#lightline#mode',
+  \     'lineinfo': 'vimrc#lightline#lineinfo',
+  \     'percent': 'vimrc#lightline#percent',
+  \     'modified': 'vimrc#lightline#modified',
+  \     'filename': 'vimrc#lightline#filename',
+  \     'fileformat': 'vimrc#lightline#fileformat',
+  \     'filetype': 'vimrc#lightline#filetype',
+  \     'fileencoding': 'vimrc#lightline#fileencoding',
+  \     'fugitive': 'vimrc#lightline#fugitive',
+  \     'ctrlp_mark': 'vimrc#lightline#ctrlp_mark',
+  \     'go': 'vimrc#lightline#go',
   \   },
   \ }
-
-let g:vimrc#lightline#readonly_icon = "\uf023" " ''
-let g:vimrc#lightline#fugitive_icon = "\uf126" " ''
-let g:vimrc#lightline#modified_icon = " \uf044" " '*'
-let g:lightline#ale#indicator_checking = "\uf110 "
-let g:lightline#ale#indicator_warnings = "\uf071"
-let g:lightline#ale#indicator_errors = "\uf05e"
-let g:lightline#ale#indicator_ok = "\uf00c"
 
 if exists('g:loaded_lightline')
   set noshowmode
@@ -69,8 +79,8 @@ endif
 " ctrlp {{{
 
 let g:ctrlp_status_func = {
-  \   'main': 'vimrc#ctrlp#StatusMain',
-  \   'prog': 'vimrc#ctrlp#StatusProg',
+  \   'main': 'vimrc#ctrlp#status_main',
+  \   'prog': 'vimrc#ctrlp#status_prog',
   \ }
 
 let g:ctrlp_user_command = [
@@ -176,10 +186,7 @@ else
   let g:ale_scss_stylelint_options = s:ale_stylelint_options
   let g:ale_stylus_stylelint_options = s:ale_stylelint_options
 
-  augroup CloseLoclistWindowGroup
-    autocmd!
-    autocmd QuitPre * if empty(&buftype) | lclose | endif
-  augroup END
+  call vimrc#ale#setup()
 endif
 
 " }}}
