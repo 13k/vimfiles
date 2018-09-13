@@ -132,9 +132,9 @@ fun! vimrc#plugins#plugs() abort
   """ ui
 
   Plug 'Dru89/vim-adventurous'
-  Plug 'tomasr/molokai'
   Plug 'itchyny/lightline.vim'
   Plug 'maximbaz/lightline-ale'
+  Plug 'tomasr/molokai'
 
   """ syntax/platforms
 
@@ -176,6 +176,7 @@ fun! vimrc#plugins#plugs() abort
   Plug 'honza/vim-snippets'
   Plug 'junegunn/fzf'
   Plug 'junegunn/fzf.vim'
+  Plug 'luochen1990/rainbow'
   Plug 'mattn/emmet-vim'
   Plug 'scrooloose/nerdcommenter'
   Plug 'scrooloose/nerdtree'
@@ -189,13 +190,11 @@ fun! vimrc#plugins#plugs() abort
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-unimpaired'
 
-  " external tools
-  Plug 'google/yapf', { 'rtp': 'plugins/vim', 'for': 'python' }
+  " integration with external tools
   Plug 'jamessan/vim-gnupg'
   Plug 'mattn/gist-vim'
   Plug 'mattn/webapi-vim' " gist dependency
   Plug 'mileszs/ack.vim'
-  Plug 'rhysd/vim-clang-format'
   Plug 'tpope/vim-fugitive'
 
   " frameworks/libs
@@ -209,17 +208,13 @@ fun! vimrc#plugins#plugs() abort
     \   'do': 'bash install.sh',
     \ }
 
-  " linting
+  " linting/formatting/autocomplete
   Plug 'w0rp/ale'
 
   " autocomplete
   Plug 'roxma/nvim-yarp' " deoplete dependency
   Plug 'roxma/vim-hug-neovim-rpc' " deoplete dependency
   Plug 'Shougo/deoplete.nvim'
-  Plug 'zchee/deoplete-go', { 'do': 'make' }
-
-  Plug 'ruby-formatter/rufo-vim'
-  Plug 'z0mbix/vim-shfmt', { 'for': 'sh' }
 
   """ ui (must come last)
   Plug 'ryanoasis/vim-devicons'

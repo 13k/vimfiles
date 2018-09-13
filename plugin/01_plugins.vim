@@ -103,21 +103,6 @@ let g:splice_wrap = 'nowrap'
 
 " }}}
 
-" vim-go {{{
-
-let g:go_fmt_command = 'gofmt'
-let g:go_fmt_autosave = 1
-
-let g:go_info_mode = 'guru'
-
-" }}}
-
-" vim-ack {{{
-
-let g:ackprg = 'ag --vimgrep'
-
-" }}}
-
 " splitjoin {{{
 
 let g:splitjoin_ruby_hanging_args = 0
@@ -149,7 +134,7 @@ else
   let g:ale_fix_on_save = 1
   let g:ale_lint_on_enter = 1
   let g:ale_lint_on_filetype_changed = 1
-  let g:ale_lint_on_insert_leave = 1
+  let g:ale_lint_on_insert_leave = 0
   let g:ale_lint_on_save = 1
   let g:ale_lint_on_text_changed = 'never'
   let g:ale_list_window_size = 3
@@ -159,25 +144,34 @@ else
   let g:ale_sign_warning = '--'
 
   let g:ale_fixers = {
+    \   'c': ['clang-format'],
+    \   'cpp': ['clang-format'],
     \   'css': ['prettier'],
     \   'elixir': ['mix_format'],
+    \   'go': ['gofmt'],
     \   'graphql': ['prettier'],
     \   'javascript': ['prettier'],
     \   'less': ['prettier'],
+    \   'python': ['black'],
+    \   'ruby': ['rufo'],
     \   'scss': ['prettier'],
+    \   'sh': ['shfmt'],
     \   'typescript': ['prettier'],
     \   'vue': ['prettier'],
     \ }
 
   let g:ale_linters = {
+    \   'elixir': ['credo', 'mix'],
+    \   'go': ['golangserver', 'golangci-lint'],
+    \   'proto': ['protoc-gen-lint'],
+    \   'python': ['pylint'],
     \   'ruby': ['brakeman', 'rails_best_practices', 'rubocop', 'ruby', 'rufo'],
+    \   'vim': ['vint'],
     \ }
 
-  let g:ale_linters_ignore = {
-    \   'elixir': ['dialyxir'],
-    \ }
-
-  let g:ale_ruby_rubocop_executable = './bin/rubocop'
+  let g:ale_ruby_rails_best_practices_executable = 'bundle'
+  let g:ale_ruby_rubocop_executable = 'bundle'
+  let g:ale_ruby_rufo_executable = 'bundle'
 
   let s:ale_stylelint_options = '--cache'
   let g:ale_css_stylelint_options = s:ale_stylelint_options
@@ -197,6 +191,20 @@ endif
 " deoplete {{{
 
 let g:deoplete#enable_at_startup = 0
+
+" }}}
+
+" vim-ack {{{
+
+let g:ackprg = 'rg --vimgrep'
+
+" }}}
+
+" vim-go {{{
+
+let g:go_fmt_command = 'gofmt'
+let g:go_fmt_autosave = 0
+let g:go_info_mode = 'guru'
 
 " }}}
 
