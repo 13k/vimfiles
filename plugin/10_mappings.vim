@@ -16,14 +16,15 @@ nnoremap Y y$
 " Sane regexes
 nnoremap / /\v
 vnoremap / /\v
+cnoremap s/ s/\v
 cnoremap %s/ %s/\v
 
 " Clear highlighted searches
 nnoremap <silent><C-N> :nohlsearch<CR>
 
 " Navigate forward and back inside tabs with Shift+Left and Shift+Right
-map <silent><S-Right> :tabnext<CR>
-map <silent><S-Left> :tabprevious<CR>
+noremap <silent><S-Right> :tabnext<CR>
+noremap <silent><S-Left> :tabprevious<CR>
 
 " Exit modes using <Shift-Enter>
 " SHIFT-CR => <Esc>, all modes
@@ -36,23 +37,17 @@ nnoremap <C-I> <C-A>
 
 " Begin/End of line
 " CTRL-A => <Home>, all modes
+" CTRL-E => <End>, all modes
 noremap <C-A> ^
 noremap! <C-A> ^
 noremap <C-E> $
 noremap! <C-E> $
 
-" Toggle Gundo
-nnoremap <silent><leader>u :GundoToggle<CR>
-
-" Resize window vertically (max)
-nnoremap <silent>_ <C-W>_
-" Resize window horizontally (max)
-nnoremap <silent>\| <C-W>\|
-" Maximize window
-nnoremap <silent>+ :resize<CR> | :vertical resize<CR>
-
 " Navigate through window splits
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
+nnoremap <C-H> <C-W>h
+nnoremap <C-J> <C-W>j
+nnoremap <C-K> <C-W>k
+nnoremap <C-L> <C-W>l
+
+" Maximize window
+nnoremap <silent>+ :resize<CR> \| :vertical resize<CR>
