@@ -195,8 +195,8 @@ fun! vimrc#plugins#plugs() abort
   Plug 'jamessan/vim-gnupg'
   Plug 'mattn/gist-vim'
   Plug 'mattn/webapi-vim' " gist dependency
-  Plug 'mileszs/ack.vim'
   Plug 'tpope/vim-fugitive'
+  Plug 'yegappan/grep'
 
   " frameworks/libs
   Plug 'skwp/vim-rspec'

@@ -194,42 +194,10 @@ let g:deoplete#enable_at_startup = 0
 
 " }}}
 
-" vim-ack {{{
-
-let g:ackprg = 'rg --vimgrep'
-
-" }}}
-
 " vim-go {{{
 
 let g:go_fmt_command = 'gofmt'
 let g:go_fmt_autosave = 0
 let g:go_info_mode = 'guru'
-
-" }}}
-
-" rufo-vim {{{
-
-let g:rufo_auto_formatting = 0
-
-" }}}
-
-" vim-shfmt {{{
-
-let g:shfmt_fmt_on_save = 0
-
-" }}}
-
-" vim-yapf {{{
-
-let g:vimrc#yapf#auto_format = 0
-
-" }}}
-
-" vim-clang-format {{{
-
-let g:clang_format#code_style = 'google'
-let g:clang_format#auto_format = 0
-let g:clang_format#detect_style_file = 1
 
 " }}}
