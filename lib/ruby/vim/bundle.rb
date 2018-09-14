@@ -1,5 +1,0 @@
-require 'vim/bundle/logging'
-require 'vim/bundle/bundle'
-require 'vim/bundle/bundle_collection'
-require 'vim/bundle/errors'
-require 'vim/bundle/task'

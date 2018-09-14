@@ -7,7 +7,7 @@ if Rake::VERSION < '11.0'
   abort('Rake 11.x or higher is required. Try updating it with `gem install rake`.')
 end
 
-require_relative 'lib/ruby/vim/logging'
+require_relative 'lib/ruby/logging'
 
 extend Logging
 
@@ -17,9 +17,10 @@ PREFIX = Pathname.new(ENV.fetch('PREFIX', Dir.home))
 CACHE_PREFIX = Pathname.new(ENV.fetch('CACHE_PREFIX', XDG_CACHE_HOME/'vim'))
 
 CACHE_NAMES = %w[
-  bundles
-  swap
   backup
+  plug
+  plugged
+  swap
   undo
 ].freeze
 
