@@ -170,7 +170,7 @@ fun! vimrc#plugins#plugs() abort
   " editor
   Plug 'airblade/vim-gitgutter'
   Plug 'AndrewRadev/linediff.vim'
-  Plug 'andrewradev/splitjoin.vim'
+  Plug 'AndrewRadev/splitjoin.vim'
   Plug 'ctrlpvim/ctrlp.vim'
   Plug 'editorconfig/editorconfig-vim'
   Plug 'honza/vim-snippets'
@@ -182,8 +182,8 @@ fun! vimrc#plugins#plugs() abort
   Plug 'SirVer/ultisnips'
   Plug 'sjl/gundo.vim'
   Plug 'sjl/splice.vim'
+  Plug 'tomtom/tcomment_vim'
   Plug 'tpope/vim-abolish'
-  Plug 'tpope/vim-commentary'
   Plug 'tpope/vim-dispatch'
   Plug 'tpope/vim-endwise'
   Plug 'tpope/vim-ragtag'
@@ -203,19 +203,8 @@ fun! vimrc#plugins#plugs() abort
   Plug 'tpope/vim-bundler'
   Plug 'tpope/vim-rails'
 
-  " language server protocol
-  Plug 'autozimu/LanguageClient-neovim', {
-    \   'branch': 'next',
-    \   'do': 'bash install.sh',
-    \ }
-
   " linting/formatting/autocomplete
   Plug 'w0rp/ale'
-
-  " autocomplete
-  Plug 'roxma/nvim-yarp' " deoplete dependency
-  Plug 'roxma/vim-hug-neovim-rpc' " deoplete dependency
-  Plug 'Shougo/deoplete.nvim'
 
   """ ui (must come last)
   Plug 'ryanoasis/vim-devicons'
