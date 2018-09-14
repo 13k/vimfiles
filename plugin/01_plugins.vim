@@ -137,6 +137,7 @@ call vimrc#editorconfig#setup()
 if &diff || exists('g:splice_prefix')
   let g:ale_enabled = 0
 else
+  let g:ale_completion_enabled = 1
   let g:ale_fix_on_save = 1
   let g:ale_lint_on_enter = 1
   let g:ale_lint_on_filetype_changed = 1
