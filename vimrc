@@ -121,19 +121,21 @@ set endofline
 set nocindent
 " don't expand tabs to spaces
 set noexpandtab
-" no smart tab
+" smart tabs
 set smarttab
 " timeout on mappings too
 set ttimeout
 set ttimeoutlen=50
 " don't wrap lines
 set nowrap
-" show matching brackets.
+" don't show matching brackets
 set noshowmatch
 " allow backspacing over ai, line breaks, start of insert
 set backspace=indent,eol,start
-" do not scan included files on completion
+" don't scan included files on completion
 set complete-=i
+" completion options
+set completeopt=menu,menuone,preview,noselect,noinsert
 " allow line wrapping when moving cursor
 set whichwrap=b,s,<,>,[,]
 " format options
@@ -144,8 +146,10 @@ set tabstop=2
 set softtabstop=2
 " shift width
 set shiftwidth=2
-" no line wrap
+" width of text
 set textwidth=100
+" mark the 100th column
+let &colorcolumn = &textwidth
 " remove '//' from comment auto-insert at a newline
 set comments=s1:/*,mb:*,ex:*/,b:#,:%,:XCOMM,n:>,fb:-
 " folding method
@@ -153,8 +157,6 @@ set foldmethod=marker
 " ignore these files
 set wildignore=*~,*.swp,*.o,*.so,*.dll,*.exe,*.class,*.obj,*.zip,*.tar*,*.bz2,*.7z,*.jpg,*.jpeg,*.png,*.gif,*.ico,*/.git,*/.svn,*/.hg,*.egg-info
 set wildignorecase
-" mark the 100th column
-set colorcolumn=100
 " swap files directory
 let &directory = g:vimrc#paths#vim_swap
 " backup files directory
