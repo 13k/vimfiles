@@ -16,7 +16,6 @@ nnoremap Y y$
 " Sane regexes
 nnoremap / /\v
 vnoremap / /\v
-cnoremap s/ s/\v
 cnoremap %s/ %s/\v
 
 " Clear highlighted searches
