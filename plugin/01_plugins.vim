@@ -173,6 +173,7 @@ else
     \   'proto': ['protoc-gen-lint'],
     \   'python': ['pylint'],
     \   'ruby': ['brakeman', 'rails_best_practices', 'rubocop', 'ruby', 'rufo'],
+    \   'sh': ['shellcheck', 'language-server'],
     \   'vim': ['vint'],
     \ }
 
