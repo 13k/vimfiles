@@ -4,8 +4,6 @@ fun! vimrc#plugins#setup() abort
   endif
   let g:vimrc#plugins#setup_once = 1
 
-  call vimrc#paths#setup()
-
   let g:vimrc#plugins#plugged_path = vimrc#paths#join(g:vimrc#paths#vim_cache, 'plugged')
   let g:vimrc#plugins#plug_path = vimrc#paths#join(g:vimrc#paths#vim_cache, 'plug')
   let g:vimrc#plugins#plug_update_interval = 5 * 24 * 3600 " 5 days
@@ -132,6 +130,7 @@ fun! vimrc#plugins#plugs() abort
   """ ui
 
   Plug 'Dru89/vim-adventurous'
+  Plug 'gruvbox-community/gruvbox'
   Plug 'itchyny/lightline.vim'
   Plug 'maximbaz/lightline-ale'
   Plug 'tomasr/molokai'

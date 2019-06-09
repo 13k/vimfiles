@@ -2,7 +2,9 @@ scriptencoding utf-8
 
 " matchit {{{
 
-packadd matchit
+if !has('nvim')
+  packadd matchit
+endif
 
 " }}}
 
