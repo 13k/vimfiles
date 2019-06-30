@@ -26,6 +26,20 @@ fun! vimrc#ui#setup() abort
   endif
   let g:vimrc#ui#setup_once = 1
 
+  call vimrc#ui#setup_cursor()
+  call vimrc#ui#setup_highlight()
+endfun
+
+fun! vimrc#ui#setup_cursor() abort
+  if &term =~# '^xterm'
+    let &t_ti .= "\e[1 q"
+    let &t_SI .= "\e[5 q"
+    let &t_EI .= "\e[1 q"
+    let &t_te .= "\e[0 q"
+  endif
+endfun
+
+fun! vimrc#ui#setup_highlight() abort
   augroup vimrc#ui#highlight
     autocmd ColorScheme * call vimrc#ui#highlight()
   augroup END
