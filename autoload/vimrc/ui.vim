@@ -130,9 +130,5 @@ fun! vimrc#ui#highlight_tui() abort
 endfun
 
 fun! vimrc#ui#highlight_gui() abort
-  " Search
-  highlight Search guibg=#4FC3F7 guifg=#212121
-  " Cursor
-  highlight Cursor guibg=#c0c0c0 guifg=#000000
-  highlight iCursor guibg=#ffffff guifg=#000000
+  return
 endfun
