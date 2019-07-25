@@ -129,40 +129,17 @@ fun! vimrc#plugins#plugs() abort
 
   """ ui
 
-  Plug 'Dru89/vim-adventurous'
-  Plug 'gruvbox-community/gruvbox'
+  " statusbar
   Plug 'itchyny/lightline.vim'
   Plug 'maximbaz/lightline-ale'
-  Plug 'tomasr/molokai'
+
+  " colorschemes
+  Plug 'gruvbox-community/gruvbox'
 
   """ syntax/platforms
 
-  Plug 'briancollins/vim-jst'
-  Plug 'cakebaker/scss-syntax.vim'
-  Plug 'cespare/vim-toml'
-  Plug 'chrisbra/csv.vim'
-  Plug 'digitaltoad/vim-jade'
-  Plug 'elixir-lang/vim-elixir'
-  Plug 'elzr/vim-json'
-  Plug 'fatih/vim-go'
-  Plug 'fatih/vim-nginx'
-  Plug 'groenewege/vim-less'
+  Plug 'sheerun/vim-polyglot'
   Plug 'hail2u/vim-css3-syntax'
-  Plug 'jeroenbourgois/vim-actionscript'
-  Plug 'juvenn/mustache.vim'
-  Plug 'kchmck/vim-coffee-script'
-  Plug 'leafgarland/typescript-vim'
-  Plug 'lifepillar/pgsql.vim'
-  Plug 'mitsuhiko/vim-jinja'
-  Plug 'nono/vim-handlebars'
-  Plug 'pangloss/vim-javascript'
-  Plug 'rosstimson/scala-vim-support'
-  Plug 'slim-template/vim-slim'
-  Plug 'tpope/vim-git'
-  Plug 'tpope/vim-markdown'
-  Plug 'vim-ruby/vim-ruby'
-  Plug 'vim-scripts/applescript.vim'
-  Plug 'wavded/vim-stylus'
 
   """ plugins
 
