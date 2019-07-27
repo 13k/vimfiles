@@ -27,8 +27,6 @@ call vimrc#plugins#setup()
 set ignorecase
 " Turns off ignorecase when pattern contains upper case chars
 set smartcase
-" incremental search
-set incsearch
 " support this types of files in this order
 set fileformats=unix,dos,mac
 " I don't care if vim can't save viminfo
@@ -48,8 +46,7 @@ set secure
 
 call vimrc#ui#setup()
 
-" enable syntax highlight
-syntax enable
+" syntax highlight
 syntax sync minlines=0
 " colors! colors!
 set t_Co=256
@@ -65,8 +62,6 @@ colorscheme gruvbox
 set number
 " highlight searches
 set hlsearch
-" always show cursor position
-set ruler
 " show current mode
 set noshowmode
 " show (partial) command in status line.
@@ -77,28 +72,10 @@ if has('mouse')
 endif
 " no fucking bells!
 set visualbell t_vb=
-" status line always shown
-set laststatus=2
-" show wildcard completion menu
-set wildmenu
 " complete till longest match then open wildmenu
 set wildmode=longest:full
-" show at least 1 line of context when scrolling
-set scrolloff=1
-" show 5 columns of context when horizontal scrolling
-set sidescrolloff=5
 " show unprintable chars as hex
 set display+=uhex
-" show last line
-set display+=lastline
-" prettier listchars
-if &listchars ==# 'eol:$'
-  set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
-  if &termencoding ==# 'utf-8' || &encoding ==# 'utf-8'
-    let &listchars = "tab:\u21e5 ,trail:\u2423,extends:\u21c9,precedes:\u21c7,nbsp:\u26ad"
-    let &fillchars = "vert:\u259a,fold:\u00b7"
-  endif
-endif
 " split to the right
 set splitright
 " split to the bottom
@@ -108,31 +85,18 @@ set splitbelow
 
 " Editing ------------------------------------------------------------------ {{{
 
-" force ftdetect
-filetype off
 " file formats precedence
 set fileformats=unix,mac,dos
-" auto indentation on
-set autoindent
 " end of line
 set endofline
 " C auto indentation off
 set nocindent
 " don't expand tabs to spaces
 set noexpandtab
-" smart tabs
-set smarttab
-" timeout on mappings too
-set ttimeout
-set ttimeoutlen=50
 " don't wrap lines
 set nowrap
 " don't show matching brackets
 set noshowmatch
-" allow backspacing over ai, line breaks, start of insert
-set backspace=indent,eol,start
-" don't scan included files on completion
-set complete-=i
 " completion options
 set completeopt=menu,menuone,preview,noselect,noinsert
 " allow line wrapping when moving cursor

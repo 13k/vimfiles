@@ -19,11 +19,11 @@ vnoremap / /\v
 cnoremap %s/ %s/\v
 
 " Clear highlighted searches
-nnoremap <silent><C-N> :nohlsearch<CR>
+nnoremap <silent><C-N> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>
 
 " Navigate forward and back inside tabs with Shift+Left and Shift+Right
-noremap <silent><S-Right> :tabnext<CR>
-noremap <silent><S-Left> :tabprevious<CR>
+nnoremap <silent><S-Right> :tabnext<CR>
+nnoremap <silent><S-Left> :tabprevious<CR>
 
 " Exit modes using <Shift-Enter>
 " SHIFT-CR => <Esc>, all modes
