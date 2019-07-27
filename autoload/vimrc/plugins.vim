@@ -164,6 +164,8 @@ fun! vimrc#plugins#plugs() abort
   Plug 'tpope/vim-endwise'
   Plug 'tpope/vim-ragtag'
   Plug 'tpope/vim-repeat'
+  Plug 'tpope/vim-rsi'
+  Plug 'tpope/vim-sensible'
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-unimpaired'
 
