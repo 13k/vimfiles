@@ -182,7 +182,7 @@ fun! vimrc#plugins#plugs() abort
   Plug 'tpope/vim-rails'
 
   " linting/formatting/autocomplete
-  Plug 'w0rp/ale'
+  Plug 'dense-analysis/ale'
 
   """ ui (must come last)
   Plug 'ryanoasis/vim-devicons'
