@@ -149,7 +149,6 @@ fun! vimrc#plugins#plugs() abort
   Plug 'AndrewRadev/splitjoin.vim'
   Plug 'ctrlpvim/ctrlp.vim'
   Plug 'editorconfig/editorconfig-vim'
-  Plug 'honza/vim-snippets'
   Plug 'junegunn/fzf'
   Plug 'junegunn/fzf.vim'
   Plug 'luochen1990/rainbow'
