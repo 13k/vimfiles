@@ -105,6 +105,7 @@ else
   let g:gitgutter_realtime = 1
   let g:gitgutter_eager = 1
   let g:gitgutter_map_keys = 0
+  let g:gitgutter_sign_priority = 10
 end
 
 " }}}
