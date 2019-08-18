@@ -140,6 +140,7 @@ fun! vimrc#plugins#plugs() abort
 
   Plug 'sheerun/vim-polyglot'
   Plug 'hail2u/vim-css3-syntax'
+  Plug '13k/vim-keyvalues'
 
   """ plugins
 
