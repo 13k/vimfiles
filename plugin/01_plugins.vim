@@ -147,6 +147,7 @@ let g:go_fmt_autosave = 0
 if &diff || exists('g:splice_prefix')
   let g:ale_enabled = 0
 else
+  let g:ale_enabled = 1
   let g:ale_completion_enabled = 1
   let g:ale_fix_on_save = 1
   let g:ale_lint_on_enter = 1
@@ -161,35 +162,61 @@ else
   let g:ale_sign_warning = '--'
 
   let g:ale_fixers = {
-    \   'c': ['clang-format'],
-    \   'cpp': ['clang-format'],
-    \   'css': ['prettier'],
-    \   'elixir': ['mix_format'],
-    \   'go': ['gofmt'],
-    \   'graphql': ['prettier'],
+    \   'c':          ['clangformat'],
+    \   'cpp':        ['clangformat'],
+    \   'cs':         ['clangformat'],
+    \   'css':        ['prettier'],
+    \   'elixir':     ['mix_format'],
+    \   'go':         ['gofmt'],
+    \   'graphql':    ['prettier'],
+    \   'haskell':    ['brittany'],
+    \   'html':       ['prettier'],
     \   'javascript': ['prettier'],
-    \   'less': ['prettier'],
-    \   'python': ['black'],
-    \   'ruby': ['rufo'],
-    \   'scss': ['prettier'],
-    \   'sh': ['shfmt'],
+    \   'json':       ['prettier'],
+    \   'jsx':        ['prettier'],
+    \   'less':       ['prettier'],
+    \   'lua':        ['luafmt'],
+    \   'markdown':   ['prettier'],
+    \   'perl':       ['perltidy'],
+    \   'proto':      ['clangformat'],
+    \   'python':     ['black'],
+    \   'ruby':       ['rufo'],
+    \   'rust':       ['rustfmt'],
+    \   'scss':       ['prettier'],
+    \   'sh':         ['shfmt'],
     \   'typescript': ['prettier'],
-    \   'vue': ['prettier'],
+    \   'vue':        ['prettier'],
+    \   'xml':        ['tidy'],
+    \   'yaml':       ['prettier'],
     \ }
 
   let g:ale_linters = {
-    \   'elixir': ['credo', 'mix'],
-    \   'go': ['golangserver', 'golangci-lint'],
-    \   'proto': ['protoc-gen-lint'],
-    \   'python': ['pylint'],
-    \   'ruby': ['brakeman', 'rails_best_practices', 'rubocop', 'ruby', 'rufo'],
-    \   'sh': ['shellcheck', 'language-server'],
-    \   'vim': ['vint'],
+    \   'c':          ['clangd', 'clangtidy'],
+    \   'cpp':        ['clangd', 'clangtidy'],
+    \   'css':        ['stylelint'],
+    \   'elixir':     ['elixir-ls', 'credo', 'mix'],
+    \   'go':         ['gopls', 'golangci-lint'],
+    \   'graphql':    ['gqlint'],
+    \   'haskell':    ['hie', 'hlint'],
+    \   'html':       ['tidy', 'stylelint'],
+    \   'javascript': ['tsserver', 'flow_ls', 'eslint'],
+    \   'less':       ['stylelint'],
+    \   'lua':        ['luacheck'],
+    \   'markdown':   ['vale'],
+    \   'perl':       ['perlcritic'],
+    \   'proto':      ['protoc-gen-lint'],
+    \   'python':     ['pyls', 'pylint'],
+    \   'ruby':       ['solargraph', 'brakeman', 'rubocop'],
+    \   'rust':       ['rls'],
+    \   'scss':       ['stylelint'],
+    \   'sh':         ['language_server', 'shellcheck'],
+    \   'typescript': ['tsserver', 'eslint'],
+    \   'vim':        ['vint'],
+    \   'xml':        ['xmllint'],
+    \   'yaml':       ['prettier'],
     \ }
 
-  let g:ale_ruby_rails_best_practices_executable = 'bundle'
   let g:ale_ruby_rubocop_executable = 'bundle'
-  let g:ale_ruby_rufo_executable = 'bundle'
 
   let s:ale_stylelint_options = '--cache'
   let g:ale_css_stylelint_options = s:ale_stylelint_options
