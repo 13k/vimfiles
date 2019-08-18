@@ -134,6 +134,13 @@ call vimrc#editorconfig#setup()
 
 " }}}
 
+" vim-go {{{
+
+let g:go_fmt_command = 'gofmt'
+let g:go_fmt_autosave = 0
+
+" }}}
+
 " ale {{{
 
 " disable when in diff or splice modes
@@ -199,13 +206,5 @@ endif
 " deoplete {{{
 
 let g:deoplete#enable_at_startup = 0
-
-" }}}
-
-" vim-go {{{
-
-let g:go_fmt_command = 'gofmt'
-let g:go_fmt_autosave = 0
-let g:go_info_mode = 'guru'
 
 " }}}
