@@ -2,6 +2,7 @@ fun! vimrc#plugins#setup() abort
   if exists('g:vimrc#plugins#setup_once')
     return
   endif
+
   let g:vimrc#plugins#setup_once = 1
 
   let g:vimrc#plugins#plugged_path = vimrc#paths#join(g:vimrc#paths#vim_cache, 'plugged')
@@ -22,6 +23,12 @@ endfun
 
 fun! vimrc#plugins#activate() abort
   let l:perform_install = vimrc#plugins#auto_install()
+
+  if !vimrc#plugins#is_installed()
+    echom 'plug.vim needs to be manually installed'
+    return
+  end
+
   call vimrc#plugins#runtime_path()
   call plug#begin(g:vimrc#plugins#plugged_path)
   call vimrc#plugins#plugs()
@@ -47,23 +54,17 @@ fun! vimrc#plugins#is_installed() abort
 endfun
 
 fun! vimrc#plugins#auto_install() abort
-  if vimrc#plugins#is_installed()
+  if exists('g:vscode') || vimrc#plugins#is_installed()
     return 0
   endif
 
-  echo 'Installing plug.vim'
+  echom 'Installing plug.vim'
 
-  exe join(
-    \   [
-    \     'silent',
-    \     '!curl',
-    \     '--create-dirs',
-    \     '-sfLo',
-    \     shellescape(s:plug_script_path),
-    \     'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim',
-    \   ],
-    \   ' '
-    \ )
+  silent !curl
+    \ '--create-dirs'
+    \ '-sfLo'
+    \ shellescape(s:plug_script_path)
+    \ 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 
   return 1
 endfun
@@ -82,17 +83,17 @@ fun! vimrc#plugins#auto_install_plugins() abort
 endfun
 
 fun! vimrc#plugins#auto_update() abort
-  if !vimrc#plugins#is_expired()
+  if exists('g:vscode') || !vimrc#plugins#is_expired()
     return 0
   endif
 
   let l:answer = vimrc#plugins#prompt_update()
 
-  if l:answer == s:prompt_answers['update']
+  if l:answer == s:prompt_answers.update
     call vimrc#plugins#upgrade()
     call vimrc#plugins#update()
     call vimrc#plugins#update_timestamp()
-  elseif l:answer == s:prompt_answers['postpone']
+  elseif l:answer == s:prompt_answers.postpone
     call vimrc#plugins#update_timestamp()
   endif
 
@@ -103,7 +104,7 @@ fun! vimrc#plugins#prompt_update() abort
   let l:answer = confirm('Update plugins?', "&Yep\n&Nope\n&Postpone")
 
   if l:answer == 0
-    let l:answer = s:prompt_answers['skip']
+    let l:answer = s:prompt_answers.skip
   endif
 
   return l:answer
