@@ -7,7 +7,7 @@ let s:linux_fonts=[
   \]
 
 let s:mac_fonts = [
-  \ 'Cousine Nerd Font Mono:h11',
+  \ 'Cousine Nerd Font Mono:h13',
   \ 'SauceCodePro Nerd Font:h14',
   \ 'Operator Mono:h14',
   \ 'Monaco:h13',
