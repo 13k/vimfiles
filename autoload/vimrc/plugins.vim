@@ -1,4 +1,4 @@
-fun! vimrc#plugins#setup() abort
+function! vimrc#plugins#setup() abort
   if exists('g:vimrc#plugins#setup_once')
     return
   endif
@@ -9,6 +9,7 @@ fun! vimrc#plugins#setup() abort
   let g:vimrc#plugins#plug_path = vimrc#paths#join(g:vimrc#paths#vim_cache, 'plug')
   let g:vimrc#plugins#plug_update_interval = 5 * 24 * 3600 " 5 days
 
+  let s:plug_script_url = 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
   let s:plug_script_path = vimrc#paths#join(g:vimrc#plugins#plug_path, 'autoload', 'plug.vim')
   let s:plug_timestamp_path = vimrc#paths#join(g:vimrc#plugins#plug_path, 'last_update.txt')
 
@@ -19,9 +20,9 @@ fun! vimrc#plugins#setup() abort
     \ }
 
   call vimrc#plugins#activate()
-endfun
+endfunction
 
-fun! vimrc#plugins#activate() abort
+function! vimrc#plugins#activate() abort
   let l:perform_install = vimrc#plugins#auto_install()
 
   if !vimrc#plugins#is_installed()
@@ -43,46 +44,50 @@ fun! vimrc#plugins#activate() abort
   augroup vimrc#plugins#init
     au BufEnter * call vimrc#plugins#auto_update()
   augroup END
-endfun
+endfunction
 
-fun! vimrc#plugins#runtime_path() abort
+function! vimrc#plugins#runtime_path() abort
   let &runtimepath = join([g:vimrc#plugins#plug_path, &runtimepath], ',')
-endfun
+endfunction
 
-fun! vimrc#plugins#is_installed() abort
+function! vimrc#plugins#is_installed() abort
   return !empty(getftype(s:plug_script_path))
-endfun
+endfunction
 
-fun! vimrc#plugins#auto_install() abort
+function! vimrc#plugins#auto_install() abort
   if exists('g:vscode') || vimrc#plugins#is_installed()
     return 0
   endif
 
   echom 'Installing plug.vim'
 
-  silent !curl
-    \ '--create-dirs'
-    \ '-sfLo'
-    \ shellescape(s:plug_script_path)
-    \ 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  let l:cmd = [
+    \ 'curl',
+    \ '--create-dirs',
+    \ '-sfLo',
+    \ shellescape(s:plug_script_path),
+    \ shellescape(s:plug_script_url),
+    \ ]
+
+  call system(join(l:cmd, ' '))
 
   return 1
-endfun
+endfunction
 
-fun! vimrc#plugins#is_expired() abort
+function! vimrc#plugins#is_expired() abort
   return vimrc#paths#is_expired(s:plug_timestamp_path, g:vimrc#plugins#plug_update_interval)
-endfun
+endfunction
 
-fun! vimrc#plugins#update_timestamp() abort
+function! vimrc#plugins#update_timestamp() abort
   call vimrc#paths#write_timestamp(s:plug_timestamp_path)
-endfun
+endfunction
 
-fun! vimrc#plugins#auto_install_plugins() abort
+function! vimrc#plugins#auto_install_plugins() abort
   call vimrc#plugins#install()
   call vimrc#plugins#update_timestamp()
-endfun
+endfunction
 
-fun! vimrc#plugins#auto_update() abort
+function! vimrc#plugins#auto_update() abort
   if exists('g:vscode') || !vimrc#plugins#is_expired()
     return 0
   endif
@@ -98,9 +103,9 @@ fun! vimrc#plugins#auto_update() abort
   endif
 
   return 1
-endfun
+endfunction
 
-fun! vimrc#plugins#prompt_update() abort
+function! vimrc#plugins#prompt_update() abort
   let l:answer = confirm('Update plugins?', "&Yep\n&Nope\n&Postpone")
 
   if l:answer == 0
@@ -108,24 +113,24 @@ fun! vimrc#plugins#prompt_update() abort
   endif
 
   return l:answer
-endfun
+endfunction
 
-fun! vimrc#plugins#install() abort
+function! vimrc#plugins#install() abort
   PlugInstall --sync
   source $MYVIMRC
   quit
-endfun
+endfunction
 
-fun! vimrc#plugins#upgrade() abort
+function! vimrc#plugins#upgrade() abort
   PlugUpgrade
-endfun
+endfunction
 
-fun! vimrc#plugins#update() abort
+function! vimrc#plugins#update() abort
   PlugUpdate --sync
   quit
-endfun
+endfunction
 
-fun! vimrc#plugins#plugs() abort
+function! vimrc#plugins#plugs() abort
   " Plugs ------------------------------------------------------------------ {{{
 
   """ ui
@@ -189,4 +194,4 @@ fun! vimrc#plugins#plugs() abort
   Plug 'ryanoasis/vim-devicons'
 
   " }}}
-endfun
+endfunction
