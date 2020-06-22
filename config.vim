@@ -39,6 +39,8 @@ set tags+=.git/tags
 set exrc
 " Run tree-specific vimrcs securelly
 set secure
+" Enable file-specific modeline
+set modeline
 
 " }}}
 
