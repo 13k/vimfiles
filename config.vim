@@ -9,6 +9,9 @@ endif
 
 if has('multi_byte')
   set encoding=utf-8
+  " fix for WSL/Windows terminals
+  " https://superuser.com/a/1525060
+  set ambw=double
 
   scriptencoding 'utf-8'
 endif
