@@ -1,9 +1,12 @@
 function! vimrc#plugins#setup() abort
   if exists('g:vimrc#plugins#setup_once')
     return
-  endif
-
+  end
   let g:vimrc#plugins#setup_once = 1
+
+  if vimrc#plugins#should_skip()
+    return
+  end
 
   let g:vimrc#plugins#plugged_path = vimrc#paths#join(g:vimrc#paths#vim_cache, 'plugged')
   let g:vimrc#plugins#plug_path = vimrc#paths#join(g:vimrc#paths#vim_cache, 'plug')
@@ -22,11 +25,15 @@ function! vimrc#plugins#setup() abort
   call vimrc#plugins#activate()
 endfunction
 
-function! vimrc#plugins#activate() abort
-  let l:perform_install = vimrc#plugins#auto_install()
+function! vimrc#plugins#should_skip() abort
+  return exists('g:vscode')
+endfunction
 
-  if !vimrc#plugins#is_installed()
-    echom 'plug.vim needs to be manually installed'
+function! vimrc#plugins#activate() abort
+  call vimrc#plugins#install_plug()
+
+  if !vimrc#plugins#installed()
+    echom 'plug.vim could not be installed'
     return
   end
 
@@ -35,14 +42,14 @@ function! vimrc#plugins#activate() abort
   call vimrc#plugins#plugs()
   call plug#end()
 
-  if l:perform_install
+  if !vimrc#plugins#plugins_installed()
     augroup vimrc#plugins#init
-      au BufEnter * call vimrc#plugins#auto_install_plugins()
+      au VimEnter * call vimrc#plugins#install_plugins()
     augroup END
-  endif
+  end
 
   augroup vimrc#plugins#init
-    au BufEnter * call vimrc#plugins#auto_update()
+    au VimEnter * call vimrc#plugins#update_plug()
   augroup END
 endfunction
 
@@ -50,14 +57,18 @@ function! vimrc#plugins#runtime_path() abort
   let &runtimepath = join([g:vimrc#plugins#plug_path, &runtimepath], ',')
 endfunction
 
-function! vimrc#plugins#is_installed() abort
-  return !empty(getftype(s:plug_script_path))
+function! vimrc#plugins#installed() abort
+  return vimrc#paths#exists(s:plug_script_path)
 endfunction
 
-function! vimrc#plugins#auto_install() abort
-  if exists('g:vscode') || vimrc#plugins#is_installed()
-    return 0
-  endif
+function! vimrc#plugins#plugins_installed() abort
+  return vimrc#paths#exists(g:vimrc#plugins#plugged_path)
+endfunction
+
+function! vimrc#plugins#install_plug() abort
+  if vimrc#plugins#installed()
+    return
+  end
 
   echom 'Installing plug.vim'
 
@@ -70,8 +81,6 @@ function! vimrc#plugins#auto_install() abort
     \ ]
 
   call system(join(l:cmd, ' '))
-
-  return 1
 endfunction
 
 function! vimrc#plugins#is_expired() abort
@@ -82,15 +91,15 @@ function! vimrc#plugins#update_timestamp() abort
   call vimrc#paths#write_timestamp(s:plug_timestamp_path)
 endfunction
 
-function! vimrc#plugins#auto_install_plugins() abort
+function! vimrc#plugins#install_plugins() abort
   call vimrc#plugins#install()
   call vimrc#plugins#update_timestamp()
 endfunction
 
-function! vimrc#plugins#auto_update() abort
-  if exists('g:vscode') || !vimrc#plugins#is_expired()
+function! vimrc#plugins#update_plug() abort
+  if !vimrc#plugins#is_expired()
     return 0
-  endif
+  end
 
   let l:answer = vimrc#plugins#prompt_update()
 
@@ -100,7 +109,7 @@ function! vimrc#plugins#auto_update() abort
     call vimrc#plugins#update_timestamp()
   elseif l:answer == s:prompt_answers.postpone
     call vimrc#plugins#update_timestamp()
-  endif
+  end
 
   return 1
 endfunction
@@ -110,7 +119,7 @@ function! vimrc#plugins#prompt_update() abort
 
   if l:answer == 0
     let l:answer = s:prompt_answers.skip
-  endif
+  end
 
   return l:answer
 endfunction

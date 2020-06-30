@@ -20,40 +20,62 @@ let s:win32_fonts = [
   \ 'Consolas:h13',
   \]
 
-fun! vimrc#ui#setup() abort
+function! vimrc#ui#setup() abort
   if exists('g:vimrc#ui#setup_once')
     return
-  endif
+  end
+
   let g:vimrc#ui#setup_once = 1
 
+  call vimrc#ui#setup_colors()
   call vimrc#ui#setup_cursor()
   call vimrc#ui#setup_highlight()
-endfun
+endfunction
 
-fun! vimrc#ui#setup_cursor() abort
+function! vimrc#ui#setup_colors() abort
+  set background=dark
+
+  if vimrc#platform#term_colors()
+    set termguicolors
+    set t_Co=256
+    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+    let g:rehash256 = 1
+  end
+
+  if vimrc#plugins#plugins_installed()
+    "colorscheme molokai
+    "colorscheme adventurous
+    colorscheme gruvbox
+  else
+    colorscheme desert
+  end
+endfunction
+
+function! vimrc#ui#setup_cursor() abort
   if !vimrc#ui#gui()
     let &t_ti .= "\e[1 q"
     let &t_SI .= "\e[5 q"
     let &t_EI .= "\e[1 q"
     let &t_te .= "\e[0 q"
-  endif
-endfun
+  end
+endfunction
 
-fun! vimrc#ui#setup_highlight() abort
+function! vimrc#ui#setup_highlight() abort
   augroup vimrc#ui#highlight
     autocmd ColorScheme * call vimrc#ui#highlight()
   augroup END
-endfun
+endfunction
 
-fun! vimrc#ui#setup_gui() abort
+function! vimrc#ui#setup_gui() abort
   if exists('g:vimrc#ui#setup_gui_once')
     return
-  endif
+  end
   let g:vimrc#ui#setup_gui_once = 1
 
   if !vimrc#ui#gui()
     return
-  endif
+  end
 
   if vimrc#ui#gui_mac()
     call call('vimrc#ui#set_font', s:mac_fonts)
@@ -61,7 +83,7 @@ fun! vimrc#ui#setup_gui() abort
     call call('vimrc#ui#set_font', s:win32_fonts)
   else
     call call('vimrc#ui#set_font', s:linux_fonts)
-  endif
+  end
 
   " Options
   set guioptions=aei
@@ -77,32 +99,32 @@ fun! vimrc#ui#setup_gui() abort
   set lines=35 columns=140
   " Do not highlight current line under cursor
   set nocursorline
-endfun
+endfunction
 
-fun! vimrc#ui#gui() abort
+function! vimrc#ui#gui() abort
   return vimrc#ui#gui_linux() ||
         \ vimrc#ui#gui_mac() ||
         \ vimrc#ui#gui_win32() ||
         \ vimrc#ui#gui_nvim()
-endfun
+endfunction
 
-fun! vimrc#ui#gui_linux() abort
+function! vimrc#ui#gui_linux() abort
   return has('linux') && has('gui_running')
-endfun
+endfunction
 
-fun! vimrc#ui#gui_mac() abort
+function! vimrc#ui#gui_mac() abort
   return has('mac') && (has('gui_macvim') || has('gui_vimr'))
-endfun
+endfunction
 
-fun! vimrc#ui#gui_win32() abort
+function! vimrc#ui#gui_win32() abort
   return has('win32') && has('gui_running')
-endfun
+endfunction
 
-fun! vimrc#ui#gui_nvim() abort
+function! vimrc#ui#gui_nvim() abort
   return has('nvim') && exists('g:vimrc#ui#gui_nvim')
-endfun
+endfunction
 
-fun! vimrc#ui#set_font(...) abort
+function! vimrc#ui#set_font(...) abort
   let l:font = join(a:000, ',')
 
   if has('nvim')
@@ -110,10 +132,10 @@ fun! vimrc#ui#set_font(...) abort
     call rpcnotify(1, 'Gui', 'Font', a:0)
   else
     let &guifont = l:font
-  endif
-endfun
+  end
+endfunction
 
-fun! vimrc#ui#highlight() abort
+function! vimrc#ui#highlight() abort
   " background colors matching SignColumn in `adventurous` colorscheme
   highlight ALEErrorSign ctermbg=234 ctermfg=DarkRed guibg=#1C1C1C guifg=#D3422E cterm=NONE gui=NONE
   highlight ALEWarningSign ctermbg=234 ctermfg=Yellow guibg=#1C1C1C guifg=#F5BB12 cterm=NONE gui=NONE
@@ -122,13 +144,13 @@ fun! vimrc#ui#highlight() abort
     call vimrc#ui#highlight_gui()
   else
     call vimrc#ui#highlight_tui()
-  endif
-endfun
+  end
+endfunction
 
-fun! vimrc#ui#highlight_tui() abort
+function! vimrc#ui#highlight_tui() abort
   return
-endfun
+endfunction
 
-fun! vimrc#ui#highlight_gui() abort
+function! vimrc#ui#highlight_gui() abort
   return
-endfun
+endfunction

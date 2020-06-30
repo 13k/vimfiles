@@ -1,5 +1,7 @@
 " Setup -------------------------------------------------------------------- {{{
 
+set nocompatible
+
 if v:version < 800
   echoerr 'This vimrc requires Vim 8.0 or later.'
   quit
@@ -7,7 +9,8 @@ endif
 
 if has('multi_byte')
   set encoding=utf-8
-  scriptencoding utf-8
+
+  scriptencoding 'utf-8'
 endif
 
 " Paths
@@ -50,16 +53,6 @@ call vimrc#ui#setup()
 
 " syntax highlight
 syntax sync minlines=0
-" colors! colors!
-set t_Co=256
-set termguicolors
-let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-let g:rehash256 = 1
-set background=dark
-"colorscheme molokai
-"colorscheme adventurous
-colorscheme gruvbox
 " show line numbers
 set number
 " highlight searches

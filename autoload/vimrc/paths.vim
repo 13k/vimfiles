@@ -1,19 +1,24 @@
-fun! vimrc#paths#join(...) abort
+function! vimrc#paths#join(...) abort
   return join(a:000, '/')
-endfun
+endfunction
 
-fun! vimrc#paths#is_expired(path, max_age) abort
+function! vimrc#paths#exists(path) abort
+  return !empty(getftype(a:path))
+endfunction
+
+function! vimrc#paths#is_expired(path, max_age) abort
   return localtime() > (getftime(a:path) + a:max_age)
-endfun
+endfunction
 
-fun! vimrc#paths#write_timestamp(path) abort
+function! vimrc#paths#write_timestamp(path) abort
   return writefile([localtime()], a:path, 's')
-endfun
+endfunction
 
-fun! vimrc#paths#setup() abort
+function! vimrc#paths#setup() abort
   if exists('g:vimrc#paths#setup_once')
     return
-  endif
+  end
+
   let g:vimrc#paths#setup_once = 1
 
   let g:vimrc#paths#xdg_config_home = empty($XDG_CONFIG_HOME) ? vimrc#paths#join($HOME, '.config') : $XDG_CONFIG_HOME
@@ -28,4 +33,4 @@ fun! vimrc#paths#setup() abort
 
   let g:vimrc#paths#nvim_cache = vimrc#paths#join(g:vimrc#paths#xdg_data_home, 'nvim')
   let g:vimrc#paths#nvim = vimrc#paths#join(g:vimrc#paths#xdg_config_home, 'nvim')
-endfun
+endfunction

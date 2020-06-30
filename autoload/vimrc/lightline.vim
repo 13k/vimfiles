@@ -3,37 +3,37 @@ let s:lightline_modes = {
   \   'vimfiler': 'VimFiler',
   \ }
 
-fun! s:lightline_modes.default() abort
+function! s:lightline_modes.default() abort
   return winwidth(0) > 60 ? lightline#mode() : ''
-endfun
+endfunction
 
-fun! vimrc#lightline#mode() abort
+function! vimrc#lightline#mode() abort
   let l:fname = expand('%:t')
 
   if has_key(s:lightline_modes, l:fname)
     return get(s:lightline_modes, l:fname)
-  endif
+  end
 
   return s:lightline_modes.default()
-endfun
+endfunction
 
-fun! vimrc#lightline#readonly() abort
+function! vimrc#lightline#readonly() abort
   return &filetype !~? 'help' && &readonly ? g:vimrc#lightline#readonly_icon : ''
-endfun
+endfunction
 
-fun! vimrc#lightline#fugitive() abort
+function! vimrc#lightline#fugitive() abort
   if exists('*fugitive#head')
     let l:head = fugitive#head()
     return empty(l:head) ? '' : printf('%s %s', g:vimrc#lightline#fugitive_icon, l:head)
-  endif
+  end
 
   return ''
-endfun
+endfunction
 
-fun! vimrc#lightline#filename() abort
+function! vimrc#lightline#filename() abort
   if mode() ==# 't'
     return ''
-  endif
+  end
 
   let l:fname = expand('%:t')
 
@@ -52,17 +52,17 @@ fun! vimrc#lightline#filename() abort
 
     if vimrc#lightline#modified() !=# ''
       let l:llfn .= vimrc#lightline#modified()
-    endif
+    end
 
     return l:llfn
   end
-endfun
+endfunction
 
-fun! vimrc#lightline#modified() abort
+function! vimrc#lightline#modified() abort
   return &modified ? g:vimrc#lightline#modified_icon : ''
-endfun
+endfunction
 
-fun! vimrc#lightline#ctrlp_mark() abort
+function! vimrc#lightline#ctrlp_mark() abort
   if expand('%:t') ==# 'ControlP' && has_key(g:lightline, 'ctrlp')
     call lightline#link('iR'[g:lightline.ctrlp.regex])
     return lightline#concatenate(
@@ -73,53 +73,53 @@ fun! vimrc#lightline#ctrlp_mark() abort
       \   ],
       \   0
       \ )
-  endif
+  end
 
   return ''
-endfun
+endfunction
 
-fun! vimrc#lightline#go() abort
+function! vimrc#lightline#go() abort
   return exists('*go#statusline#Show') ? go#statusline#Show() : ''
-endfun
+endfunction
 
-fun! vimrc#lightline#fileformat_symbol() abort
+function! vimrc#lightline#fileformat_symbol() abort
   return ''
   "return WebDevIconsGetFileFormatSymbol()
-endfun
+endfunction
 
-fun! vimrc#lightline#filetype_symbol() abort
+function! vimrc#lightline#filetype_symbol() abort
   "return ''
   return WebDevIconsGetFileTypeSymbol()
-endfun
+endfunction
 
-fun! vimrc#lightline#fileformat() abort
+function! vimrc#lightline#fileformat() abort
   if winwidth(0) <= 70 || empty(&fileformat)
     return ''
-  endif
+  end
 
   return &fileformat . ' ' . vimrc#lightline#fileformat_symbol()
-endfun
+endfunction
 
-fun! vimrc#lightline#filetype() abort
+function! vimrc#lightline#filetype() abort
   if winwidth(0) <= 70
     return ''
-  endif
+  end
 
   if empty(&filetype)
     return 'text'
-  endif
+  end
 
   return &filetype . ' ' . vimrc#lightline#filetype_symbol()
-endfun
+endfunction
 
-fun! vimrc#lightline#fileencoding() abort
+function! vimrc#lightline#fileencoding() abort
   return winwidth(0) > 70 ? (strlen(&fileencoding) ? &fileencoding : &encoding) : ''
-endfun
+endfunction
 
-fun! vimrc#lightline#lineinfo() abort
+function! vimrc#lightline#lineinfo() abort
   return winwidth(0) > 60 ? printf('%3d:%-2d', line('.'), col('.')) : ''
-endfun
+endfunction
 
-fun! vimrc#lightline#percent() abort
+function! vimrc#lightline#percent() abort
   return &filetype =~? 'vimfiler' ? '' : (100 * line('.') / line('$')) . '%'
-endfun
+endfunction
