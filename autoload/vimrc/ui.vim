@@ -1,21 +1,24 @@
 let s:linux_fonts=[
+  \ 'SauceCodePro Nerd Font Mono 12',
   \ 'Cousine Nerd Font Mono 11',
-  \ 'SauceCodePro Nerd Font 12',
+  \ 'CaskaydiaCove Nerd Font Mono 12',
   \ 'Operator Mono 12',
   \ 'Inconsolata 12',
   \ 'monospaced 10',
   \]
 
 let s:mac_fonts = [
+  \ 'SauceCodePro Nerd Font Mono:h14',
   \ 'Cousine Nerd Font Mono:h13',
-  \ 'SauceCodePro Nerd Font:h14',
+  \ 'CaskaydiaCove NF:h12',
   \ 'Operator Mono:h14',
   \ 'Monaco:h13',
   \]
 
 let s:win32_fonts = [
-  \ 'Cousine Nerd Font Mono:h11',
-  \ 'SauceCodePro Nerd Font:h14',
+  \ 'SauceCodePro NF:h14',
+  \ 'Cousine NF:h11',
+  \ 'CaskaydiaCove NF:h12',
   \ 'Operator Mono:h14',
   \ 'Consolas:h13',
   \]
@@ -96,7 +99,7 @@ function! vimrc#ui#setup_gui() abort
   " Don't hide mouse
   set nomousehide
   " Number of lines and columns
-  set lines=35 columns=140
+  set lines=35 columns=120
   " Do not highlight current line under cursor
   set nocursorline
 endfunction
@@ -113,7 +116,7 @@ function! vimrc#ui#gui_linux() abort
 endfunction
 
 function! vimrc#ui#gui_mac() abort
-  return has('mac') && (has('gui_macvim') || has('gui_vimr'))
+  return has('mac') && has('gui_macvim')
 endfunction
 
 function! vimrc#ui#gui_win32() abort
